@@ -1,0 +1,45 @@
+
+#include "voiceActivatedSystems\VAMP_displays\displays.hpp"
+
+//--------------------------------------------------------------
+//------------------------AIS INJURY----------------------------
+//--------------------------------------------------------------
+class CfgFunctions {
+	#include "AIS\cfgFunctions.hpp"
+};
+#include "AIS\Effects\BarDlg.hpp"
+//--------------------------------------------------------------
+
+respawn = 3;
+respawndelay = 3;
+respawnButton = 1;
+// disabledAI = true;
+// respawnOnStart = 1;
+
+enableDebugConsole = 2;
+allowFunctionsLog = 0;
+
+// briefingName = $STR_MISSION_TITLE;
+overviewText = "OPERATION KILLCHAIN";
+// overviewPicture = "res\lib.paa";
+author = "reggaeman007jah";
+// onLoadName = $STR_MISSION_TITLE;
+// onLoadMission = "www.fireteamsolutions.online";
+// loadScreen = "res\lib.paa";
+
+joinUnassigned = 1;
+
+class Header {
+	gameType =  COOP;	
+	minPlayers =  1;	
+	maxPlayers = 10;
+};
+
+class CfgSounds {
+	sounds[] = {};
+	
+	class info {
+		sound[] = {"\a3\Ui_f\data\Sound\CfgIngameUI\hint",0.891251,1};
+		titles[] = {};
+	};
+};
