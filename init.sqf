@@ -22,6 +22,14 @@ If !(isserver) exitwith {};
 {_x addMPEventHandler ["MPKilled", {
 	_dead = _this select 0;
 	_killer = _this select 1;
-	if ((side _dead == independent) && (side _killer == independent)) then {systemChat "oh noes"};
+	if ((side _dead == independent) && (side _killer == independent)) then {systemChat "oh noes - indifor killed a friendly"};
+	}];
+} foreach allUnits;
+
+If !(isserver) exitwith {};
+{_x addMPEventHandler ["MPKilled", {
+	_dead = _this select 0;
+	_killer = _this select 1;
+	if ((side _dead == independent) && (side _killer == west)) then {systemChat "oh noes - blufor killed a friendly"};
 	}];
 } foreach allUnits;
