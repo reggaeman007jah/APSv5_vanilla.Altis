@@ -1,12 +1,18 @@
 
+// Voice Activation Global Declaration 
 VAA_Activate = true;
 
 sleep 10;
 
 // initialise APS
 execVM "autoPatrolSystem\autoPatrolSystem.sqf";
-// systemchat "debug --- APS ACTIVATED";
 sleep 0.5;
+
+// initialise debug counter system 
+execVM "autoPatrolSystem\debuggingSystems\debugCounter.sqf";
+
+// initialise flybys - add bombs later 
+execVM "autoPatrolSystem\ambientSystems\randomFlybys.sqf";
 
 // initialise Heli Systems
 // execVM "autoPatrolSystem\heliSystems\heliSystemsInit.sqf";
@@ -18,15 +24,6 @@ sleep 0.5;
 // systemchat "debug --- UAV Systems ACTIVATED";
 // sleep 0.5;
 
-// initialise debug counter system - comment this out to turn off 
-execVM "autoPatrolSystem\debuggingSystems\debugCounter.sqf";
-
-
-// initialise flybys - add bombs later 
-execVM "autoPatrolSystem\ambientSystems\randomFlybys.sqf";
-
-
-
 // test addAction 
 // // heliAttack4
 // // if (isServer) then
@@ -34,7 +31,6 @@ execVM "autoPatrolSystem\ambientSystems\randomFlybys.sqf";
 // 	_object = heliAttack4;
 // 	[_object, ["Greetings!", {hint "Hello!"}]] remoteExec ["addAction"];
 // };
-
 // sleep 60;
 
 /*
@@ -44,7 +40,6 @@ this addEventHandler ["GetIn", {
  [_object, ["Greetings!", {hint "Hello!"}]] remoteExec ["addAction"]; systemChat str _unit; 
 };
 }];
-
 
 */
 // SF Manager
