@@ -14,10 +14,10 @@ take up any statics
 
 
 _mpSpawn = _this select 0;
-_testMpSpawn = _mpSpawn getPos [30,180];
-_testMpIndiSpawn = _mpSpawn getPos [20,180];
-[west, _testMpSpawn] call BIS_fnc_addRespawnPosition;
-[independent, _testMpIndiSpawn] call BIS_fnc_addRespawnPosition;
+_bluforSpawn = _mpSpawn getPos [40,90];
+_indiSpawn = _mpSpawn getPos [40,270];
+[west, _bluforSpawn] call BIS_fnc_addRespawnPosition;
+[independent, _indiSpawn] call BIS_fnc_addRespawnPosition;
 
 
 
