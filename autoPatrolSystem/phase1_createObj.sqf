@@ -125,8 +125,6 @@ sleep 5;
 
 // generate defending opfor 
 execVM "autoPatrolSystem\phase2_createOpforWave1.sqf";
-// systemchat "debug --- phase2_createOpforWave1 ACTIVATED";
-// "MP debug --- phase2_createOpforWave1 ACTIVATED" remoteExec ["systemChat", 0, true];
 
 // paths between marker points 
 _float = diag_tickTime;
@@ -139,14 +137,16 @@ _relDir = floor _relDirX;
 _distX = RGG_missionOrigin distance RGG_patrol_obj;
 _dist = floor _distX;
 _dist2 = _dist / 2;
-_testPos = RGG_missionOrigin getPos [_dist2, _relDirX];// testing unfloored dir 
+_testPos = RGG_missionOrigin getPos [_dist2, _relDirX];
 
 sleep 5;
+
 _lineTest = createMarker [_stampToString, _testPos];
 _lineTest setMarkerShape "RECTANGLE";
 _lineTest setMarkerColor "ColorBlack";
 _lineTest setMarkerDir _reldirX;
 _lineTest setMarkerSize [2, _dist2];
+// to enable a colour change when the chain breaks, these lines need to be pushed back into an array 
 
 // camp to dest 
 _randomCampLocation = RGG_patrol_obj findEmptyPosition [10,50,"B_Heli_Light_01_dynamicLoadout_F"];
@@ -191,5 +191,4 @@ for "_i" from 1 to 5 do {
 		// "Land_MetalWire_F"
 	];
 	_rewardSpawn = createVehicle [_campItem, _randomCampLocation];
-	
 };

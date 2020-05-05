@@ -49,11 +49,11 @@ publicVariable "MISSIONTASK";
 
 sleep 2;
 
-_diffLevel = 2; // diff modifier 
+_diffLevel = 2; // diff modifier i.e. number of iterations 
 
 for "_i" from 1 to _diffLevel do {
 	_grp = createGroup east;
-	_rndOp1 = selectRandom [8, 10, 12, 14];
+	_rndOp1 = selectRandom [8, 10, 12, 14, 18, 20];
 
 	for "_i" from 1 to _rndOp1 do {
 		_rndtype = selectRandom [

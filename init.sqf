@@ -13,3 +13,15 @@ enableEnvironment [false, true];
 // execVM "voiceActivatedArty\VAA_Init.sqf";
 
 // execVM "autoPatrolSystem\timeStampSystems\timeGen.sqf";
+
+// MP EH (test)
+// http://www.armaholic.com/forums.php?m=posts&q=33056
+// source: Pierre MGI 
+
+If !(isserver) exitwith {};
+{_x addMPEventHandler ["MPKilled", {
+	_dead = _this select 0;
+	_killer = _this select 1;
+	if ((side _dead == independent) && (side _killer == independent)) then {systemChat "oh noes"};
+	}];
+} foreach allUnits;
