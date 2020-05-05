@@ -86,16 +86,13 @@ while {monitorDefence} do {
 	};
 
 	// this needs to also ensure indifor have over 10 in the area 
-	if ((_opforCount <5) && (_indiCount >15)) then {
+	if ((_opforCount <5) && (_indiCount >8)) then {
 	// if (_opforCount <= 5) then {// loop ends when opfor is reduced to this number
 		// hint "WELL DONE !!! the patrol has held the position successfully and is now moving to the next point";
 		systemChat "this proves && syntax test"; // was this ever proven?
 		"WELL DONE !!! the patrol has held the position successfully and is now moving to the next point" remoteExec ["hint", 0, true];	
 
-		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf";
-		systemchat "debug --- phase1_createObj ACTIVATED";
-		"MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
-
+	
 		// trigger delayed cleanup 
 		_cleanupPos = RGG_patrol_obj; // this ensures that a snapshot of the location is sent to the cleanup script - a global var will always be the most current version and so will not suit this purpose 
 		[_cleanupPos] execVM "autoPatrolSystem\cleanupSystems\garbageControl.sqf";
@@ -117,6 +114,9 @@ while {monitorDefence} do {
 		// systemchat "debug --- phase1_createObj ACTIVATED";
 		// "MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
 		// [RGG_patrol_obj, ] execVM "";
+		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf";
+		systemchat "debug --- phase1_createObj ACTIVATED";
+		"MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
 
 
 		// track progress 
@@ -136,7 +136,7 @@ while {monitorDefence} do {
 			_x doMove _endPoint1;
 		} forEach _moveOpfor;
 
-		// sleep 20;
+		sleep 20;
 
 		_moveIndi = [];
 		{if ((side _x) != WEST) then {_moveIndi pushBack _x}} forEach allUnits;

@@ -47,15 +47,15 @@ _indi = [];
 
 _outcome = selectRandom [1,2,3]; 
 
-// if (_outcome == 1) then {
-// 	ONEPOINT = true;
-// };
-// if (_outcome == 2) then {
-// 	TWOPOINT = true;
-// };
-// if (_outcome == 3) then {
-// 	THREEPOINT = true;
-// };
+if (_outcome == 1) then {
+	ONEPOINT = true;
+};
+if (_outcome == 2) then {
+	TWOPOINT = true;
+};
+if (_outcome == 3) then {
+	THREEPOINT = true;
+};
 
 /*
 test to be confirmed - removed global states and trying to use local _outcome as the switch 
@@ -63,9 +63,9 @@ test to be confirmed - removed global states and trying to use local _outcome as
 
 _rndOp1 = selectRandom [25, 30, 35, 40, 45, 50]; // RF force size
 
-// switch (true) do {	
-switch (_outcome) do {	
-	case (1): {
+switch (true) do {	
+// switch (_outcome) do {	
+	case (ONEPOINT): {
 		// systemChat "switch test ok 1";
 		_pos1 = [RGG_patrol_obj, 400, 700] call BIS_fnc_findSafePos; // single point spawn 400-700m away from Dest
 		deleteMarker "Point 1";
@@ -89,9 +89,9 @@ switch (_outcome) do {
 			_unit doMove _moveTo;
 			spawnedOpforUnit = spawnedOpforUnit + 1;
 		}; 
-		// ONEPOINT = false;
+		ONEPOINT = false;
 	};
-	case (2): {
+	case (TWOPOINT): {
 		// systemChat "switch test ok 2";
 		_pos1 = [RGG_patrol_obj, 400, 700] call BIS_fnc_findSafePos; // single point spawn 400-700m away from Dest
 		_pos2 = [RGG_patrol_obj, 400, 700] call BIS_fnc_findSafePos; // single point spawn 400-700m away from Dest
@@ -122,9 +122,9 @@ switch (_outcome) do {
 			spawnedOpforUnit = spawnedOpforUnit + 1;
 
 		}; 
-		// TWOPOINT = false;
+		TWOPOINT = false;
 	};
-	case (3): {	
+	case (THREEPOINT): {	
 		// systemChat "switch test ok 3";
 		_pos1 = [RGG_patrol_obj, 300, 700] call BIS_fnc_findSafePos; // single point spawn 400-700m away from Dest
 		_pos2 = [RGG_patrol_obj, 300, 700] call BIS_fnc_findSafePos; // single point spawn 400-700m away from Dest
@@ -163,7 +163,7 @@ switch (_outcome) do {
 			spawnedOpforUnit = spawnedOpforUnit + 1;
 
 		}; 
-		// THREEPOINT = false;
+		THREEPOINT = false;
 	};
 };
 
