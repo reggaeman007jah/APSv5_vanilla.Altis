@@ -32,7 +32,7 @@ for "_i" from 1 to _rndOp1 do {
 		"o_g_soldier_ar_f", 
 		"o_g_soldier_gl_f", 
 		"o_g_sharpshooter_f", 
-		"o_soldieru_lat_f",
+		"o_soldieru_lat_f"
 		];
 	_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
 	_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
