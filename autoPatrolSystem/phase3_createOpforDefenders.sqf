@@ -26,7 +26,7 @@ O_G_HMG_02_F
 
 _rndOp1 = selectRandom [8, 10, 12, 24];
 _grp = createGroup east;
-
+systemchat format ["op defencee: %1", _rndOp1];
 for "_i" from 1 to _rndOp1 do {
 	_rndtype = selectRandom [
 		"o_g_soldier_ar_f", 
@@ -54,6 +54,9 @@ systemChat "now creating statics";
 // i.e. current iteration of killchain is an increasing diff model, until a point, then it is randomised 
 switch (patrolPointsTaken) do {
 	case 0: {
+		systemChat "no statics this time around";
+	};
+	case 1: {
 		for "_i" from 1 to 1 do {
 			_pos = [RGG_patrol_obj, 0, 50] call BIS_fnc_findSafePos; 
 			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
@@ -65,7 +68,7 @@ switch (patrolPointsTaken) do {
 			sleep 1;						
 		};
 	};
-	case 1: {
+	case 2: {
 		for "_i" from 1 to 1 do {
 			_pos = [RGG_patrol_obj, 0, 50] call BIS_fnc_findSafePos; 
 			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
@@ -77,7 +80,7 @@ switch (patrolPointsTaken) do {
 			sleep 1;						
 		};
 	};
-	case 2: {
+	case 3: {
 		for "_i" from 1 to 2 do {
 			_pos = [RGG_patrol_obj, 0, 75] call BIS_fnc_findSafePos; 
 			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
@@ -89,7 +92,7 @@ switch (patrolPointsTaken) do {
 			sleep 1;						
 		};
 	};
-	case 3: {
+	case 4: {
 		for "_i" from 1 to 2 do {
 			_pos = [RGG_patrol_obj, 0, 150] call BIS_fnc_findSafePos; 
 			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
@@ -101,7 +104,7 @@ switch (patrolPointsTaken) do {
 			sleep 1;						
 		};
 	};
-	case 4: {
+	case 5: {
 		for "_i" from 1 to 1 do {
 			_pos = [RGG_patrol_obj, 0, 75] call BIS_fnc_findSafePos; 
 			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
@@ -123,7 +126,7 @@ switch (patrolPointsTaken) do {
 			sleep 1;						
 		};
 	};
-	case 5: {
+	case 6: {
 		for "_i" from 1 to 2 do {
 			_pos = [RGG_patrol_obj, 0, 75] call BIS_fnc_findSafePos; 
 			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
@@ -145,28 +148,28 @@ switch (patrolPointsTaken) do {
 			sleep 1;						
 		};
 	};
-	case 6: {
-		for "_i" from 1 to 3 do {
-			_pos = [RGG_patrol_obj, 0, 75] call BIS_fnc_findSafePos; 
-			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
-			_static = "O_HMG_01_high_F" createVehicle _pos;
-			_unit moveInGunner _static; 
-			_unit setBehaviour "COMBAT";
-			spawnedOpforUnit = spawnedOpforUnit + 1;
-			systemChat "spawning static opfor";
-			sleep 1;						
-		};
-			for "_i" from 1 to 3 do {
-			_pos = [RGG_patrol_obj, 0, 150] call BIS_fnc_findSafePos; 
-			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
-			_static = "O_G_Mortar_01_F" createVehicle _pos;
-			_unit moveInGunner _static; 
-			_unit setBehaviour "COMBAT";
-			spawnedOpforUnit = spawnedOpforUnit + 1;
-			systemChat "spawning mortar opfor";
-			sleep 1;						
-		};
-	};
+	// case 6: {
+	// 	for "_i" from 1 to 3 do {
+	// 		_pos = [RGG_patrol_obj, 0, 75] call BIS_fnc_findSafePos; 
+	// 		_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+	// 		_static = "O_HMG_01_high_F" createVehicle _pos;
+	// 		_unit moveInGunner _static; 
+	// 		_unit setBehaviour "COMBAT";
+	// 		spawnedOpforUnit = spawnedOpforUnit + 1;
+	// 		systemChat "spawning static opfor";
+	// 		sleep 1;						
+	// 	};
+	// 		for "_i" from 1 to 3 do {
+	// 		_pos = [RGG_patrol_obj, 0, 150] call BIS_fnc_findSafePos; 
+	// 		_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+	// 		_static = "O_G_Mortar_01_F" createVehicle _pos;
+	// 		_unit moveInGunner _static; 
+	// 		_unit setBehaviour "COMBAT";
+	// 		spawnedOpforUnit = spawnedOpforUnit + 1;
+	// 		systemChat "spawning mortar opfor";
+	// 		sleep 1;						
+	// 	};
+	// };
 	default {
 		_randomStatic = selectRandom [0,1,2,3,4];
 		_randomMortar = selectRandom [0,1,2,3,4];

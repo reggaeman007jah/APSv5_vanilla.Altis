@@ -53,7 +53,8 @@ _diffLevel = 2; // diff modifier i.e. number of iterations
 
 for "_i" from 1 to _diffLevel do {
 	_grp = createGroup east;
-	_rndOp1 = selectRandom [8, 10, 12, 14, 18, 20];
+	_rndOp1 = selectRandom [0, 3, 4, 5, 6];
+	systemchat format ["1st wave: %1", _rndOp1];
 
 	for "_i" from 1 to _rndOp1 do {
 		_rndtype = selectRandom [

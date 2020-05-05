@@ -17,5 +17,17 @@ enableEnvironment [false, true];
 // MP EH (test)
 // http://www.armaholic.com/forums.php?m=posts&q=33056
 // source: Pierre MGI 
-sleep 10;
+// sleep 10;
 
+If !(isServer) exitwith {};
+
+{_x addMPEventHandler ["MPKilled", {
+	_dead = _this select 0;
+	_killer = _this select 1;
+	if ((side _dead == independent) && (side _killer == west)) then {
+		systemChat "oh noes - blufor killed a friendly"
+		};
+	}];
+} foreach allUnits;
+
+systemChat "see this";

@@ -55,15 +55,16 @@ while {monitorDefence} do {
 	// };
 
 	if (_indiCount < _RGG_reinforcementTrigger)  then {
-		systemChat (format ["The Patrol has been compromised, with %1 units left in the fight. Reinforcements are needed.. ", _indiCount]);
-		"Patrol has been compromised. Reinforcements are needed.. " remoteExec ["systemChat", 0, true]; // make this better
+		// systemChat (format ["The Patrol has been compromised, with %1 units left in the fight. Reinforcements are needed.. ", _indiCount]);
+		// "Patrol has been compromised. Reinforcements are needed.. " remoteExec ["systemChat", 0, true]; // make this better
+		format ["The Patrol has been compromised, with %1 units left in the fight. Reinforcements are needed.. ", _indiCount] remoteExec ["hint", 0];
 		// [RGG_patrol_obj, RGG_missionOrigin] execVM "autoPatrolSystem\callRF.sqf"; // send RF units into area 
 		// PARADOP UNITS HERE!!!
 	};
 
 	if (_indiCount <= 1)  then {
-		hint "LOST PATROL!! the entire patrol has been WIPED!! Someone is going to get sacked for this!!";
-		systemChat "The Patrol has been Lost .. ";
+		// hint "LOST PATROL!! the entire patrol has been WIPED!! Someone is going to get sacked for this!!";
+		// systemChat "The Patrol has been Lost .. ";
 		"LOST PATROL!! the entire patrol has been WIPED!! Someone is going to get sacked for this!!" remoteExec ["systemChat", 0, true]; 
 		// make this better // MAYBE -1 PLATOON SCORE
 		lostPatrols = lostPatrols +1;
@@ -87,9 +88,14 @@ while {monitorDefence} do {
 	// this needs to also ensure indifor have over 10 in the area 
 	if ((_opforCount <5) && (_indiCount >15)) then {
 	// if (_opforCount <= 5) then {// loop ends when opfor is reduced to this number
-		hint "WELL DONE !!! the patrol has held the position successfully and is now moving to the next point";
-		systemChat "this proves && syntax test";
+		// hint "WELL DONE !!! the patrol has held the position successfully and is now moving to the next point";
+		systemChat "this proves && syntax test"; // was this ever proven?
 		"WELL DONE !!! the patrol has held the position successfully and is now moving to the next point" remoteExec ["hint", 0, true];	
+
+		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf";
+		systemchat "debug --- phase1_createObj ACTIVATED";
+		"MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
+
 		// trigger delayed cleanup 
 		_cleanupPos = RGG_patrol_obj; // this ensures that a snapshot of the location is sent to the cleanup script - a global var will always be the most current version and so will not suit this purpose 
 		[_cleanupPos] execVM "autoPatrolSystem\cleanupSystems\garbageControl.sqf";
@@ -329,9 +335,7 @@ while {monitorDefence} do {
 		// breather - what else to do in this time? Sort out injured??
 		sleep 120;
 
-		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf";
-		systemchat "debug --- phase1_createObj ACTIVATED";
-		"MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
+
 		
 	};
 

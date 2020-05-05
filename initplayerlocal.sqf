@@ -23,12 +23,27 @@ instigator: Object - Person who pulled the trigger
 useEffects: Boolean - same as useEffects in setDamage alt syntax
 
 */
-sleep 10;
-systemChat "initplayerlocal yo";
-// systemChat "MP EH Running";
 
-If !(isserver) exitwith {};
+// params ["_player", "_didJIP"];
 
+// _index = _player addMPEventHandler ["MPKilled", {
+// 	_dead = _this select 0;
+// 	_killer = _this select 1;
+// 	if ((side _dead == independent) && (side _killer == west)) then {systemChat "oh noes - blufor killed a friendly"};
+// }]; 
+
+
+
+// {_x addMPEventHandler ["MPKilled", {
+// 	_dead = _this select 0;
+// 	_killer = _this select 1;
+// 	if ((side _dead == independent) && (side _killer == west)) then {systemChat "oh noes - blufor killed a friendly"};
+// 	}];
+// } foreach allUnits;
+
+
+
+// If !(isserver) exitwith {};
 // {_x addMPEventHandler ["MPKilled", {
 // 	_dead = _this select 0;
 // 	_killer = _this select 1;
@@ -36,9 +51,3 @@ If !(isserver) exitwith {};
 // 	}];
 // } foreach allUnits;
 
-{_x addMPEventHandler ["MPKilled", {
-	_dead = _this select 0;
-	_killer = _this select 1;
-	if ((side _dead == independent) && (side _killer == west)) then {systemChat "oh noes - blufor killed a friendly"};
-	}];
-} foreach allUnits;
