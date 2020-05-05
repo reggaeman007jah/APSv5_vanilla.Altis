@@ -49,6 +49,9 @@ for "_i" from 1 to _rndOp1 do {
 
 systemChat "now creating statics";
 
+// number of statics is linked initially to the number of points taken 
+// after they have reached max diff, the statics are totally randomised 
+// i.e. current iteration of killchain is an increasing diff model, until a point, then it is randomised 
 switch (patrolPointsTaken) do {
 	case 0: {
 		for "_i" from 1 to 1 do {
@@ -202,7 +205,7 @@ sleep 20; // changes from 5 to 20, in case this was the reasons for the logic gl
 // "MP debug --- checking for blufor RF" remoteExec ["systemChat", 0, true];
 // this is one of two points where patrol reinforcements are considered - previously this was every 90 seconds, now it is more lean and cheap
 
-// redirects any units incorrectly send to the old point 
+// redirects any units incorrectly sent to the old point as part of an RF action 
 execVM "autoPatrolSystem\insuranceSystems\phase3Timer.sqf";
 // the above only applies to indifor units
 
@@ -212,7 +215,7 @@ RFCHECK = true;
 
 while {RFCHECK} do {
 
-	// do this once and access a global!!!
+	// do this once and access a global!!! MAY 2020
 
 	// systemChat "___RFCHECK phase 3 cycle___";
 	// confirms side numbers on the red zone 
@@ -227,7 +230,6 @@ while {RFCHECK} do {
 			case INDEPENDENT: {_indiCount = _indiCount + 1};
 		};
 	} forEach _units;
-
 	// hint format ["debug --- OPFOR DEFENDERS = %1", _opforCount1];
 
 	if ((_opforCount) <= 3) then // this is the decider-value as to whether the second round of enemy moves in
@@ -251,3 +253,5 @@ while {RFCHECK} do {
 	systemChat "debug - 90 second RFcheck cycle";
 	sleep 90;
 };
+
+// at what stage should these initial defenders retreat?

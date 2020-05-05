@@ -4,6 +4,9 @@
 Maybe use this as a timer system?
 _defendStartTime = time;
 systemChat format ["patrol defence started at %1 seconds into mission", _defendStartTime];
+
+I capture mission minutes - this is an easy way to set a timer on any one point 
+
 */
 
 MISSIONTASK = "Secure the patrol point and prepare for opfor retaliation";
@@ -24,7 +27,7 @@ _indi = [];
 	// systemChat "debug - BLUEDEFEND STATE - Blue Unit Counted";
 	// "MP debug - BLUEDEFEND STATE - Blue Unit Counted" remoteExec ["systemChat", 0, true];
 	_dir = random 360;
-	_dist = selectRandom [14, 16, 18, 20]; 
+	_dist = selectRandom [14, 16, 18, 20, 22, 24]; 
 	_defendPoint = RGG_patrol_obj getPos [_dist, _dir]; // moves units into a rough 360 defensive circle
 	_x setBehaviour "COMBAT";
 	_x doMove _defendPoint;
@@ -44,20 +47,25 @@ _indi = [];
 
 _outcome = selectRandom [1,2,3]; 
 
-if (_outcome == 1) then {
-	ONEPOINT = true;
-};
-if (_outcome == 2) then {
-	TWOPOINT = true;
-};
-if (_outcome == 3) then {
-	THREEPOINT = true;
-};
+// if (_outcome == 1) then {
+// 	ONEPOINT = true;
+// };
+// if (_outcome == 2) then {
+// 	TWOPOINT = true;
+// };
+// if (_outcome == 3) then {
+// 	THREEPOINT = true;
+// };
+
+/*
+test to be confirmed - removed global states and trying to use local _outcome as the switch 
+*/
 
 _rndOp1 = selectRandom [25, 30, 35, 40, 45, 50]; // RF force size
 
-switch (true) do {	
-	case (ONEPOINT): {
+// switch (true) do {	
+switch (_outcome) do {	
+	case (1): {
 		// systemChat "switch test ok 1";
 		_pos1 = [RGG_patrol_obj, 400, 700] call BIS_fnc_findSafePos; // single point spawn 400-700m away from Dest
 		deleteMarker "Point 1";
@@ -81,9 +89,9 @@ switch (true) do {
 			_unit doMove _moveTo;
 			spawnedOpforUnit = spawnedOpforUnit + 1;
 		}; 
-		ONEPOINT = false;
+		// ONEPOINT = false;
 	};
-	case (TWOPOINT): {
+	case (2): {
 		// systemChat "switch test ok 2";
 		_pos1 = [RGG_patrol_obj, 400, 700] call BIS_fnc_findSafePos; // single point spawn 400-700m away from Dest
 		_pos2 = [RGG_patrol_obj, 400, 700] call BIS_fnc_findSafePos; // single point spawn 400-700m away from Dest
@@ -114,9 +122,9 @@ switch (true) do {
 			spawnedOpforUnit = spawnedOpforUnit + 1;
 
 		}; 
-		TWOPOINT = false;
+		// TWOPOINT = false;
 	};
-	case (THREEPOINT): {	
+	case (3): {	
 		// systemChat "switch test ok 3";
 		_pos1 = [RGG_patrol_obj, 300, 700] call BIS_fnc_findSafePos; // single point spawn 400-700m away from Dest
 		_pos2 = [RGG_patrol_obj, 300, 700] call BIS_fnc_findSafePos; // single point spawn 400-700m away from Dest
@@ -155,7 +163,7 @@ switch (true) do {
 			spawnedOpforUnit = spawnedOpforUnit + 1;
 
 		}; 
-		THREEPOINT = false;
+		// THREEPOINT = false;
 	};
 };
 
