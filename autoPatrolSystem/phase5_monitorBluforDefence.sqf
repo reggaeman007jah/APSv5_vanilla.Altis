@@ -62,9 +62,10 @@ while {monitorDefence} do {
 	};
 
 	if (_indiCount <= 1)  then {
-		hint "LOST PATROL!! the entire platoon has been WIPED!! Someone is going to get sacked for this!!";
+		hint "LOST PATROL!! the entire patrol has been WIPED!! Someone is going to get sacked for this!!";
 		systemChat "The Patrol has been Lost .. ";
-		"The Patrol has been Lost ..  " remoteExec ["systemChat", 0, true]; // make this better // MAYBE -1 PLATOON SCORE
+		"LOST PATROL!! the entire patrol has been WIPED!! Someone is going to get sacked for this!!" remoteExec ["systemChat", 0, true]; 
+		// make this better // MAYBE -1 PLATOON SCORE
 		lostPatrols = lostPatrols +1;
 
 		// send in new units - removed as i am exp with an auto check 
@@ -83,8 +84,11 @@ while {monitorDefence} do {
 		// end state FAIL - what happens here???
 	};
 
-	if (_opforCount <= 5) then {// loop ends when opfor is reduced to this number
+	// this needs to also ensure indifor have over 10 in the area 
+	if ((_opforCount <5) && (_indiCount >15)) then {
+	// if (_opforCount <= 5) then {// loop ends when opfor is reduced to this number
 		hint "WELL DONE !!! the patrol has held the position successfully and is now moving to the next point";
+		systemChat "this proves && syntax test";
 		"WELL DONE !!! the patrol has held the position successfully and is now moving to the next point" remoteExec ["hint", 0, true];	
 		// trigger delayed cleanup 
 		_cleanupPos = RGG_patrol_obj; // this ensures that a snapshot of the location is sent to the cleanup script - a global var will always be the most current version and so will not suit this purpose 
@@ -107,17 +111,14 @@ while {monitorDefence} do {
 		// systemchat "debug --- phase1_createObj ACTIVATED";
 		// "MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
 		// [RGG_patrol_obj, ] execVM "";
-		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf";
-		systemchat "debug --- phase1_createObj ACTIVATED";
-		"MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
-		sleep 20;
+
 
 		// track progress 
 		// execVM "autoPatrolSystem\counterSystems\counterSystems.sqf";
 		// systemchat "debug --- mission count amended";
 		// "MP debug --- mission count amended" remoteExec ["systemChat", 0, true];
 
-		// move opfor out first 
+		// move any remaining opfor out first 
 		_moveOpfor = [];
 		{if ((side _x) == EAST) then {_moveOpfor pushBack _x}} forEach allUnits;
 		{
@@ -325,6 +326,13 @@ while {monitorDefence} do {
 		[RGG_missionOrigin] execVM "autoPatrolSystem\phase6_regroup.sqf";
 		// we need a big center here too 
 
+		// breather - what else to do in this time? Sort out injured??
+		sleep 120;
+
+		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf";
+		systemchat "debug --- phase1_createObj ACTIVATED";
+		"MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
+		
 	};
 
 	sleep 90;
