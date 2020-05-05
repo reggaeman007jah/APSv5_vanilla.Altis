@@ -22,8 +22,6 @@ _numberOfCycles = 4; // temp test
 _area = 60; // distribution of units on spawn  // I am making this much smaller 
 _timer = 0.3; // spawn cycle gap  
 
-
-
 /*
 Each spawned team has:
 1 rifleman
@@ -31,7 +29,6 @@ Each spawned team has:
 1 grenadier 
 1 medic 
 1 marksman
-
 */
 
 for "_i" from 1 to _numberOfCycles do {

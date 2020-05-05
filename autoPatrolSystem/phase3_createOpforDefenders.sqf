@@ -21,6 +21,7 @@ O_G_Soldier_F
 O_G_medic_F
 O_G_HMG_02_high_F
 O_G_Mortar_01_F
+O_G_HMG_02_F
 */
 
 _rndOp1 = selectRandom [8, 10, 12, 24];
@@ -28,12 +29,10 @@ _grp = createGroup east;
 
 for "_i" from 1 to _rndOp1 do {
 	_rndtype = selectRandom [
-		// "o_g_soldier_ar_f", 
-		// "o_g_soldier_gl_f", 
-		// "o_g_sharpshooter_f", 
-		// "o_soldieru_lat_f",
-		"O_G_HMG_02_high_F",
-		"O_G_Mortar_01_F"
+		"o_g_soldier_ar_f", 
+		"o_g_soldier_gl_f", 
+		"o_g_sharpshooter_f", 
+		"o_soldieru_lat_f",
 		];
 	_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
 	_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
@@ -46,6 +45,151 @@ for "_i" from 1 to _rndOp1 do {
  	sleep 1;									
 	// systemChat "debug --- opfor dug in defender unit created"; 	
 	// "MP debug --- opfor dug in defender unit created" remoteExec ["systemChat", 0, true];		
+};
+
+systemChat "now creating statics";
+
+switch (patrolPointsTaken) do {
+	case 0: {
+		for "_i" from 1 to 1 do {
+			_pos = [RGG_patrol_obj, 0, 50] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_HMG_01_high_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning static opfor";
+			sleep 1;						
+		};
+	};
+	case 1: {
+		for "_i" from 1 to 1 do {
+			_pos = [RGG_patrol_obj, 0, 50] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_G_Mortar_01_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning mortar opfor";
+			sleep 1;						
+		};
+	};
+	case 2: {
+		for "_i" from 1 to 2 do {
+			_pos = [RGG_patrol_obj, 0, 75] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_HMG_01_high_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning static opfor";
+			sleep 1;						
+		};
+	};
+	case 3: {
+		for "_i" from 1 to 2 do {
+			_pos = [RGG_patrol_obj, 0, 150] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_G_Mortar_01_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning mortar opfor";
+			sleep 1;						
+		};
+	};
+	case 4: {
+		for "_i" from 1 to 1 do {
+			_pos = [RGG_patrol_obj, 0, 75] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_HMG_01_high_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning static opfor";
+			sleep 1;						
+		};
+			for "_i" from 1 to 1 do {
+			_pos = [RGG_patrol_obj, 0, 150] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_G_Mortar_01_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning mortar opfor";
+			sleep 1;						
+		};
+	};
+	case 5: {
+		for "_i" from 1 to 2 do {
+			_pos = [RGG_patrol_obj, 0, 75] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_HMG_01_high_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning static opfor";
+			sleep 1;						
+		};
+			for "_i" from 1 to 2 do {
+			_pos = [RGG_patrol_obj, 0, 150] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_G_Mortar_01_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning mortar opfor";
+			sleep 1;						
+		};
+	};
+	case 6: {
+		for "_i" from 1 to 3 do {
+			_pos = [RGG_patrol_obj, 0, 75] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_HMG_01_high_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning static opfor";
+			sleep 1;						
+		};
+			for "_i" from 1 to 3 do {
+			_pos = [RGG_patrol_obj, 0, 150] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_G_Mortar_01_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning mortar opfor";
+			sleep 1;						
+		};
+	};
+	default {
+		_randomStatic = selectRandom [0,1,2,3,4];
+		_randomMortar = selectRandom [0,1,2,3,4];
+
+		for "_i" from 1 to _randomStatic do {
+			_pos = [RGG_patrol_obj, 0, 75] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_HMG_01_high_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning static opfor";
+			sleep 1;						
+		};
+			for "_i" from 1 to _randomMortar do {
+			_pos = [RGG_patrol_obj, 0, 150] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_G_Mortar_01_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning mortar opfor";
+			sleep 1;						
+		};
+
+	};
 };
 
 // systemChat "op defenders spawn complete .....................";
@@ -67,6 +211,8 @@ RFCHECK = true;
 // there is a check, below, but there are other similar checks being done elsewhere - can we just do one check, and globalise the var, and just use that?
 
 while {RFCHECK} do {
+
+	// do this once and access a global!!!
 
 	// systemChat "___RFCHECK phase 3 cycle___";
 	// confirms side numbers on the red zone 
@@ -99,8 +245,9 @@ while {RFCHECK} do {
 	} else {
 		// systemChat "Patrol Point has not yet been cleared";
 		// "MP Patrol Point has not yet been cleared" remoteExec ["systemChat", 0, true];	
+		// placeholder for something else..?
 	};
 
-	systemChat "debug - RFcheck cycle";
+	systemChat "debug - 90 second RFcheck cycle";
 	sleep 90;
 };
