@@ -8,11 +8,7 @@ a solution is needed to ensure that blufor essentially search and destroy in and
 I need to write a function or script that does an 'Insurance Move' for all blufor in the area but only while RFCHECK is true 
 I tried this before and failed - find out why it failed!
 When defenders are wiped out, next phase is called 
-*/
 
-// systemChat "op defenders being created - check performance ..................";
-
-/*
 O_G_Soldier_LAT_F
 O_G_Soldier_TL_F
 O_G_Soldier_SL_F
@@ -22,39 +18,66 @@ O_G_medic_F
 O_G_HMG_02_high_F
 O_G_Mortar_01_F
 O_G_HMG_02_F
+
+number of statics and size of defence is linked to the number of points taken 
+after they have reached max diff, the statics are totally randomised 
+i.e. current iteration of killchain is an increasing diff model, until a point, then it is randomised 
 */
+
+_opforClass = [
+	"o_soldieru_lat_f",
+	"O_G_Soldier_A_F",
+	"O_G_Soldier_AR_F",
+	"O_G_medic_F",
+	"O_G_engineer_F",
+	"O_G_Soldier_exp_F",
+	"O_G_Soldier_GL_F",
+	"O_G_Soldier_M_F",
+	"O_G_officer_F",
+	"O_G_Soldier_F",
+	"O_G_Soldier_LAT_F",
+	"O_G_Soldier_LAT2_F",
+	"O_G_Soldier_lite_F",
+	"O_G_Sharpshooter_F",
+	"O_G_Soldier_SL_F",
+	"O_G_Soldier_TL_F"
+];
 
 _rndOp1 = selectRandom [8, 10, 12, 24];
 _grp = createGroup east;
 systemchat format ["op defencee: %1", _rndOp1];
 for "_i" from 1 to _rndOp1 do {
-	_rndtype = selectRandom [
-		"o_g_soldier_ar_f", 
-		"o_g_soldier_gl_f", 
-		"o_g_sharpshooter_f", 
-		"o_soldieru_lat_f"
-		];
+	_rndtype = selectRandom _opforClass;
 	_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
 	_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
-	
 	_randomDir = selectRandom [270, 290, 01, 30, 90];
-	_endPoint = RGG_patrol_obj getPos [25, _randomDir];
+	_randomDist = random [5, 25, 50]; 
+	_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
 	_unit setBehaviour "COMBAT";
 	_unit doMove _endPoint;
 	spawnedOpforUnit = spawnedOpforUnit +1;
  	sleep 1;									
-	// systemChat "debug --- opfor dug in defender unit created"; 	
-	// "MP debug --- opfor dug in defender unit created" remoteExec ["systemChat", 0, true];		
 };
 
-systemChat "now creating statics";
 
-// number of statics is linked initially to the number of points taken 
-// after they have reached max diff, the statics are totally randomised 
-// i.e. current iteration of killchain is an increasing diff model, until a point, then it is randomised 
 switch (patrolPointsTaken) do {
 	case 0: {
 		systemChat "no statics this time around";
+		_rndOp1 = random [8, 12, 16];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [5, 25, 50]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
+		};
 	};
 	case 1: {
 		for "_i" from 1 to 1 do {
@@ -66,6 +89,21 @@ switch (patrolPointsTaken) do {
 			spawnedOpforUnit = spawnedOpforUnit + 1;
 			systemChat "spawning static opfor";
 			sleep 1;						
+		};
+		_rndOp1 = random [8, 14, 18];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [5, 25, 50]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
 		};
 	};
 	case 2: {
@@ -79,6 +117,21 @@ switch (patrolPointsTaken) do {
 			systemChat "spawning mortar opfor";
 			sleep 1;						
 		};
+		_rndOp1 = random [8, 16, 20];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [5, 25, 50]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
+		};
 	};
 	case 3: {
 		for "_i" from 1 to 2 do {
@@ -91,6 +144,36 @@ switch (patrolPointsTaken) do {
 			systemChat "spawning static opfor";
 			sleep 1;						
 		};
+		_rndOp1 = random [8, 12, 18];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [5, 25, 50]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
+		};
+		_rndOp1 = random [4, 8, 10];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [25, 50, 75]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
+		};
 	};
 	case 4: {
 		for "_i" from 1 to 2 do {
@@ -102,6 +185,36 @@ switch (patrolPointsTaken) do {
 			spawnedOpforUnit = spawnedOpforUnit + 1;
 			systemChat "spawning mortar opfor";
 			sleep 1;						
+		};
+		_rndOp1 = random [8, 12, 18];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [5, 25, 50]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
+		};
+		_rndOp1 = random [8, 10, 14];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [25, 50, 75]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
 		};
 	};
 	case 5: {
@@ -125,6 +238,36 @@ switch (patrolPointsTaken) do {
 			systemChat "spawning mortar opfor";
 			sleep 1;						
 		};
+		_rndOp1 = random [10, 14, 20];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [5, 25, 50]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
+		};
+		_rndOp1 = random [6, 10, 12];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [25, 50, 75]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
+		};
 	};
 	case 6: {
 		for "_i" from 1 to 2 do {
@@ -146,6 +289,51 @@ switch (patrolPointsTaken) do {
 			spawnedOpforUnit = spawnedOpforUnit + 1;
 			systemChat "spawning mortar opfor";
 			sleep 1;						
+		};
+		_rndOp1 = random [10, 14, 20];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [5, 25, 50]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
+		};
+		_rndOp1 = random [6, 10, 12];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [25, 50, 75]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
+		};
+		_rndOp1 = random [6, 10, 12];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [50, 75, 90]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
 		};
 	};
 	// case 6: {
@@ -194,7 +382,51 @@ switch (patrolPointsTaken) do {
 			systemChat "spawning mortar opfor";
 			sleep 1;						
 		};
-
+		_rndOp1 = random [2, 8, 20];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [5, 25, 50]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
+		};
+		_rndOp1 = random [2, 8, 20];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [25, 50, 75]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
+		};
+		_rndOp1 = random [2, 8, 20];
+		_grp = createGroup east;
+		systemchat format ["op defencee: %1", _rndOp1];
+		for "_i" from 1 to _rndOp1 do {
+			_rndtype = selectRandom _opforClass;
+			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
+			_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+			_randomDir = selectRandom [270, 290, 01, 30, 90];
+			_randomDist = random [50, 75, 90]; 
+			_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
+			_unit setBehaviour "COMBAT";
+			_unit doMove _endPoint;
+			spawnedOpforUnit = spawnedOpforUnit +1;
+			sleep 1;									
+		};
 	};
 };
 
