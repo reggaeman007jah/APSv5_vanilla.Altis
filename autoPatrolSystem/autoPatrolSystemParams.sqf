@@ -12,7 +12,7 @@ toDo / April 2020 / confirm why I now do not need the commented out RF trigger v
 // RGG_reinforcementTrigger = 10;
 
 // position blacklist - prevents overlapping of patrol points 
-RGG_patrolPositionBlacklist = ["black1","black2", "black3", "black4", "black5", "black6"];
+RGG_patrolPositionBlacklist = ["black1","black2", "black3", "black4", "black5", "black6", "black7","black8","black9","black10"];
 // RGG_patrolPositionBlacklist = ["blacklist4","blacklist3","blacklist2","blacklist1","nosouth","nowest"];
 // RGG_patrolPositionBlacklist = ["blacklist4","blacklist3","blacklist2","blacklist1","nosouth","nowest","noeast"];
 // RGG_patrolPositionBlacklist = ["blacklist4","blacklist3","blacklist2","blacklist1"];

@@ -150,7 +150,10 @@ _lineTest setMarkerSize [2, _dist2];
 
 // camp to dest 
 _randomCampLocation = RGG_patrol_obj findEmptyPosition [10,50,"B_Heli_Light_01_dynamicLoadout_F"];
-for "_i" from 1 to 5 do {
+_randomDist = selectRandom [2,5,10];
+_randomDir = random 359;
+_randomItemNumber = selectRandom [6,7,8,9,10];
+for "_i" from 1 to _randomItemNumber do {
 	_campItem = selectRandom [
 		"Land_BarrelSand_F",
 		"Land_BarrelSand_F",
@@ -190,5 +193,9 @@ for "_i" from 1 to 5 do {
 		// "Land_FireExtinguisher_F",
 		// "Land_MetalWire_F"
 	];
-	_rewardSpawn = createVehicle [_campItem, _randomCampLocation];
+	_spawnPos = _randomCampLocation getPos [_randomDist, _randomDir];
+	_rewardSpawn = createVehicle [_campItem, _spawnPos];
+	_rewardSpawn setDir _randomDir;
+	_rewardSpawn enableSimulationGlobal false;
+	sleep 0.5;
 };
