@@ -114,6 +114,9 @@ while {monitorDefence} do {
 		// systemchat "debug --- phase1_createObj ACTIVATED";
 		// "MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
 		// [RGG_patrol_obj, ] execVM "";
+		_takenBasePoint = RGG_patrol_obj;
+		RGG_fieldbases pushback _takenBasePoint;
+		systemChat format ["Field Bases: %1", RGG_fieldbases];
 		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf";
 		systemchat "debug --- phase1_createObj ACTIVATED";
 		"MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];

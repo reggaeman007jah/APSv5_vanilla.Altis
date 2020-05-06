@@ -57,7 +57,10 @@ LOSTPATROL = false;
 // you could maybe also track mission time on each 'take' to track time for each mission point?
 
 // field bases array
-fieldBases = [];
+RGG_fieldbases = [];
+
+// broken links 
+RGG_brokenLinks = [];
 
 // mission status 
 // there are a few different stages of the mission, these states will track the current task 
@@ -71,3 +74,5 @@ spawnedOpforUnit = 0;
 publicVariable "spawnedIndiUnit";
 publicVariable "spawnedOpforUnit";
 
+// track whether opfor sapper ops are happening
+SAPPERS = false;
