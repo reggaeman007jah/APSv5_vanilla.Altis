@@ -3,34 +3,35 @@ while {true} do {
 
 	sleep 28;
 
+	// mission time
 	_missionDuration = time;
-	// _roundedMission = floor _missionDuration;
 	_roundedMission2 = _missionDuration / 60;
 	_roundedMission3 = floor _roundedMission2;
 
-	// _missionDuration2 = _roundedMission / 60;
-
-	_totalIndi = independent countSide allUnits;
-	_totalWest = west countSide allUnits;
-	_totalEast = east countSide allUnits;
+	// global side count 
+	RGG_totalIndi = independent countSide allUnits;
+	RGG_totalWest = west countSide allUnits;
+	RGG_totalEast = east countSide allUnits;
 	
+	// placeholder
 	_TEST1 = "";
 
-	_opforCount = 0;
-	_blueforCount = 0;
-	_indiCount = 0;
+	// redzone count
+	RGG_redzoneEast = 0;
+	RGG_redzoneWest = 0;
+	RGG_redzoneIndi = 0;
 	_units = allUnits inAreaArray "Objective 1";
 	_totalUnits = count _units;
 	
 	{
 		switch ((side _x)) do
 		{
-			case EAST: {_opforCount = _opforCount + 1};
-			case WEST: {_blueforCount = _blueforCount + 1};
-			case INDEPENDENT: {_indiCount = _indiCount + 1};
+			case EAST: {RGG_redzoneIndi = RGG_redzoneEast + 1};
+			case WEST: {RGG_redzoneWest = RGG_redzoneWest + 1};
+			case INDEPENDENT: {RGG_redzoneIndi = RGG_redzoneIndi + 1};
 		};
 	} forEach _units;
-	_totalRedzone = _opforCount + _blueforCount + _indiCount;
+	_totalRedzone = RGG_redzoneEast + RGG_redzoneWest + RGG_redzoneIndi;
 	_totalUnits = count allUnits;
 
 	// count blacklist items 
@@ -45,11 +46,11 @@ while {true} do {
 	_opforGroupCount = count _opforGroups;
 	_indiforGroupCount = count _indiforGroups;
 
-	// _indiKilled = spawnedIndiUnit - _totalIndi;
+	// _indiKilled = spawnedIndiUnit - RGG_totalIndi;
 
 	/*
 	RGG_totalOpforGroups = [];
-	RGG_totalIndiforGroups = [];
+	RGGRGG_totalIndiforGroups = [];
 	*/
 
 	// count total groups spawned in since mission start 
@@ -68,14 +69,14 @@ while {true} do {
 	systemChat "................. ";
 	systemChat "................. REDZONE UNITS";
 	systemChat format ["................. TOTAL: %1", _totalRedzone]; 
-	systemChat format ["................. WEST: %1 / EAST: %2 / INDI: %3", _blueforCount, _opforCount, _indiCount]; 
+	systemChat format ["................. WEST: %1 / EAST: %2 / INDI: %3", RGG_redzoneWest, RGG_redzoneEast, RGG_redzoneIndi]; 
 	systemChat "................. ";
 	systemChat "................. GLOBAL UNITS";
 	systemChat format ["................. TOTAL: %1", _totalUnits]; 
-	systemChat format ["................. WEST: %1 / EAST: %2 / INDI: %3", _totalWest, _totalEast, _totalIndi]; 
+	systemChat format ["................. WEST: %1 / EAST: %2 / INDI: %3", RGG_totalWest, RGG_totalEast, RGG_totalIndi]; 
 	systemChat "................. ";
-	// systemChat format ["................. REDZONE BLUFOR %1", _blueforCount]; 
-	// systemChat format ["................. REDZONE OPFOR %1", _opforCount]; 
+	// systemChat format ["................. REDZONE BLUFOR %1", RGG_redzoneWest]; 
+	// systemChat format ["................. REDZONE OPFOR %1", RGG_redzoneEast]; 
 	systemChat "................. STATS";
 	systemChat format ["................. MISSION DURATION (MINS): %1", _roundedMission3]; 
 	systemChat format ["................. POINTS TAKEN: %1", patrolPointsTaken]; 
@@ -95,12 +96,11 @@ while {true} do {
 	// systemChat format ["................. PATROLS LOST: %1", LOSTPATROLS]; 
 	systemChat ".............................................................................................................................";
 
-	if ((_totalIndi <10) && (_indiCount <10)) then {
+	if ((RGG_totalIndi <10) && (RGG_redzoneIndi <10)) then {
 		// hint "RF called in now from initServer";
 		// systemChat "............ CALLING IN RF NOW ....................";
 		// execVM "autoPatrolSystem\reinforcementSystems\bluforRF.sqf";
 		sleep 2;
-		hint "INDI REINFORCEMENTS ARE INBOUND";
 		"INDI REINFORCEMENTS ARE INBOUND" remoteExec ["hint", 0, true];	
 		_smoke = createVehicle ["G_40mm_smokeYELLOW", RGG_missionOrigin, [], 0, "none"]; // drop this from up high 
 
@@ -117,9 +117,9 @@ while {true} do {
 	/*
 	// Manages total count of groups created 
 		RGG_totalOpforGroups = [];
-		RGG_totalIndiforGroups = [];
+		RGGRGG_totalIndiforGroups = [];
 		publicVariable "RGG_totalOpforGroups";
-		publicVariable "RGG_totalIndiforGroups";
+		publicVariable "RGGRGG_totalIndiforGroups";
 	// base-counter var for tracking how many missions have been completed 
 		patrolPointsTaken = 0;
 		publicVariable "patrolPointsTaken";

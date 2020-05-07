@@ -28,7 +28,7 @@ _RGG_reinforcementTrigger = 10;
 // I am removing this for now ... 
 
 /*
-I need to allow some time for batter before checking initial state of defence 
+I need to allow some time for battle before checking initial state of defence 
 */
 
 sleep 180;
@@ -38,21 +38,23 @@ monitorDefence = true;
 while {monitorDefence} do {
 	sleep 10;
 
-	_units1 = allUnits inAreaArray "Objective 1"; // just trying this change out... april 2020
-	// _unitCount = count _units1;
+	// _units1 = allUnits inAreaArray "Objective 1"; // just trying this change out... april 2020
+	// // _unitCount = count _units1;
 
-	// _opfor = (side _x == opfor) inAreaArray "BattleArea";
-	// hint str _opfor;
+	// // _opfor = (side _x == opfor) inAreaArray "BattleArea";
+	// // hint str _opfor;
 			
-	_opforCount = 0;
-	_indiCount = 0;
-	{
-		switch ((side _x)) do
-		{
-			case EAST: {_opforCount = _opforCount + 1};
-			case INDEPENDENT: {_indiCount = _indiCount + 1}; 
-		};
-	} forEach _units1;
+	// _opforCount = 0;
+	// _indiCount = 0;
+	// {
+	// 	switch ((side _x)) do
+	// 	{
+	// 		case EAST: {_opforCount = _opforCount + 1};
+	// 		case INDEPENDENT: {_indiCount = _indiCount + 1}; 
+	// 	};
+	// } forEach _units1;
+
+	
 
 	// if (_indiCount >= _RGG_reinforcementTrigger)  then {
 	// 	systemChat "Patrol is at good strength, hold the line .. !!!";
@@ -60,7 +62,7 @@ while {monitorDefence} do {
 	// 	// "Patrol is at good strength, hold the line .. !!!" remoteExec ["systemChat", 0, true]; // learn this
 	// };
 
-	if (_indiCount < _RGG_reinforcementTrigger)  then {
+	if (RGG_redzoneIndi < _RGG_reinforcementTrigger)  then {
 		// systemChat (format ["The Patrol has been compromised, with %1 units left in the fight. Reinforcements are needed.. ", _indiCount]);
 		// "Patrol has been compromised. Reinforcements are needed.. " remoteExec ["systemChat", 0, true]; // make this better
 		format ["The Patrol has been compromised, with %1 units left in the fight. Reinforcements are needed.. ", _indiCount] remoteExec ["hint", 0];
@@ -68,7 +70,7 @@ while {monitorDefence} do {
 		// PARADOP UNITS HERE!!!
 	};
 
-	if (_indiCount <= 1)  then {
+	if (RGG_redzoneIndi <= 1)  then {
 		// hint "LOST PATROL!! the entire patrol has been WIPED!! Someone is going to get sacked for this!!";
 		// systemChat "The Patrol has been Lost .. ";
 		"LOST PATROL!! the entire patrol has been WIPED!! Someone is going to get sacked for this!!" remoteExec ["systemChat", 0, true]; 
@@ -92,7 +94,7 @@ while {monitorDefence} do {
 	};
 
 	// this needs to also ensure indifor have over 10 in the area 
-	if ((_opforCount <5) && (_indiCount >6)) then {
+	if ((RGG_redzoneEast <5) && (RGG_totalEast <10) && (RGG_redzoneIndi >6)) then {
 	// if (_opforCount <= 5) then {// loop ends when opfor is reduced to this number
 		// hint "WELL DONE !!! the patrol has held the position successfully and is now moving to the next point";
 		systemChat "this proves && syntax test"; // was this ever proven?
