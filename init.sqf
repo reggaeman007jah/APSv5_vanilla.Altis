@@ -30,4 +30,3 @@ If !(isServer) exitwith {};
 	}];
 } foreach allUnits;
 
-systemChat "see this";
