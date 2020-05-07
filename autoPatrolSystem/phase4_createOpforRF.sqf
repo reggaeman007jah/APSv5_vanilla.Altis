@@ -61,6 +61,8 @@ if (_outcome == 3) then {
 // _rndOp1 = selectRandom [24, 30, 36, 42, 48, 54]; // RF force size 
 // stage RF based on patrol points taken and maybe also dist from home base 
 
+private ["_rndOp1"];
+
 switch (patrolPointsTaken) do {
 	case (0): { _rndOp1 = 24; };
 	case (1): { _rndOp1 = 30; };
@@ -91,7 +93,7 @@ switch (true) do {
 			_opClasses = ["o_g_soldier_ar_f","o_g_soldier_gl_f","o_g_sharpshooter_f","o_soldieru_lat_f"];
 			for "_i" from 1 to _groupSize do {
 				_unit = selectRandom _opClasses;
-				_unit1 = _indiGroup createUnit [_unit, _pos, [], 0.1, "none"];
+				_unit1 = _indiGroup createUnit [_unit, _anchor2, [], 0.1, "none"];
 				_opforTeam pushBack _unit1;
 			};
 			systemChat "opfor team:";
@@ -105,13 +107,13 @@ switch (true) do {
 			spawnedIndiUnit = spawnedIndiUnit + _groupSize;
 		};
 		// _anchor1 = [RGG_patrol_obj, 400, 700] call BIS_fnc_findSafePos; 
-		// deleteMarker "Point 1";
-		// deleteMarker "Point 2";
-		// deleteMarker "Point 3"; 
-		// _objective1 = createMarker ["Point 1", _pos1];
-		// _objective1 setMarkerShape "ELLIPSE";
-		// _objective1 setMarkerColor "ColorRed";
-		// _objective1 setMarkerSize [50, 50];
+		deleteMarker "Point 1";
+		deleteMarker "Point 2";
+		deleteMarker "Point 3"; 
+		_objective1 = createMarker ["Point 1", _anchor1];
+		_objective1 setMarkerShape "ELLIPSE";
+		_objective1 setMarkerColor "ColorRed";
+		_objective1 setMarkerSize [50, 50];
 
 		// for "_i" from 1 to 6 do {						
 		// 	_grp = createGroup east; // should be 6 groups

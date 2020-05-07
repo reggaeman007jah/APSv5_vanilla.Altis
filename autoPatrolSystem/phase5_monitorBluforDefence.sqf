@@ -27,6 +27,12 @@ _RGG_reinforcementTrigger = 10;
 // execVM "autoPatrolSystem\insuranceSystems\phase5Timer.sqf";
 // I am removing this for now ... 
 
+/*
+I need to allow some time for batter before checking initial state of defence 
+*/
+
+sleep 180;
+
 monitorDefence = true; 
 
 while {monitorDefence} do {
