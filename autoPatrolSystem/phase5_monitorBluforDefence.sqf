@@ -86,7 +86,7 @@ while {monitorDefence} do {
 	};
 
 	// this needs to also ensure indifor have over 10 in the area 
-	if ((_opforCount <5) && (_indiCount >8)) then {
+	if ((_opforCount <5) && (_indiCount >6)) then {
 	// if (_opforCount <= 5) then {// loop ends when opfor is reduced to this number
 		// hint "WELL DONE !!! the patrol has held the position successfully and is now moving to the next point";
 		systemChat "this proves && syntax test"; // was this ever proven?
@@ -94,6 +94,7 @@ while {monitorDefence} do {
 
 		// delete existing camp 
 		{ deleteVehicle _x } forEach campItems;
+		campItems = [];
 		systemChat "camp cleanup";
 			
 	
@@ -172,7 +173,7 @@ while {monitorDefence} do {
 
 		// _baseBuilding1 = createVehicle ["Land_IRMaskingCover_02_F", getMarkerPos "missionOrigin", [], 30, "none"]; 
 		_baseBuilding1 = createVehicle ["Land_MedicalTent_01_tropic_closed_F", _buildLocation, [], 30, "none"]; 
-		_baseBuilding1 enableSimulationGlobal false;
+		// _baseBuilding1 enableSimulationGlobal false;
 		sleep 1;
 
 		_fobPos = _baseBuilding1 getPos [20,180];
@@ -183,16 +184,16 @@ while {monitorDefence} do {
 		// _ammoSup = createVehicle ["Land_MedicalTent_01_tropic_closed_F", _fobPos];//med kit for full heal 
 		sleep 2;
 		_ammoSup = createVehicle ["B_supplyCrate_F", _fobPos];//ammo 
-		_ammoSup enableSimulationGlobal false;
+		// _ammoSup enableSimulationGlobal false;
 		sleep 2;
 		_ammoSup = createVehicle ["Box_NATO_Support_F", _fobPos];//ammmo 
-		_ammoSup enableSimulationGlobal false;
+		// _ammoSup enableSimulationGlobal false;
 		sleep 2;
 		_ammoSup = createVehicle ["Box_FIA_Support_F", _fobPos];//ammo 
-		_ammoSup enableSimulationGlobal false;
+		// _ammoSup enableSimulationGlobal false;
 		sleep 2;
 		_ammoSup = createVehicle ["Box_FIA_Wps_F", _fobPos];//ammo 
-		_ammoSup enableSimulationGlobal false;
+		// _ammoSup enableSimulationGlobal false;
 		sleep 2;
 		_quaddy = createVehicle ["I_G_Quadbike_01_F", _fobPos]; // quad
 

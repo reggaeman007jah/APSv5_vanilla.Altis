@@ -17,7 +17,7 @@ _sentPos 	= _this select 0; // objective point for any new mission
 _sentOrigin = _this select 1; // starting point for any new mission
 
 RGG_missionOrigin = _sentOrigin;
-RGG_patrol_obj = [_sentPos, 400, 800, 3, 0, 0, 0, RGG_patrolPositionBlacklist] call BIS_fnc_findSafePos; // generate patrol obj between 600m and 800m away, and always over land 
+RGG_patrol_obj = [_sentPos, 400, 900, 3, 0, 0, 0, RGG_patrolPositionBlacklist] call BIS_fnc_findSafePos; // generate patrol obj between 600m and 900m away, and always over land 
 // new test to make each point closer, now 350 - 500 away 
 // RGG_patrol_obj = [_sentPos, 600, 650, 3, 0, 0, 0, RGG_patrolPositionBlacklist] call BIS_fnc_findSafePos; // generate patrol obj between 600m and 800m away, and always over land 
 // RGG_patrol_obj = [_sentPos, 600, 800, 3, 0, 20, 0] call BIS_fnc_findSafePos; // generate patrol obj between 600m and 800m away, and always over land 
@@ -254,7 +254,7 @@ for "_i" from 1 to 2 do {
 		"Land_MetalBarrel_F",
 		"Land_WaterTank_F"
 	];
-	_spawnPos = _randomCampLocation getPos [_random25, _randomDir];
+	// _spawnPos = _randomCampLocation getPos [_random25, _randomDir];
 	_campItem2 = createVehicle [_campItem, _spawnPos];
 	_campItem2 setDir _randomDir;
 	campItems pushback _campItem2;
@@ -277,7 +277,7 @@ for "_i" from 1 to _random5 do {
 		"Land_MetalBarrel_F",
 		"Land_WaterTank_F"
 	];
-	_spawnPos = _randomCampLocation getPos [_random25, _randomDir];
+	// _spawnPos = _randomCampLocation getPos [_random25, _randomDir];
 	_campItem2 = createVehicle [_campItem, _spawnPos];
 	_campItem2 setDir _randomDir;
 	campItems pushback _campItem2;

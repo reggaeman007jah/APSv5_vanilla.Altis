@@ -4,7 +4,7 @@
 //__________________________________________________________________________________________________________________________________________________________________
 // v v v v v v v v v v v v  --- Main Settings --- v v v v v v v v v v v v
 
-AIS_REVIVE_INIT_UNITS 		= 	"allUnits"; // Auto-Init a group of units: "allPlayers" , "allPlayables" , "allUnits", "allUnitsBLUFOR", "allUnitsOPFOR", "allUnitsINDFOR", "allUnitsCIVILIAN"
+AIS_REVIVE_INIT_UNITS 		= 	"allPlayables"; // Auto-Init a group of units: "allPlayers" , "allPlayables" , "allUnits", "allUnitsBLUFOR", "allUnitsOPFOR", "allUnitsINDFOR", "allUnitsCIVILIAN"
 												// Warning: I didn't recomment to use "allUnits" if you play with a lot of AI units! AIS is mainly created for players and/or their AI group.
 AIS_MEDICAL_EDUCATION 		= 	0; 				// Who can revive an unconscious unit? 0 == Everybody, 1 == Everybody with a First Aid Kit or Medkit, 2 == Only Medics (this affects both, AI and players!).
 AIS_REVIVE_GUARANTY 		= 	false;			// If true you will fall everytime in uncoscious mode, regardless how strong the impact of damage was.
