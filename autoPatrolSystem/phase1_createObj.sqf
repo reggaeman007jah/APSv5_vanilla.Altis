@@ -149,53 +149,142 @@ _lineTest setMarkerSize [2, _dist2];
 // to enable a colour change when the chain breaks, these lines need to be pushed back into an array 
 
 // camp to dest 
+// _randomCampLocation = RGG_patrol_obj findEmptyPosition [10,50,"B_Heli_Light_01_dynamicLoadout_F"];
+// _randomItemNumber = selectRandom [6,7,8,9,10];
+// for "_i" from 1 to _randomItemNumber do {
+// 	_randomDist = selectRandom [2,5,10,15,20];
+// 	_randomDir = random 359;
+// 	_campItem = selectRandom [
+// 		"Land_BarrelSand_F",
+// 		"Land_BarrelSand_F",
+// 		"Land_BarrelSand_grey_F",
+// 		"Land_BarrelWater_grey_F",
+// 		// "Land_Suitcase_F",
+// 		"Land_WoodenCrate_01_stack_x3_F",
+// 		"Weapon_launch_O_Vorona_brown_F",
+// 		// "Land_Camera_01_F",
+// 		// "Land_CarBattery_01_F",
+// 		// "Land_ExtensionCord_F",
+// 		// "Land_MobilePhone_smart_F",
+// 		// "Land_PortableLongRangeRadio_F",
+// 		// "Land_Tablet_02_F",
+// 		// "Land_SurvivalRadio_F",
+// 		"Land_TransferSwitch_01_F",
+// 		"Land_TentDome_F",
+// 		// "FlexibleTank_01_forest_F",
+// 		"Box_T_East_Wps_F",
+// 		"Box_East_AmmoOrd_F",
+// 		"Box_East_WpsLaunch_F",
+// 		"Land_RotorCoversBag_01_F",
+// 		// "Land_FMradio_F",
+// 		// "Land_Laptop_F",
+// 		// "Land_SatellitePhone_F",
+// 		"Land_FoodSack_01_full_brown_F",
+// 		// "Intel_Photos_F",
+// 		// "Land_Camping_Light_F",
+// 		"Land_CratesWooden_F",
+// 		"Land_Pallet_MilBoxes_F",
+// 		// "Land_TankRoadWheels_01_single_F",
+// 		// "Land_File1_F",
+// 		// "Land_Money_F",
+// 		"Land_MetalBarrel_F",
+// 		"Land_WaterTank_F"
+// 		// "Land_Bucket_painted_F",
+// 		// "Land_FireExtinguisher_F",
+// 		// "Land_MetalWire_F"
+// 	];
+// 	_spawnPos = _randomCampLocation getPos [_randomDist, _randomDir];
+// 	_rewardSpawn = createVehicle [_campItem, _spawnPos];
+
+// 	// _rewardSpawn2 = createVehicle ["Land_TentDome_F", _spawnPos];
+// 	_rewardSpawn setDir _randomDir;
+// 	// _rewardSpawn2 setDir _randomDir;
+// 	systemChat format ["random base dir: %1", _randomDir];
+// 	_rewardSpawn enableSimulationGlobal false;
+// 	sleep 0.5;
+// };
+
+
+// _randomDist = selectRandom [10,15,20];
+// _randomDir = random 359;
+// _spawnPos = _randomCampLocation getPos [_randomDist, _randomDir];
+// _rewardSpawn2 = createVehicle ["Land_TentDome_F", _spawnPos];
+// systemChat "tent 1";
+
+// _randomDist = selectRandom [10,15,20];
+// _randomDir = random 359;
+// _spawnPos = _randomCampLocation getPos [_randomDist, _randomDir];
+// _rewardSpawn2 = createVehicle ["Land_TentDome_F", _spawnPos];
+// systemChat "tent 2";
+
+// _randomDist = selectRandom [10,15,20];
+// _randomDir = random 359;
+// _spawnPos = _randomCampLocation getPos [_randomDist, _randomDir];
+// _rewardSpawn2 = createVehicle ["Land_TentDome_F", _spawnPos];systemChat "tent 3";
+
+
+// new 
 _randomCampLocation = RGG_patrol_obj findEmptyPosition [10,50,"B_Heli_Light_01_dynamicLoadout_F"];
-_randomDist = selectRandom [2,5,10];
-_randomDir = random 359;
-_randomItemNumber = selectRandom [6,7,8,9,10];
-for "_i" from 1 to _randomItemNumber do {
+_random5 = random 5;
+_random3 = random 3;
+
+// tents 
+for "_i" from 1 to 2 do {
+	_randomDir = random 359;
+	_random30 = random 30;
+	_spawnPos = _randomCampLocation getPos [_random30, _randomDir];
+	_campItem = createVehicle ["Land_TentDome_F", _spawnPos];
+	_campItem setDir _randomDir;
+	campItems pushback _campItem;
+};
+
+// barrels and other camp stuff 
+for "_i" from 1 to 2 do {
+	_randomDir = random 359;
+	_random25 = random 25;
+	_spawnPos = _randomCampLocation getPos [_random3, _randomDir];
 	_campItem = selectRandom [
 		"Land_BarrelSand_F",
 		"Land_BarrelSand_F",
 		"Land_BarrelSand_grey_F",
 		"Land_BarrelWater_grey_F",
-		// "Land_Suitcase_F",
-		"Land_WoodenCrate_01_stack_x3_F",
-		"Weapon_launch_O_Vorona_brown_F",
-		// "Land_Camera_01_F",
-		// "Land_CarBattery_01_F",
-		// "Land_ExtensionCord_F",
-		// "Land_MobilePhone_smart_F",
-		// "Land_PortableLongRangeRadio_F",
-		// "Land_Tablet_02_F",
-		// "Land_SurvivalRadio_F",
 		"Land_TransferSwitch_01_F",
 		"Land_TentDome_F",
-		// "FlexibleTank_01_forest_F",
+		"Land_RotorCoversBag_01_F",
+		"Land_MetalBarrel_F",
+		"Land_WaterTank_F"
+	];
+	_spawnPos = _randomCampLocation getPos [_random25, _randomDir];
+	_campItem2 = createVehicle [_campItem, _spawnPos];
+	_campItem2 setDir _randomDir;
+	campItems pushback _campItem2;
+};
+
+// crates 
+for "_i" from 1 to _random5 do {
+	_randomDir = random 359;
+	_random5 = random 5;
+	_random25 = random 25;
+	_spawnPos = _randomCampLocation getPos [_random5, _randomDir];
+	_campItem = selectRandom [
+		"Land_WoodenCrate_01_stack_x3_F",
+		"Weapon_launch_O_Vorona_brown_F",
 		"Box_T_East_Wps_F",
 		"Box_East_AmmoOrd_F",
 		"Box_East_WpsLaunch_F",
-		"Land_RotorCoversBag_01_F",
-		// "Land_FMradio_F",
-		// "Land_Laptop_F",
-		// "Land_SatellitePhone_F",
-		"Land_FoodSack_01_full_brown_F",
-		// "Intel_Photos_F",
-		// "Land_Camping_Light_F",
 		"Land_CratesWooden_F",
 		"Land_Pallet_MilBoxes_F",
-		// "Land_TankRoadWheels_01_single_F",
-		// "Land_File1_F",
-		// "Land_Money_F",
 		"Land_MetalBarrel_F",
 		"Land_WaterTank_F"
-		// "Land_Bucket_painted_F",
-		// "Land_FireExtinguisher_F",
-		// "Land_MetalWire_F"
 	];
-	_spawnPos = _randomCampLocation getPos [_randomDist, _randomDir];
-	_rewardSpawn = createVehicle [_campItem, _spawnPos];
-	_rewardSpawn setDir _randomDir;
-	_rewardSpawn enableSimulationGlobal false;
-	sleep 0.5;
+	_spawnPos = _randomCampLocation getPos [_random25, _randomDir];
+	_campItem2 = createVehicle [_campItem, _spawnPos];
+	_campItem2 setDir _randomDir;
+	campItems pushback _campItem2;
 };
+
+sleep 2;
+
+systemChat format ["Camp Items: %1", campItems];
+_noOfCampItems = count campItems;
+systemChat format ["No. of Camp Items: %1", _noOfCampItems];

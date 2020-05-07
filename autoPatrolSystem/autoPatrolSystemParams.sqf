@@ -76,3 +76,6 @@ publicVariable "spawnedOpforUnit";
 
 // track whether opfor sapper ops are happening
 SAPPERS = false;
+
+// holds camp items (for deletion after taking base)
+campItems = [];

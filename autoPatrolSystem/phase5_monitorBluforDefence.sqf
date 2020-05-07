@@ -92,6 +92,10 @@ while {monitorDefence} do {
 		systemChat "this proves && syntax test"; // was this ever proven?
 		"WELL DONE !!! the patrol has held the position successfully and is now moving to the next point" remoteExec ["hint", 0, true];	
 
+		// delete existing camp 
+		{ deleteVehicle _x } forEach campItems;
+		systemChat "camp cleanup";
+			
 	
 		// trigger delayed cleanup 
 		_cleanupPos = RGG_patrol_obj; // this ensures that a snapshot of the location is sent to the cleanup script - a global var will always be the most current version and so will not suit this purpose 

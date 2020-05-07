@@ -14,6 +14,14 @@ execVM "autoPatrolSystem\debuggingSystems\debugCounter.sqf";
 // initialise flybys - add bombs later 
 execVM "autoPatrolSystem\ambientSystems\randomFlybys.sqf";
 
+while {true} do {
+	{ deleteVehicle _x } forEach allDead;
+	systemChat "cleanup";
+	sleep 30;
+};
+
+
+
 // initialise Heli Systems
 // execVM "autoPatrolSystem\heliSystems\heliSystemsInit.sqf";
 // // systemchat "debug --- Heli Systems ACTIVATED";

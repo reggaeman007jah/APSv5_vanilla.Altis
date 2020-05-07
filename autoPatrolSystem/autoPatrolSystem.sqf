@@ -2,10 +2,18 @@
 // this launches the mission-specific params file 
 execVM "autoPatrolSystem\autoPatrolSystemParams.sqf";
 
+// this launches the sapper system
+execVM "autoPatrolSystem\chainSecuritySystems\chainSec.sqf";
+
+
 // this file should run only once 
 sleep 2;
 systemchat "debug --- autoPatrolSystem.sqf running";
-"MP debug --- autoPatrolSystem.sqf running" remoteExec ["systemChat", 0, true];
+"Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
+"Support Independent forces as they patrol teh badlands" remoteExec ["systemChat", 0, true];
+// "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
+// "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
+// "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
 
 /*
 ------- Base Setup ------- 

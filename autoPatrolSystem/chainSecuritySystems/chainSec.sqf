@@ -83,13 +83,16 @@ while {true} do {
 				};
 			};
 		};
+	} else {
+		systemChat "no sappers right now you ok";
 	};
 
 	if (SAPPERS) then {
 		systemChat "needs code";
+		hint "needs code";
 		//
 		SAPPERS = false;
 	};
 
-	sleep 600;
+	sleep 90;
 };
