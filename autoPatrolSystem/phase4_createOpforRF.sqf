@@ -69,7 +69,7 @@ switch (patrolPointsTaken) do {
 	case (2): { _rndOp1 = 36; TWOPOINT = true; };
 	case (3): { _rndOp1 = 42; TWOPOINT = true; };
 	case (4): { _rndOp1 = 48; THREEPOINT = true; };
-	case (4): { _rndOp1 = 54; THREEPOINT = true; };
+	case (5): { _rndOp1 = 54; THREEPOINT = true; };
 	default { _rndOp1 = selectRandom [24, 30, 36, 42, 48, 54]; THREEPOINT = true; };
 };
 
@@ -80,7 +80,7 @@ _grp3 = createGroup east;
 _grp4 = createGroup east;
 _grp5 = createGroup east;
 _grp6 = createGroup east;
-_groupSize = _rndOp1 / 6;
+_groupSize = _rndOp1 / 12;
 
 switch (true) do {	
 
@@ -98,7 +98,7 @@ switch (true) do {
 		// unit creation 
 		for "_i" from 1 to 6 do {
 			_indiGroup = createGroup east;
-			_anchor1a = [_anchor1, 50, 150, 3, 0] call BIS_fnc_findSafePos;
+			_anchor1a = [_anchor1, 50, 200, 3, 0] call BIS_fnc_findSafePos;
 			_opforTeam = [];
 			_opClasses = ["o_g_soldier_ar_f","o_g_soldier_gl_f","o_g_sharpshooter_f","o_soldieru_lat_f"];
 			for "_i" from 1 to _groupSize do {
@@ -195,6 +195,10 @@ switch (true) do {
 		_objective2 setMarkerShape "ELLIPSE";
 		_objective2 setMarkerColor "ColorRed";
 		_objective2 setMarkerSize [50, 50];
+		_objective3 = createMarker ["Point 3", _anchor3];
+		_objective3 setMarkerShape "ELLIPSE";
+		_objective3 setMarkerColor "ColorRed";
+		_objective3 setMarkerSize [50, 50];
 		// unit creation 
 		for "_i" from 1 to 2 do {
 			_indiGroup = createGroup east;

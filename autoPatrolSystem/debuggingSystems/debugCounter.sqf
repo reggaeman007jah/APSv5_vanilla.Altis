@@ -26,7 +26,7 @@ while {true} do {
 	{
 		switch ((side _x)) do
 		{
-			case EAST: {RGG_redzoneIndi = RGG_redzoneEast + 1};
+			case EAST: {RGG_redzoneEast = RGG_redzoneEast + 1};
 			case WEST: {RGG_redzoneWest = RGG_redzoneWest + 1};
 			case INDEPENDENT: {RGG_redzoneIndi = RGG_redzoneIndi + 1};
 		};

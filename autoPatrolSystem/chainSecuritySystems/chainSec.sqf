@@ -48,6 +48,7 @@ if sappers are destroyed, nothing happens (well, remove red warning marker)
 // spawn from main base 
 // on arrival chekc points, if higher, move to next 
 // if at any stage specops detected they will head to that base immediately 
+sleep 10;
 
 while {true} do {
 	systemChat "sapperTest running";
