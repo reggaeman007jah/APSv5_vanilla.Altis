@@ -282,11 +282,9 @@ while {monitorDefence} do {
 			case 6: {
 				_vicLocation = _anchorPos findEmptyPosition [10,100,"B_Heli_Light_01_dynamicLoadout_F"];
 				_vic = selectRandom [
-					"B_APC_Wheeled_01_cannon_F", 
-					"B_APC_Tracked_01_rcws_F", 
-					"B_AFV_Wheeled_01_cannon_F", 
-					"B_AFV_Wheeled_01_up_cannon_F"
-					]; // needs to be tanks!!!
+					"B_MBT_01_cannon_F", 
+					"I_MBT_03_cannon_F"
+					]; 
 				_rewardSpawn = createVehicle [_vic, _vicLocation];
 			};
 			default {
@@ -309,7 +307,9 @@ while {monitorDefence} do {
 					"B_APC_Wheeled_01_cannon_F", 
 					"B_APC_Tracked_01_rcws_F", 
 					"B_AFV_Wheeled_01_cannon_F", 
-					"B_AFV_Wheeled_01_up_cannon_F"
+					"B_AFV_Wheeled_01_up_cannon_F",
+					"B_MBT_01_cannon_F",
+					"I_MBT_03_cannon_F"
 					];
 				_rewardSpawn = createVehicle [_vic, _vicLocation];
 			};
