@@ -73,13 +73,13 @@ for "_i" from 1 to _diffLevel do {
 			"O_G_Sharpshooter_F",
 			"O_G_Soldier_SL_F",
 			"O_G_Soldier_TL_F"
-			];
+		];
 		_pos = [RGG_patrol_obj, 0, 30] call BIS_fnc_findSafePos; // was 30, now 80, now 150 hopefully for better dispertion // now back to 30
 		_unit = _grp createUnit [_rndtype, _pos, [], 1, "none"]; 
 		_unit setBehaviour "COMBAT";
 		_unit doMove RGG_missionOrigin; 
 		spawnedOpforUnit = spawnedOpforUnit + 1;
-		sleep 1;						
+		sleep 0.5;						
 	};
 };
 

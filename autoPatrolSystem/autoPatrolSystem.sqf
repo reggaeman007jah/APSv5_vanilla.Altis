@@ -10,7 +10,7 @@ execVM "autoPatrolSystem\chainSecuritySystems\chainSec.sqf";
 sleep 2;
 systemchat "debug --- autoPatrolSystem.sqf running";
 "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
-"Support Independent forces as they patrol teh badlands" remoteExec ["systemChat", 0, true];
+"Support Independent forces as they patrol the badlands" remoteExec ["systemChat", 0, true];
 // "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
 // "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
 // "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];

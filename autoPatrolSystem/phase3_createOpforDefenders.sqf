@@ -44,8 +44,9 @@ _opforClass = [
 ];
 
 _rndOp1 = selectRandom [8, 10, 12, 24];
+
 _grp = createGroup east;
-systemchat format ["op defencee: %1", _rndOp1];
+systemchat format ["op defence: %1", _rndOp1];
 for "_i" from 1 to _rndOp1 do {
 	_rndtype = selectRandom _opforClass;
 	_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
@@ -440,51 +441,36 @@ sleep 20; // changes from 5 to 20, in case this was the reasons for the logic gl
 // "MP debug --- checking for blufor RF" remoteExec ["systemChat", 0, true];
 // this is one of two points where patrol reinforcements are considered - previously this was every 90 seconds, now it is more lean and cheap
 
-// redirects any units incorrectly sent to the old point as part of an RF action 
+// redirects any indifor units incorrectly sent to the old point as part of an RF action 
 execVM "autoPatrolSystem\insuranceSystems\phase3Timer.sqf";
-// the above only applies to indifor units
 
 RFCHECK = true; 
 
-// there is a check, below, but there are other similar checks being done elsewhere - can we just do one check, and globalise the var, and just use that?
-
 while {RFCHECK} do {
-
-	// do this once and access a global!!! MAY 2020
-
 	// systemChat "___RFCHECK phase 3 cycle___";
 	// confirms side numbers on the red zone 
-	_opforCount = 0;
-	_indiCount = 0;
-	_units = allUnits inAreaArray "Objective 1";
-	_unitCount1 = count _units;
-	{
-		switch ((side _x)) do
-		{
-			case EAST: {_opforCount = _opforCount + 1};
-			case INDEPENDENT: {_indiCount = _indiCount + 1};
-		};
-	} forEach _units;
+	// _opforCount = 0;
+	// _indiCount = 0;
+	// _units = allUnits inAreaArray "Objective 1";
+	// _unitCount1 = count _units;
+	// {
+	// 	switch ((side _x)) do
+	// 	{
+	// 		case EAST: {_opforCount = _opforCount + 1};
+	// 		case INDEPENDENT: {_indiCount = _indiCount + 1};
+	// 	};
+	// } forEach _units;
 	// hint format ["debug --- OPFOR DEFENDERS = %1", _opforCount1];
-
-	if ((_opforCount) <= 3) then // this is the decider-value as to whether the second round of enemy moves in
-	{
+	if ((RGG_redzoneEast <= 3) && (RGG_redzoneIndi >=3)) then { // this is the decider-value as to whether the second round of enemy moves in
 		// systemChat "Debug - Initial defenders neutralised, prepare for OPFOR RF .. !!!";
 		// "MP debug - Initial defenders neutralised, prepare for OPFOR RF .. !!!" remoteExec ["systemChat", 0, true];	
-		RFCHECK = false;
 		sleep 1;
 		execVM "autoPatrolSystem\phase4_createOpforRF.sqf";
-		hint "debug - opfor count is now < 3";
-		sleep 2;
-		// systemchat "debug --- phase4_createOpforRF ACTIVATED";
-		// "MP debug --- phase4_createOpforRF ACTIVATED" remoteExec ["systemChat", 0, true];
-
-	} else {
-		// systemChat "Patrol Point has not yet been cleared";
-		// "MP Patrol Point has not yet been cleared" remoteExec ["systemChat", 0, true];	
-		// placeholder for something else..?
+		"Independent Forces Have Taken The Patrol Point" remoteExec ["hint", 0, true];
+		"Independent Forces Have Taken The Patrol Point" remoteExec ["systemChat", 0, true];
+		"Opfor may try to retake this point - check the map" remoteExec ["systemChat", 0, true];
+		RFCHECK = false;
 	};
-
 	systemChat "debug - 90 second RFcheck cycle";
 	sleep 90;
 };

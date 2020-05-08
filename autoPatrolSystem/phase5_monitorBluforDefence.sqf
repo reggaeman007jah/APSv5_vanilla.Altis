@@ -16,9 +16,12 @@ systemChat "debug --- phase 5 - defence";
 
 // message to players regarding incoming opfor 
 _numberOfAttackers = _this select 0;
-_numberOfAttackPoints = _this select 1;
-systemChat format ["Intel suggests %1 enemy units are advancing from %2 key position(s) in your immediate area", _numberOfAttackers, _numberOfAttackPoints];
-systemChat "Check the map for specific locational intel";
+// _numberOfAttackPoints = _this select 1;
+// systemChat format ["Intel suggests %1 enemy units are advancing in your immediate area", _numberOfAttackers];
+// systemChat "Check the map for specific locational intel";
+
+format ["Intel suggests %1 enemy units are advancing in your immediate area. Check the map for specific locational intel", _numberOfAttackers] remoteExec ["hint", 0];
+
 
 // previously this managed blu RF, but now it can be used to manage future things (has no direct usage now)
 _RGG_reinforcementTrigger = 10; 
@@ -81,7 +84,7 @@ while {monitorDefence} do {
 		// execVM "autoPatrolSystem\reinforcementSystems\bluforRF.sqf";
 		// systemchat "sending in fresh units to avenge the lost patrol";
 		// "sending in fresh units to avenge the lost patrol" remoteExec ["systemChat", 0, true];
-		LOSTPATROL = true; // indicates patrol has been lost and RF will need to head in to take over // i.e. do not auto-progress via timer 
+		// LOSTPATROL = true; // indicates patrol has been lost and RF will need to head in to take over // i.e. do not auto-progress via timer 
 
 		// this (below) did not work 
 		// [RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf";
@@ -99,6 +102,10 @@ while {monitorDefence} do {
 		// hint "WELL DONE !!! the patrol has held the position successfully and is now moving to the next point";
 		systemChat "this proves && syntax test"; // was this ever proven?
 		"WELL DONE !!! the patrol has held the position successfully and is now moving to the next point" remoteExec ["hint", 0, true];	
+		"The enemy camp has been destroyed and a new FOB is now available" remoteExec ["systemChat", 0, true];	
+		sleep 1;
+		"The patrol FOB will enable full heals at the medical tent" remoteExec ["systemChat", 0, true];	
+		"As well as vehicle repair and rearm" remoteExec ["systemChat", 0, true];	
 
 		// delete existing camp 
 		{ deleteVehicle _x } forEach campItems;
