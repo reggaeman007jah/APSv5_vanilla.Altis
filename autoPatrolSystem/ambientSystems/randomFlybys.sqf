@@ -16,6 +16,7 @@ always have ambient flybys go relative to the next patrol obj
 */
 
 sleep 300; // initial delay
+
 while {true} do {
 	_sleep = selectRandom [60, 90, 120, 180, 240, 300]; // determines how long between each batch of ambients 
 	sleep _sleep; // random sleep between spawn batches // test if moving this line solves the pos problem 
