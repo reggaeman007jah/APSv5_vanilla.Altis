@@ -198,20 +198,24 @@ while {monitorDefence} do {
 		// _ammoSup = createVehicle ["Land_PortableCabinet_01_medical_F", _fobPos];//med kit for full heal // CONTACT DLC 
 		// _ammoSup = createVehicle ["Land_MedicalTent_01_tropic_closed_F", _fobPos];//med kit for full heal 
 		sleep 2;
-		_ammoSup = createVehicle ["B_supplyCrate_F", _fobPos];//ammo 
+		// _ammoSup = createVehicle ["B_supplyCrate_F", _fobPos];//ammo 
 		// _ammoSup enableSimulationGlobal false;
 		sleep 2;
 		_ammoSup = createVehicle ["Box_NATO_Support_F", _fobPos];//ammmo 
+		[ "AmmoboxInit", [_ammoSup, true, {true}] ] call BIS_fnc_arsenal;
 		// _ammoSup enableSimulationGlobal false;
-		sleep 2;
-		_ammoSup = createVehicle ["Box_FIA_Support_F", _fobPos];//ammo 
+		// sleep 2;
+		// _ammoSup = createVehicle ["Box_FIA_Support_F", _fobPos];//ammo 
 		// _ammoSup enableSimulationGlobal false;
-		sleep 2;
-		_ammoSup = createVehicle ["Box_FIA_Wps_F", _fobPos];//ammo 
+		// sleep 2;
+		// _ammoSup = createVehicle ["Box_FIA_Wps_F", _fobPos];//ammo 
 		// _ammoSup enableSimulationGlobal false;
-		sleep 2;
+		// sleep 2;
 		_quaddy = createVehicle ["I_G_Quadbike_01_F", _fobPos]; // quad
 
+		// testVA
+		// _spawnedVA = createVehicle ["Land_WoodenBox_F", _fobPos];
+		// [ "AmmoboxInit", [_spawnedVA, true, {true}] ] call BIS_fnc_arsenal;
 
 		// repair area 
 		_repairPos = _fobPos findEmptyPosition [10,100,"B_Heli_Light_01_dynamicLoadout_F"];

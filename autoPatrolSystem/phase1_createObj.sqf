@@ -288,3 +288,6 @@ sleep 2;
 systemChat format ["Camp Items: %1", campItems];
 _noOfCampItems = count campItems;
 systemChat format ["No. of Camp Items: %1", _noOfCampItems];
+
+// trigger test
+execVM "autoPatrolSystem\triggerTest.sqf";

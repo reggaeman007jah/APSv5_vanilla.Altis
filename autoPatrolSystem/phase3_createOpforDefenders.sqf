@@ -55,11 +55,16 @@ for "_i" from 1 to _rndOp1 do {
 	_randomDist = random [5, 25, 50]; 
 	_endPoint = RGG_patrol_obj getPos [_randomDist, _randomDir];
 	_unit setBehaviour "COMBAT";
-	_unit doMove _endPoint;
+	// _unit doMove _endPoint;
 	spawnedOpforUnit = spawnedOpforUnit +1;
+
  	sleep 1;									
 };
 
+// createGuardedPoint [east, RGG_patrol_obj, -1, objNull];
+// systemChat "guard wp set";
+
+sleep 2;
 
 switch (patrolPointsTaken) do {
 	case 0: {
