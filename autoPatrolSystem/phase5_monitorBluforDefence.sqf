@@ -189,7 +189,7 @@ while {monitorDefence} do {
 		// _baseBuilding1 = createVehicle ["Land_IRMaskingCover_02_F", getMarkerPos "missionOrigin", [], 30, "none"]; 
 		_baseBuilding1 = createVehicle ["Land_MedicalTent_01_tropic_closed_F", _buildLocation, [], 30, "none"]; 
 		// _baseBuilding1 enableSimulationGlobal false;
-		sleep 1;
+		// sleep 0.6;
 
 		_fobPos = _baseBuilding1 getPos [20,180];
 		// _ammoPos = _fobPos getPos [10,180];
@@ -197,10 +197,10 @@ while {monitorDefence} do {
 		// _fuelPos = _fobPos getPos [10,270];
 		// _ammoSup = createVehicle ["Land_PortableCabinet_01_medical_F", _fobPos];//med kit for full heal // CONTACT DLC 
 		// _ammoSup = createVehicle ["Land_MedicalTent_01_tropic_closed_F", _fobPos];//med kit for full heal 
-		sleep 2;
+		// sleep 2;
 		// _ammoSup = createVehicle ["B_supplyCrate_F", _fobPos];//ammo 
 		// _ammoSup enableSimulationGlobal false;
-		sleep 2;
+		sleep 0.6;
 		_ammoSup = createVehicle ["Box_NATO_Support_F", _fobPos];//ammmo 
 		[ "AmmoboxInit", [_ammoSup, true, {true}] ] call BIS_fnc_arsenal;
 		// _ammoSup enableSimulationGlobal false;
@@ -210,7 +210,7 @@ while {monitorDefence} do {
 		// sleep 2;
 		// _ammoSup = createVehicle ["Box_FIA_Wps_F", _fobPos];//ammo 
 		// _ammoSup enableSimulationGlobal false;
-		// sleep 2;
+		sleep 0.6;
 		_quaddy = createVehicle ["I_G_Quadbike_01_F", _fobPos]; // quad
 
 		// testVA
@@ -222,12 +222,12 @@ while {monitorDefence} do {
 		_ammoSup = createVehicle ["B_Slingload_01_Repair_F", _repairPos];//vehicle repair 
 		// _repairMan = createVehicle ["C_Man_UtilityWorker_01_F", _repairPos];//mechanic
 		// why does the unit spawn with an empty gun?
-		sleep 2;
+		// sleep 2;
 
 		// vehicle ammo - next to repair 
-		_ammoPos = _repairPos findEmptyPosition [10,100,"B_Heli_Light_01_dynamicLoadout_F"];
-		_ammoSup = createVehicle ["Box_NATO_AmmoVeh_F", _ammoPos];//vehicle ammo 
-		sleep 2;
+		// _ammoPos = _repairPos findEmptyPosition [10,100,"B_Heli_Light_01_dynamicLoadout_F"];
+		// _ammoSup = createVehicle ["Box_NATO_AmmoVeh_F", _ammoPos];//vehicle ammo 
+		sleep 0.6;
 		
 		// rewards
 		/*

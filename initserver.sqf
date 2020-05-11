@@ -20,6 +20,8 @@ while {true} do {
 	sleep 30;
 };
 
+// to avoid errors 
+REARMONSPAWN = true; 
 
 
 // initialise Heli Systems

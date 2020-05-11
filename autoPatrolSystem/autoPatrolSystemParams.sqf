@@ -79,3 +79,6 @@ SAPPERS = false;
 
 // holds camp items (for deletion after taking base)
 campItems = [];
+
+// decide whether to have to rearm helis every respawn 
+// REARMONSPAWN = true;
