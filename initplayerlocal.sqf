@@ -1,6 +1,9 @@
 
 sleep 1;
 
+// test of new voiceMarkerSystem 
+execVM "voiceMarkerSystem\1_vmsInit.sqf";
+
 // execVM "voiceActivatedCoordFinder\VACF_init.sqf";
 // execVM "voiceActivatedDataStore\VADS_init.sqf";
 // execVM "voiceActivatedDataManager\VADM_init.sqf";
@@ -50,4 +53,6 @@ useEffects: Boolean - same as useEffects in setDamage alt syntax
 // 	if ((side _dead == independent) && (side _killer == independent)) then {systemChat "oh noes - indifor killed a friendly"};
 // 	}];
 // } foreach allUnits;
+
+
 
