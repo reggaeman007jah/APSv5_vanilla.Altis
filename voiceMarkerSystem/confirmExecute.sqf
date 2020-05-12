@@ -12,13 +12,17 @@ notes:
 issues:
 
 */
+systemChat "confirm ex running";
 
 // eyepos 
 _dir = _this select 0;
+_dir2 = _dir select 0;
+systemChat format ["player look dir is:%1", _dir];
 
 RGG_FNC_VMS_createMarker = {
+	
 	// params  
-	params ["_dist", "_dir"];
+	params ["_dist", "_dir2"];
 	// get marker pos 
 	_markerPos = player getPos [_dist, _dir];
 	// create marker 
@@ -26,7 +30,7 @@ RGG_FNC_VMS_createMarker = {
 	_tempMarker setMarkerShape "ELLIPSE";
 	_tempMarker setMarkerSize [20, 20];
 	_tempMarker setMarkerAlpha 0.8;
-	_tempMarker setMarkerColor "colorRed";
+	_tempMarker setMarkerColor "colorBlue";
 	// fade and delete 
 	sleep 10;
 	_tempMarker setMarkerAlpha 0.6;
@@ -36,7 +40,10 @@ RGG_FNC_VMS_createMarker = {
 	_tempMarker setMarkerAlpha 0.1;
 	sleep 2;
 	deleteMarker "VMS_Marker";
+	execVM "voiceMarkerSystem\clearKeyDowns.sqf";
 	execVM "voiceMarkerSystem\1_vmsInit.sqf";
+	systemchat format ["distance: %1", _dist];
+	systemchat format ["direction: %1", _dir2];
 
 };
 
@@ -82,4 +89,4 @@ switch (RGG_VMS_Distance) do {
 		_dist = 1000;
 	};
 
-[_dist, _dir] call RGG_FNC_VMS_createMarker;
+[_dist, _dir2] call RGG_FNC_VMS_createMarker;
