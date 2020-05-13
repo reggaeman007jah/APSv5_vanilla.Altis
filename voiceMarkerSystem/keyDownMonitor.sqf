@@ -88,8 +88,8 @@ while {RGG_VMS_NumInputBool} do {
 			};
 			_dist = (RGG_VMS_Distance select 0) * 100;
 			[_type, _category, _dist, _playerLookDir] execVM "voiceMarkerSystem\confirmExecute.sqf";
-			systemChat format ["player look dir is:%1", _playerLookDir];
-			systemChat format ["marker distance is:%1", _dist];
+			// systemChat format ["player look dir is:%1", _playerLookDir];
+			// systemChat format ["marker distance is:%1", _dist];
 			execVM "voiceMarkerSystem\clearKeyDowns.sqf";
 			RGG_VMS_ConfirmBool = false;
 		};

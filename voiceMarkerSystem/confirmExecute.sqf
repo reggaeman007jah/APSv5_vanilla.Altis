@@ -49,12 +49,13 @@ _Vtype 	= _this select 1; // marker type (infi, repair etc)
 _Vdist 	= _this select 2; // spoken distance 
 _Vdir 	= _this select 3; // head direction 
 
+private = "_visualMarkerType"; // test placement to fix issue !! Does this work??
+
 RGG_FNC_VMS_createMarker = {
 
 	// params  
 	params ["_Vcat", "_Vtype", "_Vdist", "_Vdir"];
-	private = "_visualMarkerType";
-
+	
 	// get cat && type 
 	switch (_Vcat) do {
 		case (1): {
@@ -109,11 +110,13 @@ RGG_FNC_VMS_createMarker = {
 
 	// _tempMarker setMarkerColor "colorBlue";
 	// debug feedback 
+	systemchat format [" ........................."];
 	systemchat format [" .. DEBUG .. category:  %1", _Vcat];
 	systemchat format [" .. DEBUG .. type:      %1", _Vtype];
 	systemchat format [" .. DEBUG .. distance:  %1", _Vdist];
 	systemchat format [" .. DEBUG .. direction: %1", _Vdir];
 	systemchat format [" .. DEBUG .. position:  %1", _markerPos];
+	systemchat format [" ........................."];
 
 	//fade and delete (sorry!) 
 	sleep 5;
