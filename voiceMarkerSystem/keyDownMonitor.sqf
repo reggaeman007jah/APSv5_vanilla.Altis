@@ -36,7 +36,13 @@ while {RGG_VMS_NumInputBool} do {
 	if (RGG_VMS_ConfirmBool) then {
 		if (_countRGG_VMS_Confirm == 1) then {
 			systemChat "selection made";
-			_playerLookDir = eyePos player;
+			// _playerLookDir = eyePos player;
+			_vdir = getCameraViewDirection player;
+			_playerLookDir = _vdir # 0 atan2 _vdir # 1;
+			_playerLookDir = round _playerLookDir;
+			if (_playerLookDir < 0) then {
+				_playerLookDir = _playerLookDir + 360;
+			};
 			[_playerLookDir] execVM "voiceMarkerSystem\confirmExecute.sqf";
 			RGG_VMS_ConfirmBool = false;
 		};
@@ -46,4 +52,11 @@ while {RGG_VMS_NumInputBool} do {
 	};
 	sleep 0.1;
 };	
-	
+
+/*
+_vdir = getCameraViewDirection player;
+__playerLookDir = _vdir # 0 atan2 _vdir # 1;
+_playerLookDir = round __playerLookDir;
+if (_playerLookDir < 0) then {
+	_playerLookDir = _playerLookDir + 360;
+};
