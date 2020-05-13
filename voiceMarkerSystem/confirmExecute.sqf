@@ -44,48 +44,48 @@ East
 
 */
 
-_cat 	= _this select 0; // faction type (East West Indi General etc) 
-_type 	= _this select 1; // marker type (infi, repair etc)
-_dist 	= _this select 2; // spoken distance 
-_dir 	= _this select 3; // head direction 
+_Vcat 	= _this select 0; // faction type (East West Indi General etc) 
+_Vtype 	= _this select 1; // marker type (infi, repair etc)
+_Vdist 	= _this select 2; // spoken distance 
+_Vdir 	= _this select 3; // head direction 
 
 RGG_FNC_VMS_createMarker = {
 
 	// params  
-	params ["_cat", "_type", "_dist", "_dir"];
-	private = "_markerType";
+	params ["_Vcat", "_Vtype", "_Vdist", "_Vdir"];
+	private = "_visualMarkerType";
 
 	// get cat && type 
-	switch (_cat) do {
+	switch (_Vcat) do {
 		case (1): {
-			switch (_type) do {
-				case (1): { _markerType = "b_inf" };
-				case (2): { _markerType = "b_motor_inf" };
-				case (3): { _markerType = "b_mech_inf" };
-				case (4): { _markerType = "b_armor" };
-				case (5): { _markerType = "b_art" };
+			switch (_Vtype) do {
+				case (1): { _visualMarkerType = "b_inf" };
+				case (2): { _visualMarkerType = "b_motor_inf" };
+				case (3): { _visualMarkerType = "b_mech_inf" };
+				case (4): { _visualMarkerType = "b_armor" };
+				case (5): { _visualMarkerType = "b_art" };
 			}; 
 		};
 		case (2): {
-			switch (_type) do {
-				case (1): { _markerType = "n_inf" };
-				case (2): { _markerType = "n_motor_inf" };
-				case (3): { _markerType = "n_mech_inf" };
-				case (4): { _markerType = "n_armor" };
-				case (5): { _markerType = "n_art" };
+			switch (_Vtype) do {
+				case (1): { _visualMarkerType = "n_inf" };
+				case (2): { _visualMarkerType = "n_motor_inf" };
+				case (3): { _visualMarkerType = "n_mech_inf" };
+				case (4): { _visualMarkerType = "n_armor" };
+				case (5): { _visualMarkerType = "n_art" };
 			}; 
 		};
 		case (3): {
-			switch (_type) do {
-				case (1): { _markerType = "o_inf" };
-				case (2): { _markerType = "o_motor_inf" };
-				case (3): { _markerType = "o_mech_inf" };
-				case (4): { _markerType = "o_armor" };
-				case (5): { _markerType = "o_art" };
+			switch (_Vtype) do {
+				case (1): { _visualMarkerType = "o_inf" };
+				case (2): { _visualMarkerType = "o_motor_inf" };
+				case (3): { _visualMarkerType = "o_mech_inf" };
+				case (4): { _visualMarkerType = "o_armor" };
+				case (5): { _visualMarkerType = "o_art" };
 			}; 
 		};
 		case (4): {
-			switch (_type) do {
+			switch (_Vtype) do {
 				case (1): { _markerType = "mil_pickup" };
 				case (2): { _markerType = "mil_destroy" };
 				case (3): { _markerType = "mil_objective" };
@@ -96,25 +96,27 @@ RGG_FNC_VMS_createMarker = {
 	}; 
 
 	// get marker pos 
-	_markerPos = player getPos [_dist, _dir];
+	_markerPos = player getPos [_Vdist, _Vdir];
 
 	// create marker 
 	_tempMarker = createMarker ["VMS_Marker", _markerPos];
 
 	// _tempMarker setMarkerShape "ELLIPSE";
-	_tempMarker setMarkerType _markerType;
+	_tempMarker setMarkerType _visualMarkerType;
 
 	// _tempMarker setMarkerSize [20, 20];
 	_tempMarker setMarkerAlpha 0.8;
 
 	// _tempMarker setMarkerColor "colorBlue";
 	// debug feedback 
-	systemchat format ["distance:  %1", _dist];
-	systemchat format ["direction: %1", _dir];
-	systemchat format ["position:  %1", _markerPos];
+	systemchat format [" .. DEBUG .. category:  %1", _Vcat];
+	systemchat format [" .. DEBUG .. type:      %1", _Vtype];
+	systemchat format [" .. DEBUG .. distance:  %1", _Vdist];
+	systemchat format [" .. DEBUG .. direction: %1", _Vdir];
+	systemchat format [" .. DEBUG .. position:  %1", _markerPos];
 
 	//fade and delete (sorry!) 
-	sleep 30;
+	sleep 5;
 	_tempMarker setMarkerAlpha 0.6;
 	sleep 0.5;
 	_tempMarker setMarkerAlpha 0.5;
@@ -130,5 +132,5 @@ RGG_FNC_VMS_createMarker = {
 	execVM "voiceMarkerSystem\1_vmsInit.sqf";
 };
 
-[_cat, _type, _dist, _dir] call RGG_FNC_VMS_createMarker;
+[_Vcat, _Vtype, _Vdist, _Vdir] call RGG_FNC_VMS_createMarker;
 
