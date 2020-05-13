@@ -32,7 +32,6 @@ RGG_VMS_ConfirmBool		= false;	// confirm state
 
 // key = "4"
 rgg_Activate = (findDisplay 46) displayAddEventHandler ["KeyDown", "if ((!VAMP) && (_this select 1 == 75)) then {
-
 	vamp = true;
 	_ehRemove1 = (findDisplay 46) displayRemoveEventHandler ['keyDown',rgg_Activate];
 	systemChat 'VMS Activated - Please Confirm Distance';
@@ -43,11 +42,3 @@ rgg_Activate = (findDisplay 46) displayAddEventHandler ["KeyDown", "if ((!VAMP) 
 }"];
 
 // 	playSound 'dangerClose1';
-
-/*
-_vdir = getCameraViewDirection player;
-_RGG_adir = _vdir # 0 atan2 _vdir # 1;
-RGG_adir = round _RGG_adir;
-if (RGG_adir < 0) then {
-	RGG_adir = RGG_adir + 360;
-};

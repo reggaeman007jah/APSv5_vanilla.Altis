@@ -58,11 +58,3 @@ while {RGG_VMS_NumInputBool} do {
 	};
 	sleep 0.1;
 };	
-
-/*
-_vdir = getCameraViewDirection player;
-__playerLookDir = _vdir # 0 atan2 _vdir # 1;
-_playerLookDir = round __playerLookDir;
-if (_playerLookDir < 0) then {
-	_playerLookDir = _playerLookDir + 360;
-};

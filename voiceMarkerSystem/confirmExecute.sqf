@@ -24,28 +24,28 @@ RGG_FNC_VMS_createMarker = {
 	_markerPos = player getPos [_dist, _dir];
 	// create marker 
 	_tempMarker = createMarker ["VMS_Marker", _markerPos];
-	_tempMarker setMarkerShape "ELLIPSE";
-	_tempMarker setMarkerSize [20, 20];
+	// _tempMarker setMarkerShape "ELLIPSE";
+	_tempMarker setMarkerType "o_inf";
+	// _tempMarker setMarkerSize [20, 20];
 	_tempMarker setMarkerAlpha 0.8;
-	_tempMarker setMarkerColor "colorBlue";
+	// _tempMarker setMarkerColor "colorBlue";
 	// feedback 
 	systemchat format ["distance:  %1", _dist];
 	systemchat format ["direction: %1", _dir];
 	systemchat format ["position:  %1", _markerPos];
 	//fade and delete 
-	sleep 8;
+	sleep 4;
 	_tempMarker setMarkerAlpha 0.6;
-	sleep 2;
+	sleep 0.5;
 	_tempMarker setMarkerAlpha 0.5;
-	sleep 2;
+	sleep 0.5;
 	_tempMarker setMarkerAlpha 0.4;
-	sleep 2;
+	sleep 0.5;
 	_tempMarker setMarkerAlpha 0.3;
-	sleep 2;
+	sleep 0.5;
 	_tempMarker setMarkerAlpha 0.2;
-	sleep 2;
+	sleep 0.5;
 	_tempMarker setMarkerAlpha 0.1;
-	sleep 2;
 	deleteMarker "VMS_Marker";
 	execVM "voiceMarkerSystem\1_vmsInit.sqf";
 };

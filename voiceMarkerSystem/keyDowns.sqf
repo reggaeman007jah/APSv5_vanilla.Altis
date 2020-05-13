@@ -22,8 +22,8 @@ purpose:
 listens to numpad keypresses, and sends respective values (numpad nums) into arrays 
 the array the data is pushed into is dependent on the current state (bool) - this is managed by the monitor 
 
-notes://
-something to test - does this need to be bool-driven? Or would these operate just as well by activating and then removing the EH?
+notes:
+
 */
 
 if (RGG_VMS_NumInputBool) then {
