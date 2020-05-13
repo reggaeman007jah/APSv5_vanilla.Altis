@@ -43,3 +43,11 @@ rgg_Activate = (findDisplay 46) displayAddEventHandler ["KeyDown", "if ((!VAMP) 
 }"];
 
 // 	playSound 'dangerClose1';
+
+/*
+_vdir = getCameraViewDirection player;
+_RGG_adir = _vdir # 0 atan2 _vdir # 1;
+RGG_adir = round _RGG_adir;
+if (RGG_adir < 0) then {
+	RGG_adir = RGG_adir + 360;
+};
