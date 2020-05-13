@@ -78,8 +78,10 @@ while {RGG_VMS_NumInputBool} do {
 	// confirm / cancel state 
 	if (RGG_VMS_ConfirmBool) then {
 		if (_countRGG_VMS_Confirm == 1) then {
-			_type = RGG_VMS_Type;
-			_category = RGG_VMS_Category;
+			_typeArray = RGG_VMS_Type;
+			_type = _typeArray select 0;
+			_categoryArray = RGG_VMS_Category;
+			_category = _categoryArray select 0;
 			_vdir = getCameraViewDirection player;
 			_playerLookDir = _vdir # 0 atan2 _vdir # 1;
 			_playerLookDir = round _playerLookDir;
@@ -87,7 +89,7 @@ while {RGG_VMS_NumInputBool} do {
 				_playerLookDir = _playerLookDir + 360;
 			};
 			_dist = (RGG_VMS_Distance select 0) * 100;
-			[_type, _category, _dist, _playerLookDir] execVM "voiceMarkerSystem\confirmExecute.sqf";
+			[_category, _type, _dist, _playerLookDir] execVM "voiceMarkerSystem\confirmExecute.sqf";
 			// systemChat format ["player look dir is:%1", _playerLookDir];
 			// systemChat format ["marker distance is:%1", _dist];
 			execVM "voiceMarkerSystem\clearKeyDowns.sqf";
