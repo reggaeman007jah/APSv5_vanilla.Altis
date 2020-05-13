@@ -25,8 +25,8 @@ while {RGG_VMS_NumInputBool} do {
 		if (_countRGG_VMS_Distance == 1) then {
 			systemChat "VMS Distance confirmed";
 			systemChat "Confirm (1) or Cancel (2)";
-			// playSound "dangerClose2";
-			// playsound via VA 
+			// playSound "dangerClose2";?
+			// playsound via VA? 
 			RGG_VMS_DistanceBool = false;
 			RGG_VMS_ConfirmBool = true;
 		};
@@ -35,7 +35,6 @@ while {RGG_VMS_NumInputBool} do {
 	// confirm / cancel state 
 	if (RGG_VMS_ConfirmBool) then {
 		if (_countRGG_VMS_Confirm == 1) then {
-			systemChat "selection made";
 			_vdir = getCameraViewDirection player;
 			_playerLookDir = _vdir # 0 atan2 _vdir # 1;
 			_playerLookDir = round _playerLookDir;
@@ -43,13 +42,10 @@ while {RGG_VMS_NumInputBool} do {
 				_playerLookDir = _playerLookDir + 360;
 			};
 			_dist = (RGG_VMS_Distance select 0) * 100;
-			// _dist = 200;
 			[_dist, _playerLookDir] execVM "voiceMarkerSystem\confirmExecute.sqf";
 			systemChat format ["player look dir is:%1", _playerLookDir];
 			systemChat format ["marker distance is:%1", _dist];
 			execVM "voiceMarkerSystem\clearKeyDowns.sqf";
-			// execVM "voiceMarkerSystem\1_vmsInit.sqf";
-
 			RGG_VMS_ConfirmBool = false;
 		};
 		if (_countRGG_VMS_Cancel == 1) then {

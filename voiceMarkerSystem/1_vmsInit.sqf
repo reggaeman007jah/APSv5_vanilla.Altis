@@ -1,5 +1,4 @@
 // init for VMS 
-
 systemChat " ... Voice Activated Marker System Activated ... ";
 
 /*
@@ -7,8 +6,7 @@ Notes
 This system will enable a player to use VA to create a temp global marker 
 will be based on lookDir and an input of distance 
 e.g. if I look to 090 and say "100m" a marker will appear 100m away at 090 
-TBC should this use getDir or getRelDir ??
-Marker will fade after 1 minute, in 10 second cycles, 0.2 alpha each time, then be deleted perm 
+Marker will fade and then be deleted perm 
 Initially this will be an enemy marker system so a hardcoded symbol and colour will be used
 if successful, other markers and colours can be selected with voice
 System needs to be activated by triggering a keypress 
@@ -19,16 +17,23 @@ system feedback is to confirm this to all units (though systChat for now)
 after doing this, system is closed auto 
 If this is a mistake, for now, tough, let it expire and tell your units 
 
+toDo:
+enable multiple markers at once!
+check whether all EHs are needed (cancel?)
+decide on global alerts to MP players 
+decide on audio alerts to players (.ogg or within VA)
+complete cancel operation 
 */
 
-// vars and arrays initialisation
-RGG_VMS_Distance		= [];		// holds distance 
-RGG_VMS_LookDir			= [];		// holds look direction  
-RGG_VMS_Cancel			= [];		// manages cancel action
+// declarations
+RGG_VMS_Distance		= [];		// holds distance value fed from Voice Attack
+RGG_VMS_LookDir			= [];		// holds look direction fed from player look direction
 RGG_VMS_Confirm			= [];		// manages confirm action 
-RGG_VMS_NumInputBool 	= false; 	// general keydown state 
-RGG_VMS_DistanceBool	= false;	// distance state 
-RGG_VMS_ConfirmBool		= false;	// confirm state
+RGG_VMS_Cancel			= [];		// manages cancel action
+
+RGG_VMS_NumInputBool 	= false; 	// manages general keydown state 
+RGG_VMS_DistanceBool	= false;	// manages distance state 
+RGG_VMS_ConfirmBool		= false;	// manages confirm/cancel state
 
 // key = "4"
 rgg_Activate = (findDisplay 46) displayAddEventHandler ["KeyDown", "if ((!VAMP) && (_this select 1 == 75)) then {

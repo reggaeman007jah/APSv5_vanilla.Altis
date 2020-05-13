@@ -13,11 +13,10 @@ issues:
 
 */
 
-_dist = _this select 0;
-_dir = _this select 1;
+_dist 	= _this select 0;
+_dir 	= _this select 1;
 
 RGG_FNC_VMS_createMarker = {
-	systemChat "SEE THIS!";
 	// params  
 	params ["_dist", "_dir"];
 	// get marker pos 
@@ -29,11 +28,11 @@ RGG_FNC_VMS_createMarker = {
 	// _tempMarker setMarkerSize [20, 20];
 	_tempMarker setMarkerAlpha 0.8;
 	// _tempMarker setMarkerColor "colorBlue";
-	// feedback 
+	// debug feedback 
 	systemchat format ["distance:  %1", _dist];
 	systemchat format ["direction: %1", _dir];
 	systemchat format ["position:  %1", _markerPos];
-	//fade and delete 
+	//fade and delete (sorry) 
 	sleep 4;
 	_tempMarker setMarkerAlpha 0.6;
 	sleep 0.5;
