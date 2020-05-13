@@ -4,6 +4,7 @@ systemChat " ... Voice Activated Marker System Activated ... ";
 /*
 Notes 
 This system will enable a player to use VA to create a temp global marker 
+Essentially this will be a spotting tool for faction and types (e.g, opfor infi, blufor tanks etc)
 will be based on lookDir and an input of distance 
 e.g. if I look to 090 and say "100m" a marker will appear 100m away at 090 
 Marker will fade and then be deleted perm 
@@ -23,6 +24,8 @@ check whether all EHs are needed (cancel?)
 decide on global alerts to MP players 
 decide on audio alerts to players (.ogg or within VA)
 complete cancel operation 
+enable a delete option while in map - for any player 
+enable system to show other info like "attack here", "move there" or "this direction"
 */
 
 // declarations
@@ -30,6 +33,10 @@ RGG_VMS_Distance		= [];		// holds distance value fed from Voice Attack
 RGG_VMS_LookDir			= [];		// holds look direction fed from player look direction
 RGG_VMS_Confirm			= [];		// manages confirm action 
 RGG_VMS_Cancel			= [];		// manages cancel action
+/*
+RGG_VMS_Faction			= [];		// holds faction info 
+RGG_VMS_Type			= [];		// holds type info (1-infantry, 2-light armour, 3 - heavy armour)
+*/
 
 RGG_VMS_NumInputBool 	= false; 	// manages general keydown state 
 RGG_VMS_DistanceBool	= false;	// manages distance state 
