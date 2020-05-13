@@ -39,12 +39,18 @@ if (RGG_VMS_NumInputBool) then {
 	rgg_kd0 = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == 82) then {
 		systemChat '0';
 		if (RGG_VMS_DistanceBool) then {
-			RGG_VMS_Distance pushback 0;
+			RGG_VMS_Distance pushback 10;
 		};
 	}"];
 
 	rgg_kd1 = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == 79) then {
 		systemChat '1';
+		if (RGG_VMS_CategoryBool) then {
+			RGG_VMS_Category pushback 1;
+		};
+		if (RGG_VMS_TypeBool) then {
+			RGG_VMS_Type pushback 1;
+		};
 		if (RGG_VMS_DistanceBool) then {
 			RGG_VMS_Distance pushback 1;
 		};
@@ -55,6 +61,12 @@ if (RGG_VMS_NumInputBool) then {
 
 	rgg_kd2 = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == 80) then {
 		systemChat '2';
+		if (RGG_VMS_CategoryBool) then {
+			RGG_VMS_Category pushback 2;
+		};
+		if (RGG_VMS_TypeBool) then {
+			RGG_VMS_Type pushback 2;
+		};
 		if (RGG_VMS_DistanceBool) then {
 			RGG_VMS_Distance pushback 2;
 		};
@@ -65,6 +77,12 @@ if (RGG_VMS_NumInputBool) then {
 
 	rgg_kd3 = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == 81) then {
 		systemChat '3';
+		if (RGG_VMS_CategoryBool) then {
+			RGG_VMS_Category pushback 3;
+		};
+		if (RGG_VMS_TypeBool) then {
+			RGG_VMS_Type pushback 3;
+		};
 		if (RGG_VMS_DistanceBool) then {
 			RGG_VMS_Distance pushback 3;
 		};
@@ -72,6 +90,12 @@ if (RGG_VMS_NumInputBool) then {
 
 	rgg_kd4 = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == 75) then {
 		systemChat '4';
+		if (RGG_VMS_CategoryBool) then {
+			RGG_VMS_Category pushback 4;
+		};
+		if (RGG_VMS_TypeBool) then {
+			RGG_VMS_Type pushback 4;
+		};
 		if (RGG_VMS_DistanceBool) then {
 			RGG_VMS_Distance pushback 4;
 		};
@@ -79,6 +103,12 @@ if (RGG_VMS_NumInputBool) then {
 
 	rgg_kd5 = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == 76) then {
 		systemChat '5';
+		if (RGG_VMS_CategoryBool) then {
+			RGG_VMS_Category pushback 5;
+		};
+		if (RGG_VMS_TypeBool) then {
+			RGG_VMS_Type pushback 5;
+		};
 		if (RGG_VMS_DistanceBool) then {
 			RGG_VMS_Distance pushback 5;
 		};

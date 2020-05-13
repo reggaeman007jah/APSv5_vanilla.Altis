@@ -26,19 +26,20 @@ decide on audio alerts to players (.ogg or within VA)
 complete cancel operation 
 enable a delete option while in map - for any player 
 enable system to show other info like "attack here", "move there" or "this direction"
+enable "infi moving" + direction arrow 
+enable an "on my location" command for pickups 
 */
 
 // declarations
+RGG_VMS_Category		= [];		// holds category info (east, west, general etc) 
+RGG_VMS_Type			= [];		// holds type info (1-infantry, 2-light armour, 3 - heavy armour)
 RGG_VMS_Distance		= [];		// holds distance value fed from Voice Attack
 RGG_VMS_LookDir			= [];		// holds look direction fed from player look direction
 RGG_VMS_Confirm			= [];		// manages confirm action 
 RGG_VMS_Cancel			= [];		// manages cancel action
-/*
-RGG_VMS_Faction			= [];		// holds faction info 
-RGG_VMS_Type			= [];		// holds type info (1-infantry, 2-light armour, 3 - heavy armour)
-*/
-
 RGG_VMS_NumInputBool 	= false; 	// manages general keydown state 
+RGG_VMS_CategoryBool	= false; 	// manages category state 
+RGG_VMS_TypeBool		= false; 	// manages type state 
 RGG_VMS_DistanceBool	= false;	// manages distance state 
 RGG_VMS_ConfirmBool		= false;	// manages confirm/cancel state
 
@@ -46,9 +47,13 @@ RGG_VMS_ConfirmBool		= false;	// manages confirm/cancel state
 rgg_Activate = (findDisplay 46) displayAddEventHandler ["KeyDown", "if ((!VAMP) && (_this select 1 == 75)) then {
 	vamp = true;
 	_ehRemove1 = (findDisplay 46) displayRemoveEventHandler ['keyDown',rgg_Activate];
-	systemChat 'VMS Activated - Please Confirm Distance';
-	RGG_VMS_DistanceBool = true;
-	RGG_VMS_NumInputBool = true; 
+	systemChat 'VMS Activated - Please Confirm Category';
+	systemChat '1 - Blufor';
+	systemChat '2 - Indifor';
+	systemChat '3 - Opfor';
+	systemChat '4 - General Requests';
+	RGG_VMS_NumInputBool = true;
+	RGG_VMS_CategoryBool = true; 
 	execVM 'voiceMarkerSystem\keyDowns.sqf'; 
 	execVM 'voiceMarkerSystem\keyDownMonitor.sqf'; 
 }"];
