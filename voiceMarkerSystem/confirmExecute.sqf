@@ -12,17 +12,14 @@ notes:
 issues:
 
 */
-systemChat "confirm ex running";
 
-// eyepos 
-_dir = _this select 0;
-_dir2 = _dir select 0;
-systemChat format ["player look dir is:%1", _dir];
+_dist = _this select 0;
+_dir = _this select 1;
 
 RGG_FNC_VMS_createMarker = {
-	
+	systemChat "SEE THIS!";
 	// params  
-	params ["_dist", "_dir2"];
+	params ["_dist", "_dir"];
 	// get marker pos 
 	_markerPos = player getPos [_dist, _dir];
 	// create marker 
@@ -31,62 +28,27 @@ RGG_FNC_VMS_createMarker = {
 	_tempMarker setMarkerSize [20, 20];
 	_tempMarker setMarkerAlpha 0.8;
 	_tempMarker setMarkerColor "colorBlue";
-	// fade and delete 
-	sleep 10;
+	// feedback 
+	systemchat format ["distance:  %1", _dist];
+	systemchat format ["direction: %1", _dir];
+	systemchat format ["position:  %1", _markerPos];
+	//fade and delete 
+	sleep 8;
 	_tempMarker setMarkerAlpha 0.6;
-	sleep 5;
+	sleep 2;
+	_tempMarker setMarkerAlpha 0.5;
+	sleep 2;
 	_tempMarker setMarkerAlpha 0.4;
-	sleep 3;
+	sleep 2;
+	_tempMarker setMarkerAlpha 0.3;
+	sleep 2;
+	_tempMarker setMarkerAlpha 0.2;
+	sleep 2;
 	_tempMarker setMarkerAlpha 0.1;
 	sleep 2;
 	deleteMarker "VMS_Marker";
-	execVM "voiceMarkerSystem\clearKeyDowns.sqf";
 	execVM "voiceMarkerSystem\1_vmsInit.sqf";
-	systemchat format ["distance: %1", _dist];
-	systemchat format ["direction: %1", _dir2];
-
 };
 
-switch (RGG_VMS_Distance) do {
-	case 1: {
-		// dist 100m
-		_dist = 100;
-	};
-	case 2: {
-		// dist 200m
-		_dist = 200;
-	};
-	case 3: {
-		// dist 300m
-		_dist = 300;
-	};
-	case 4: {
-		// dist 400m
-		_dist = 400;
-	};
-	case 5: {
-		// dist 500m
-		_dist = 500;
-	};
-	case 6: {
-		// dist 600m
-		_dist = 600;
-	};
-	case 7: {
-		// dist 700m
-		_dist = 700;
-	};
-	case 8: {
-		// dist 800m
-		_dist = 800;
-	};
-	case 9: {
-		// dist 900m
-		_dist = 900;
-	};
-	case 0: {
-		// dist 1000m
-		_dist = 1000;
-	};
+[_dist, _dir] call RGG_FNC_VMS_createMarker;
 
-[_dist, _dir2] call RGG_FNC_VMS_createMarker;

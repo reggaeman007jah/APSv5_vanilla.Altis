@@ -36,14 +36,20 @@ while {RGG_VMS_NumInputBool} do {
 	if (RGG_VMS_ConfirmBool) then {
 		if (_countRGG_VMS_Confirm == 1) then {
 			systemChat "selection made";
-			// _playerLookDir = eyePos player;
 			_vdir = getCameraViewDirection player;
 			_playerLookDir = _vdir # 0 atan2 _vdir # 1;
 			_playerLookDir = round _playerLookDir;
 			if (_playerLookDir < 0) then {
 				_playerLookDir = _playerLookDir + 360;
 			};
-			[_playerLookDir] execVM "voiceMarkerSystem\confirmExecute.sqf";
+			_dist = (RGG_VMS_Distance select 0) * 100;
+			// _dist = 200;
+			[_dist, _playerLookDir] execVM "voiceMarkerSystem\confirmExecute.sqf";
+			systemChat format ["player look dir is:%1", _playerLookDir];
+			systemChat format ["marker distance is:%1", _dist];
+			execVM "voiceMarkerSystem\clearKeyDowns.sqf";
+			// execVM "voiceMarkerSystem\1_vmsInit.sqf";
+
 			RGG_VMS_ConfirmBool = false;
 		};
 		if (_countRGG_VMS_Cancel == 1) then {
