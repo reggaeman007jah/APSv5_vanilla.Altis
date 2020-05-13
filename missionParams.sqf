@@ -18,7 +18,7 @@ enableDebug = true;
 
 // ------------------------------------------ //
 
-// vamp = false; // init declaration - indicates that there are no VAMP modules running, and helps to avoid overlapping modules running at the same time
+vamp = false; // init declaration - indicates that there are no VAMP modules running, and helps to avoid overlapping modules running at the same time
 
 // ------------------------------------------ //
 

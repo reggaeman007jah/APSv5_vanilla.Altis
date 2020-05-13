@@ -35,8 +35,10 @@ while {RGG_VMS_NumInputBool} do {
 	// confirm / cancel state 
 	if (RGG_VMS_ConfirmBool) then {
 		if (_countRGG_VMS_Confirm == 1) then {
+			systemChat "selection made";
 			_playerLookDir = eyePos player;
-			execVM "voiceMarkerSystem\confirmExecute.sqf";
+			[_playerLookDir] execVM "voiceMarkerSystem\confirmExecute.sqf";
+			RGG_VMS_ConfirmBool = false;
 		};
 		if (_countRGG_VMS_Cancel == 1) then {
 			// clear and restart 

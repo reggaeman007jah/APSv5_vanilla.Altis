@@ -5,7 +5,7 @@
 enableEnvironment [false, true];
 
 // execVM "autoPatrolSystem\reinforcementSystems\bluforRF.sqf";
-// execVM "missionParams.sqf";
+execVM "missionParams.sqf";
 // init VA Arty
 
 // execVM "VAMP_initParams\vampInitParams.sqf";

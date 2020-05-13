@@ -1,6 +1,6 @@
 // init for VMS 
 
-systemChat "Voice Activated Marker System Activated";
+systemChat " ... Voice Activated Marker System Activated ... ";
 
 /*
 Notes 
