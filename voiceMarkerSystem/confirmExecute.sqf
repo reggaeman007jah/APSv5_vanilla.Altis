@@ -103,8 +103,21 @@ RGG_FNC_VMS_createMarker = {
 	// get marker pos 
 	_markerPos = player getPos [_Vdist, _Vdir];
 
+
+	// create unique marker name 
+	_float = diag_tickTime;
+	_float2 = random 10000;
+	_uniqueStamp = [_float, _float2];
+	_stampToString = str _uniqueStamp;
+
+	// _lineTest = createMarker [_stampToString, _testPos];
+	// _lineTest setMarkerShape "RECTANGLE";
+	// _lineTest setMarkerColor "ColorBlack";
+	// _lineTest setMarkerDir _reldirX;
+	// _lineTest setMarkerSize [2, _dist2];
+
 	// create marker 
-	_tempMarker = createMarker ["VMS_Marker", _markerPos];
+	_tempMarker = createMarker [_stampToString, _markerPos];
 
 	// _tempMarker setMarkerShape "ELLIPSE";
 	_tempMarker setMarkerType _visualMarkerTypeX;
@@ -135,7 +148,7 @@ RGG_FNC_VMS_createMarker = {
 	_tempMarker setMarkerAlpha 0.2;
 	sleep 0.5;
 	_tempMarker setMarkerAlpha 0.1;
-	deleteMarker "VMS_Marker";
+	deleteMarker _stampToString;
 	
 };
 
