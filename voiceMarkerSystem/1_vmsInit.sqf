@@ -17,7 +17,6 @@ System feedback is to confirm this to all units (though remoteExec systChat for 
 If this is a mistake in marker placement, for now, tough, let it expire and tell your units about your mistake
 
 toDo:
-enable multiple markers at once!
 check whether all EHs are needed (cancel?)
 decide on global alerts to MP players 
 decide on audio alerts to players (.ogg or within VA)
@@ -26,9 +25,12 @@ enable a delete option while in map - for any player
 enable system to show other info like "attack here", "move there" or "this direction"
 enable "infi moving" + direction arrow 
 enable an "on my location" command for pickups 
+add player name to marker intel or alerts somehow
 
 done:
-:(
+enable multiple markers at once!
+
+done but needs more work:
 
 */
 

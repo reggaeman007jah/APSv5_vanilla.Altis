@@ -52,6 +52,8 @@ _Vdir 	= _this select 3; // head direction
 systemChat format ["%1 // %2 // %3 // %4", _Vcat, _Vtype, _Vdist, _Vdir];
 
 private _visualMarkerTypeX = ""; 
+private _markerCat = ""; 
+private _markerType = ""; 
 
 RGG_FNC_VMS_createMarker = {
 
@@ -63,39 +65,43 @@ RGG_FNC_VMS_createMarker = {
 	// get cat && type 
 	switch (_Vcat) do {
 		case (1): {
+			_markerCat = "BLUFOR";
 			switch (_Vtype) do {
-				case (1): { _visualMarkerTypeX = "b_inf" };
-				case (2): { _visualMarkerTypeX = "b_motor_inf" };
-				case (3): { _visualMarkerTypeX = "b_mech_inf" };
-				case (4): { _visualMarkerTypeX = "b_armor" };
-				case (5): { _visualMarkerTypeX = "b_art" };
+				case (1): { _visualMarkerTypeX = "b_inf", _markerType = "INFANTRY" };
+				case (2): { _visualMarkerTypeX = "b_motor_inf", _markerType = "MOTORIZED" };
+				case (3): { _visualMarkerTypeX = "b_mech_inf", _markerType = "MECHANIZED" };
+				case (4): { _visualMarkerTypeX = "b_armor", _markerType = "ARMOUR" };
+				case (5): { _visualMarkerTypeX = "b_art", _markerType = "ARTILLERY" };
 			}; 
 		};
 		case (2): {
+			_markerCat = "INDIFOR";
 			switch (_Vtype) do {
-				case (1): { _visualMarkerTypeX = "n_inf" };
-				case (2): { _visualMarkerTypeX = "n_motor_inf" };
-				case (3): { _visualMarkerTypeX = "n_mech_inf" };
-				case (4): { _visualMarkerTypeX = "n_armor" };
-				case (5): { _visualMarkerTypeX = "n_art" };
+				case (1): { _visualMarkerTypeX = "n_inf", _markerType = "INFANTRY" };
+				case (2): { _visualMarkerTypeX = "n_motor_inf", _markerType = "MOTORIZED" };
+				case (3): { _visualMarkerTypeX = "n_mech_inf", _markerType = "INFAMECHANIZEDNTRY" };
+				case (4): { _visualMarkerTypeX = "n_armor", _markerType = "ARMOUR" };
+				case (5): { _visualMarkerTypeX = "n_art", _markerType = "ARTILLERY" };
 			}; 
 		};
 		case (3): {
+			_markerCat = "OPFOR";
 			switch (_Vtype) do {
-				case (1): { _visualMarkerTypeX = "o_inf" };
-				case (2): { _visualMarkerTypeX = "o_motor_inf" };
-				case (3): { _visualMarkerTypeX = "o_mech_inf" };
-				case (4): { _visualMarkerTypeX = "o_armor" };
-				case (5): { _visualMarkerTypeX = "o_art" };
+				case (1): { _visualMarkerTypeX = "o_inf", _markerType = "INFANTRY" };
+				case (2): { _visualMarkerTypeX = "o_motor_inf", _markerType = "MOTORIZED" };
+				case (3): { _visualMarkerTypeX = "o_mech_inf", _markerType = "MECHANIZED" };
+				case (4): { _visualMarkerTypeX = "o_armor", _markerType = "ARMOUR" };
+				case (5): { _visualMarkerTypeX = "o_art", _markerType = "ARTILLERY" };
 			}; 
 		};
 		case (4): {
 			switch (_Vtype) do {
-				case (1): { _visualMarkerTypeX = "mil_pickup" };
-				case (2): { _visualMarkerTypeX = "mil_destroy" };
-				case (3): { _visualMarkerTypeX = "mil_objective" };
-				case (4): { _visualMarkerTypeX = "FireMission" };
-				case (5): { _visualMarkerTypeX = "RepairVehicle" };
+				_markerCat = "GENERAL";
+				case (1): { _visualMarkerTypeX = "mil_pickup", _markerType = "PICKUP" };
+				case (2): { _visualMarkerTypeX = "mil_destroy", _markerType = "DESTROY" };
+				case (3): { _visualMarkerTypeX = "mil_objective", _markerType = "OBJECTIVE" };
+				case (4): { _visualMarkerTypeX = "FireMission", _markerType = "FIRE MISSION" };
+				case (5): { _visualMarkerTypeX = "RepairVehicle", _markerType = "REPAIR" };
 			}; 
 		};
 	}; 
@@ -128,12 +134,18 @@ RGG_FNC_VMS_createMarker = {
 	// _tempMarker setMarkerColor "colorBlue";
 	// debug feedback 
 	systemchat format [" ........................."];
-	systemchat format [" .. DEBUG .. category:  %1", _Vcat];
-	systemchat format [" .. DEBUG .. type:      %1", _Vtype];
+	systemchat format [" .. DEBUG .. category:  %1", _markerCat];
+	systemchat format [" .. DEBUG .. type:      %1", _markerType];
 	systemchat format [" .. DEBUG .. distance:  %1", _Vdist];
 	systemchat format [" .. DEBUG .. direction: %1", _Vdir];
 	systemchat format [" .. DEBUG .. position:  %1", _markerPos];
 	systemchat format [" ........................."];
+
+	// inform MP Players
+	// format ["Intel suggests %1 enemy units are advancing in your immediate area. Check the map for specific locational intel", _numberOfAttackers] remoteExec ["hint", 0];
+	// <t size='1.25' font='Zeppelin33' color='#ff0000'>%1 lives remaining.</t>
+
+	format ["<color='#ff0000'>A visual marker has been created:</t> %1 %2 at %3", _Vcat, _Vtype, _markerPos] remoteExec ["systemChat", 0];
 
 	//fade and delete (sorry!) 
 	sleep 50;
