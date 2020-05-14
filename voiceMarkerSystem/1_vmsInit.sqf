@@ -18,7 +18,6 @@ If this is a mistake in marker placement, for now, tough, let it expire and tell
 
 toDo:
 check whether all EHs are needed (cancel?)
-decide on global alerts to MP players 
 decide on audio alerts to players (.ogg or within VA)
 complete cancel operation 
 enable a delete option while in map - for any player 
@@ -31,6 +30,13 @@ done:
 enable multiple markers at once!
 
 done but needs more work:
+global alerts to MP players 
+
+issues:
+general category is bugged (process trips before confirmation is made) and also does not show correct menu in systemChat
+
+fixed:
+
 
 */
 
