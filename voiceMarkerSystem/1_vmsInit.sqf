@@ -15,6 +15,7 @@ e.g. set up a repair signal on my location
 Markers are temporary - they fde out and then get deleted
 System feedback is to confirm this to all units (though remoteExec systChat for now)
 If this is a mistake in marker placement, for now, tough, let it expire and tell your units about your mistake
+consider breaking out the general markers into a totally different flow
 
 toDo:
 check whether all EHs are needed (cancel?)

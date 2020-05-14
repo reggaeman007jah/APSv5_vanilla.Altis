@@ -49,7 +49,7 @@ _Vtype 	= _this select 1; // marker type (infi, repair etc)
 _Vdist 	= _this select 2; // spoken distance 
 _Vdir 	= _this select 3; // head direction 
 
-systemChat format ["%1 // %2 // %3 // %4", _Vcat, _Vtype, _Vdist, _Vdir];
+// systemChat format ["%1 // %2 // %3 // %4", _Vcat, _Vtype, _Vdist, _Vdir];
 
 private _visualMarkerTypeX = ""; 
 private _markerCat = ""; 
@@ -108,6 +108,11 @@ RGG_FNC_VMS_createMarker = {
 
 	// get marker pos 
 	_markerPos = player getPos [_Vdist, _Vdir];
+	_disLat = _markerPos Select 0; 
+	_disLon = _markerPos Select 1; 
+	_displayLat = floor _disLat;
+	_displayLon = floor _disLon;
+	_displayCoords = [_displayLat, _displayLon];
 
 
 	// create unique marker name 
@@ -133,32 +138,33 @@ RGG_FNC_VMS_createMarker = {
 
 	// _tempMarker setMarkerColor "colorBlue";
 	// debug feedback 
-	systemchat format [" ........................."];
-	systemchat format [" .. DEBUG .. category:  %1", _markerCat];
-	systemchat format [" .. DEBUG .. type:      %1", _markerType];
-	systemchat format [" .. DEBUG .. distance:  %1", _Vdist];
-	systemchat format [" .. DEBUG .. direction: %1", _Vdir];
-	systemchat format [" .. DEBUG .. position:  %1", _markerPos];
-	systemchat format [" ........................."];
+	// systemchat format [" ........................."];
+	// systemchat format [" .. DEBUG .. category:  %1", _markerCat];
+	// systemchat format [" .. DEBUG .. type:      %1", _markerType];
+	// systemchat format [" .. DEBUG .. distance:  %1", _Vdist];
+	// systemchat format [" .. DEBUG .. direction: %1", _Vdir];
+	// systemchat format [" .. DEBUG .. position:  %1", _markerPos];
+	// systemchat format [" ........................."];
 
 	// inform MP Players
 	// format ["Intel suggests %1 enemy units are advancing in your immediate area. Check the map for specific locational intel", _numberOfAttackers] remoteExec ["hint", 0];
 	// <t size='1.25' font='Zeppelin33' color='#ff0000'>%1 lives remaining.</t>
 
-	format ["<color='#ff0000'>A visual marker has been created:</t> %1 %2 at %3", _Vcat, _Vtype, _markerPos] remoteExec ["systemChat", 0];
+	// format ["<t color='#ff0000'>A visual marker has been created: %1 %2 at %3</t>", _Vcat, _Vtype, _markerPos] remoteExec ["systemChat", 0];
+	format ["ALL STATIONS BE ADVISED - %1 %2 SPOTTED at %3", _markerCat, _markerType, _displayCoords] remoteExec ["systemChat", 0];
 
 	//fade and delete (sorry!) 
-	sleep 50;
+	sleep 45;
 	_tempMarker setMarkerAlpha 0.6;
-	sleep 0.5;
+	sleep 5;
 	_tempMarker setMarkerAlpha 0.5;
-	sleep 0.5;
+	sleep 5;
 	_tempMarker setMarkerAlpha 0.4;
-	sleep 0.5;
+	sleep 5;
 	_tempMarker setMarkerAlpha 0.3;
-	sleep 0.5;
+	sleep 5;
 	_tempMarker setMarkerAlpha 0.2;
-	sleep 0.5;
+	sleep 5;
 	_tempMarker setMarkerAlpha 0.1;
 	deleteMarker _stampToString;
 	
