@@ -8,15 +8,7 @@ purpose:
 loop-listener that validates user input, and changes state at correct times 
 
 notes:
-// case (1): {
-// 	systemChat "General Type Selected";
-// 	systemChat "Now confirm Marker Type";
-// 	systemChat "1 Pick up";
-// 	systemChat "2 Destroy";
-// 	systemChat "3 Objective";
-// 	systemChat "4 FireMission";
-// 	systemChat "5 RepairVehicle";
-// };
+
 issues:
 
 */
@@ -34,9 +26,9 @@ while {RGG_VMS_NumInputBool} do {
 	if (RGG_VMS_CategoryBool) then {
 		if (_countRGG_VMS_Category == 1) then {
 			switch (RGG_VMS_Category) do {
-				case (1): { systemChat "Blufor Type Selected"; };
+				case (1): { systemChat "Blufor Type Selected";  };
 				case (2): { systemChat "Indifor Type Selected"; };
-				case (3): { systemChat "Opfor Type Selected"; };
+				case (3): { systemChat "Opfor Type Selected";   };
 			};
 			systemChat "Now confirm Marker Type";
 			systemChat "1 Infantry";
@@ -53,11 +45,11 @@ while {RGG_VMS_NumInputBool} do {
 	if (RGG_VMS_TypeBool) then {
 		if (_countRGG_VMS_Type == 1) then {
 			switch (RGG_VMS_Type) do {
-				case (1): { systemChat "Infantry Selected"; };
-				case (2): { systemChat "Motorised Selected"; };
+				case (1): { systemChat "Infantry Selected";   };
+				case (2): { systemChat "Motorised Selected";  };
 				case (3): { systemChat "Mechanised Selected"; };
-				case (4): { systemChat "Armour Selected"; };
-				case (5): { systemChat "Artillery Selected"; };
+				case (4): { systemChat "Armour Selected";     };
+				case (5): { systemChat "Artillery Selected";  };
 			};
 			systemChat "now select distance";
 			RGG_VMS_TypeBool = false;
@@ -90,13 +82,13 @@ while {RGG_VMS_NumInputBool} do {
 			};
 			_dist = (RGG_VMS_Distance select 0) * 100;
 			[_category, _type, _dist, _playerLookDir] execVM "voiceMarkerSystem\confirmExecute.sqf";
-			// systemChat format ["player look dir is:%1", _playerLookDir];
-			// systemChat format ["marker distance is:%1", _dist];
 			execVM "voiceMarkerSystem\clearKeyDowns.sqf";
 			RGG_VMS_ConfirmBool = false;
 		};
 		if (_countRGG_VMS_Cancel == 1) then {
-			// clear and restart - TBC
+			// clear and restart 
+			execVM "voiceMarkerSystem\clearKeyDowns.sqf";
+			execVM "voiceMarkerSystem\confirmExecute.sqf";
 		};
 	};
 	sleep 0.1;

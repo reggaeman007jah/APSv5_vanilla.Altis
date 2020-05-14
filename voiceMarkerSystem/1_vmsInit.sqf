@@ -17,27 +17,31 @@ System feedback is to confirm this to all units (though remoteExec systChat for 
 If this is a mistake in marker placement, for now, tough, let it expire and tell your units about your mistake
 consider breaking out the general markers into a totally different flow
 
+consider:
+decide on audio alerts to players (.ogg or within VA)
+creating separate J-TAC system for more exact relay of fire strikes, direction, repair, pickup etc 
+
 toDo:
 check whether all EHs are needed (cancel?)
-decide on audio alerts to players (.ogg or within VA)
 complete cancel operation 
 enable a delete option while in map - for any player 
 enable system to show other info like "attack here", "move there" or "this direction"
 enable "infi moving" + direction arrow 
 enable an "on my location" command for pickups 
 add player name to marker intel or alerts somehow
+add custom radio channel for colour in sysChat 
 
 done:
 enable multiple markers at once!
 
-done but needs more work:
-global alerts to MP players 
+partly done (but needs more work if demand is there):
+global alerts to MP players (see colour and custom radio chat)
 
-issues:
+current issues:
+
+fixed issues:
 general category is bugged (process trips before confirmation is made) and also does not show correct menu in systemChat
-
-fixed:
-
+Removed the general selection - will be done separately to keep things focussed on rapid heli-observations
 
 */
 
@@ -62,7 +66,6 @@ rgg_Activate = (findDisplay 46) displayAddEventHandler ["KeyDown", "if ((!VAMP) 
 	systemChat '1 - Blufor';
 	systemChat '2 - Indifor';
 	systemChat '3 - Opfor';
-	systemChat '4 - General Requests';
 	RGG_VMS_NumInputBool = true;
 	RGG_VMS_CategoryBool = true; 
 	execVM 'voiceMarkerSystem\keyDowns.sqf'; 
@@ -70,3 +73,4 @@ rgg_Activate = (findDisplay 46) displayAddEventHandler ["KeyDown", "if ((!VAMP) 
 }"];
 
 // 	playSound 'dangerClose1';
+// 	systemChat '4 - General Requests';

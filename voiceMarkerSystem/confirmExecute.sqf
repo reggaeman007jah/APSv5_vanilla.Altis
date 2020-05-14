@@ -14,7 +14,7 @@ issues:
 configs: 
 https://community.bistudio.com/wiki/cfgMarkers
 
-General Requests 
+General Requests - to be done in JTAC system / or VA Recon 
 1 Pick up / "mil_pickup"
 2 Destroy / "mil_destroy"
 3 Objective / "mil_objective"
@@ -48,8 +48,6 @@ _Vcat 	= _this select 0; // category (East West Indi General etc)
 _Vtype 	= _this select 1; // marker type (infi, repair etc)
 _Vdist 	= _this select 2; // spoken distance 
 _Vdir 	= _this select 3; // head direction 
-
-// systemChat format ["%1 // %2 // %3 // %4", _Vcat, _Vtype, _Vdist, _Vdir];
 
 private _visualMarkerTypeX = ""; 
 private _markerCat = ""; 
@@ -94,16 +92,17 @@ RGG_FNC_VMS_createMarker = {
 				case (5): { _visualMarkerTypeX = "o_art", _markerType = "ARTILLERY" };
 			}; 
 		};
-		case (4): {
-			switch (_Vtype) do {
-				_markerCat = "GENERAL";
-				case (1): { _visualMarkerTypeX = "mil_pickup", _markerType = "PICKUP" };
-				case (2): { _visualMarkerTypeX = "mil_destroy", _markerType = "DESTROY" };
-				case (3): { _visualMarkerTypeX = "mil_objective", _markerType = "OBJECTIVE" };
-				case (4): { _visualMarkerTypeX = "FireMission", _markerType = "FIRE MISSION" };
-				case (5): { _visualMarkerTypeX = "RepairVehicle", _markerType = "REPAIR" };
-			}; 
-		};
+		// case (4): {
+		// 	switch (_Vtype) do {
+		// 		_markerCat = "GENERAL";
+		// 		case (1): { _visualMarkerTypeX = "mil_pickup", _markerType = "PICKUP" };
+		// 		case (2): { _visualMarkerTypeX = "mil_destroy", _markerType = "DESTROY" };
+		// 		case (3): { _visualMarkerTypeX = "mil_objective", _markerType = "OBJECTIVE" };
+		// 		case (4): { _visualMarkerTypeX = "FireMission", _markerType = "FIRE MISSION" };
+		// 		case (5): { _visualMarkerTypeX = "RepairVehicle", _markerType = "REPAIR" };
+		// 	}; 
+		// };
+		// todo - move the above to a J-TAC script 
 	}; 
 
 	// get marker pos 
@@ -114,18 +113,11 @@ RGG_FNC_VMS_createMarker = {
 	_displayLon = floor _disLon;
 	_displayCoords = [_displayLat, _displayLon];
 
-
 	// create unique marker name 
 	_float = diag_tickTime;
 	_float2 = random 10000;
 	_uniqueStamp = [_float, _float2];
 	_stampToString = str _uniqueStamp;
-
-	// _lineTest = createMarker [_stampToString, _testPos];
-	// _lineTest setMarkerShape "RECTANGLE";
-	// _lineTest setMarkerColor "ColorBlack";
-	// _lineTest setMarkerDir _reldirX;
-	// _lineTest setMarkerSize [2, _dist2];
 
 	// create marker 
 	_tempMarker = createMarker [_stampToString, _markerPos];
@@ -136,7 +128,6 @@ RGG_FNC_VMS_createMarker = {
 	// _tempMarker setMarkerSize [20, 20];
 	_tempMarker setMarkerAlpha 0.8;
 
-	// _tempMarker setMarkerColor "colorBlue";
 	// debug feedback 
 	// systemchat format [" ........................."];
 	// systemchat format [" .. DEBUG .. category:  %1", _markerCat];
@@ -147,10 +138,6 @@ RGG_FNC_VMS_createMarker = {
 	// systemchat format [" ........................."];
 
 	// inform MP Players
-	// format ["Intel suggests %1 enemy units are advancing in your immediate area. Check the map for specific locational intel", _numberOfAttackers] remoteExec ["hint", 0];
-	// <t size='1.25' font='Zeppelin33' color='#ff0000'>%1 lives remaining.</t>
-
-	// format ["<t color='#ff0000'>A visual marker has been created: %1 %2 at %3</t>", _Vcat, _Vtype, _markerPos] remoteExec ["systemChat", 0];
 	format ["ALL STATIONS BE ADVISED - %1 %2 SPOTTED at %3", _markerCat, _markerType, _displayCoords] remoteExec ["systemChat", 0];
 
 	//fade and delete (sorry!) 

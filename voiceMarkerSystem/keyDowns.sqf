@@ -13,19 +13,6 @@ issues:
 
 */
 
-/*
-from:	voiceActivatedArty\initialiseVAA.sqf
-to:		voiceActivatedArty\clearKeyDowns.sqf	/ if cancelled  
-to:		voiceActivatedArty\VAA_Init.sqf			/ if cancelled 
-
-purpose:
-listens to numpad keypresses, and sends respective values (numpad nums) into arrays 
-the array the data is pushed into is dependent on the current state (bool) - this is managed by the monitor 
-
-notes:
-
-*/
-
 if (RGG_VMS_NumInputBool) then {
 
 	rgg_cnl = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == 181) then {
