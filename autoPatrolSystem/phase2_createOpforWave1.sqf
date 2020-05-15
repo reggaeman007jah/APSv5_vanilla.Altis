@@ -72,7 +72,8 @@ for "_i" from 1 to _diffLevel do {
 			"O_G_Soldier_lite_F",
 			"O_G_Sharpshooter_F",
 			"O_G_Soldier_SL_F",
-			"O_G_Soldier_TL_F"
+			"O_G_Soldier_TL_F",
+			"O_G_Offroad_01_armed_F"
 		];
 		_pos = [RGG_patrol_obj, 0, 30] call BIS_fnc_findSafePos; // was 30, now 80, now 150 hopefully for better dispertion // now back to 30
 		_unit = _grp createUnit [_rndtype, _pos, [], 1, "none"]; 

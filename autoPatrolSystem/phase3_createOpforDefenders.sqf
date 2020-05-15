@@ -25,7 +25,7 @@ i.e. current iteration of killchain is an increasing diff model, until a point, 
 */
 
 _opforClass = [
-	"o_soldieru_lat_f",
+	// "o_soldieru_lat_f",
 	"O_G_Soldier_A_F",
 	"O_G_Soldier_AR_F",
 	"O_G_medic_F",
