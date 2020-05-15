@@ -42,6 +42,11 @@ while {true} do {
 	_indiforGroups = allGroups select {side _x isEqualTo independent};
 	// _bluforGroupCount = allGroups select {side _x isEqualTo west};
 
+	// show group leaders as markers 
+	// {
+
+	// } forEach _indiforGroups;
+
 	// count groups 
 	_opforGroupCount = count _opforGroups;
 	_indiforGroupCount = count _indiforGroups;
