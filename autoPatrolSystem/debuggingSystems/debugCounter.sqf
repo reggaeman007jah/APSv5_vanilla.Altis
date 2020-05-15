@@ -141,6 +141,8 @@ while {true} do {
 
 	*/
 
+	
+
 
 	"MISSION STATUS" remoteExec ["systemChat", 0, true];	
 	format ["................. TASK: %1", MISSIONTASK] remoteExec ["systemChat", 0];

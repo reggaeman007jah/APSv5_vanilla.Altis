@@ -71,7 +71,7 @@ switch (patrolPointsTaken) do {
 		systemChat "no statics this time around";
 		_rndOp1 = random [8, 12, 16];
 		_grp = createGroup east;
-		systemchat format ["op defencee: %1", _rndOp1];
+		systemchat format ["op defence: %1", _rndOp1];
 		for "_i" from 1 to _rndOp1 do {
 			_rndtype = selectRandom _opforClass;
 			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
@@ -96,9 +96,20 @@ switch (patrolPointsTaken) do {
 			systemChat "spawning static opfor";
 			sleep 1;						
 		};
+		for "_i" from 1 to 1 do {
+			_pos = [RGG_patrol_obj, 0, 50] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_static_AT_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning static opfor";
+			sleep 1;						
+		};
+		// O_static_AT_F
 		_rndOp1 = random [8, 14, 18];
 		_grp = createGroup east;
-		systemchat format ["op defencee: %1", _rndOp1];
+		systemchat format ["op defence: %1", _rndOp1];
 		for "_i" from 1 to _rndOp1 do {
 			_rndtype = selectRandom _opforClass;
 			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
@@ -123,9 +134,19 @@ switch (patrolPointsTaken) do {
 			systemChat "spawning mortar opfor";
 			sleep 1;						
 		};
+		for "_i" from 1 to 1 do {
+			_pos = [RGG_patrol_obj, 0, 50] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_static_AT_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning static opfor";
+			sleep 1;						
+		};
 		_rndOp1 = random [8, 16, 20];
 		_grp = createGroup east;
-		systemchat format ["op defencee: %1", _rndOp1];
+		systemchat format ["op defence: %1", _rndOp1];
 		for "_i" from 1 to _rndOp1 do {
 			_rndtype = selectRandom _opforClass;
 			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
@@ -150,9 +171,19 @@ switch (patrolPointsTaken) do {
 			systemChat "spawning static opfor";
 			sleep 1;						
 		};
+		for "_i" from 1 to 1 do {
+			_pos = [RGG_patrol_obj, 0, 50] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_static_AT_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning static opfor";
+			sleep 1;						
+		};
 		_rndOp1 = random [8, 12, 18];
 		_grp = createGroup east;
-		systemchat format ["op defencee: %1", _rndOp1];
+		systemchat format ["op defence: %1", _rndOp1];
 		for "_i" from 1 to _rndOp1 do {
 			_rndtype = selectRandom _opforClass;
 			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
@@ -167,7 +198,7 @@ switch (patrolPointsTaken) do {
 		};
 		_rndOp1 = random [4, 8, 10];
 		_grp = createGroup east;
-		systemchat format ["op defencee: %1", _rndOp1];
+		systemchat format ["op defence: %1", _rndOp1];
 		for "_i" from 1 to _rndOp1 do {
 			_rndtype = selectRandom _opforClass;
 			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
@@ -192,9 +223,19 @@ switch (patrolPointsTaken) do {
 			systemChat "spawning mortar opfor";
 			sleep 1;						
 		};
+		for "_i" from 1 to 2 do {
+			_pos = [RGG_patrol_obj, 0, 50] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_static_AT_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning static opfor";
+			sleep 1;						
+		};
 		_rndOp1 = random [8, 12, 18];
 		_grp = createGroup east;
-		systemchat format ["op defencee: %1", _rndOp1];
+		systemchat format ["op defence: %1", _rndOp1];
 		for "_i" from 1 to _rndOp1 do {
 			_rndtype = selectRandom _opforClass;
 			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
@@ -244,9 +285,19 @@ switch (patrolPointsTaken) do {
 			systemChat "spawning mortar opfor";
 			sleep 1;						
 		};
+		for "_i" from 1 to 1 do {
+			_pos = [RGG_patrol_obj, 0, 50] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_static_AT_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning static opfor";
+			sleep 1;						
+		};
 		_rndOp1 = random [10, 14, 20];
 		_grp = createGroup east;
-		systemchat format ["op defencee: %1", _rndOp1];
+		systemchat format ["op defence: %1", _rndOp1];
 		for "_i" from 1 to _rndOp1 do {
 			_rndtype = selectRandom _opforClass;
 			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
@@ -261,7 +312,7 @@ switch (patrolPointsTaken) do {
 		};
 		_rndOp1 = random [6, 10, 12];
 		_grp = createGroup east;
-		systemchat format ["op defencee: %1", _rndOp1];
+		systemchat format ["op defence: %1", _rndOp1];
 		for "_i" from 1 to _rndOp1 do {
 			_rndtype = selectRandom _opforClass;
 			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
@@ -296,9 +347,19 @@ switch (patrolPointsTaken) do {
 			systemChat "spawning mortar opfor";
 			sleep 1;						
 		};
+		for "_i" from 1 to 2 do {
+			_pos = [RGG_patrol_obj, 0, 50] call BIS_fnc_findSafePos; 
+			_unit = _grp createUnit ["o_g_soldier_ar_f", _pos, [], 1, "none"]; 
+			_static = "O_static_AT_F" createVehicle _pos;
+			_unit moveInGunner _static; 
+			_unit setBehaviour "COMBAT";
+			spawnedOpforUnit = spawnedOpforUnit + 1;
+			systemChat "spawning static opfor";
+			sleep 1;						
+		};
 		_rndOp1 = random [10, 14, 20];
 		_grp = createGroup east;
-		systemchat format ["op defencee: %1", _rndOp1];
+		systemchat format ["op defence: %1", _rndOp1];
 		for "_i" from 1 to _rndOp1 do {
 			_rndtype = selectRandom _opforClass;
 			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
@@ -313,7 +374,7 @@ switch (patrolPointsTaken) do {
 		};
 		_rndOp1 = random [6, 10, 12];
 		_grp = createGroup east;
-		systemchat format ["op defencee: %1", _rndOp1];
+		systemchat format ["op defence: %1", _rndOp1];
 		for "_i" from 1 to _rndOp1 do {
 			_rndtype = selectRandom _opforClass;
 			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
@@ -328,7 +389,7 @@ switch (patrolPointsTaken) do {
 		};
 		_rndOp1 = random [6, 10, 12];
 		_grp = createGroup east;
-		systemchat format ["op defencee: %1", _rndOp1];
+		systemchat format ["op defence: %1", _rndOp1];
 		for "_i" from 1 to _rndOp1 do {
 			_rndtype = selectRandom _opforClass;
 			_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;

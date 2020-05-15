@@ -100,7 +100,7 @@ switch (true) do {
 			_indiGroup = createGroup east;
 			_anchor1a = [_anchor1, 50, 200, 3, 0] call BIS_fnc_findSafePos;
 			_opforTeam = [];
-			_opClasses = ["o_g_soldier_ar_f","o_g_soldier_gl_f","o_g_sharpshooter_f","O_G_Soldier_LAT_F"];
+			_opClasses = ["o_g_soldier_ar_f","o_g_soldier_gl_f","o_g_sharpshooter_f"];
 			for "_i" from 1 to _groupSize do {
 				_unit = selectRandom _opClasses;
 				_unit1 = _indiGroup createUnit [_unit, _anchor1a, [], 0.1, "none"];
