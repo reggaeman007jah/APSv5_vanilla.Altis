@@ -137,10 +137,12 @@ switch (true) do {
 		_objective1 setMarkerShape "ELLIPSE";
 		_objective1 setMarkerColor "ColorRed";
 		_objective1 setMarkerSize [50, 50];
+		_objective1 setMarkerAlpha 0.2;
 		_objective2 = createMarker ["Point 2", _anchor2];
 		_objective2 setMarkerShape "ELLIPSE";
 		_objective2 setMarkerColor "ColorRed";
 		_objective2 setMarkerSize [50, 50];
+		_objective2 setMarkerAlpha 0.2;
 		// unit creation 
 		for "_i" from 1 to 3 do {
 			_indiGroup = createGroup east;
@@ -197,14 +199,17 @@ switch (true) do {
 		_objective1 setMarkerShape "ELLIPSE";
 		_objective1 setMarkerColor "ColorRed";
 		_objective1 setMarkerSize [50, 50];
+		_objective1 setMarkerAlpha 0.2;
 		_objective2 = createMarker ["Point 2", _anchor2];
 		_objective2 setMarkerShape "ELLIPSE";
 		_objective2 setMarkerColor "ColorRed";
 		_objective2 setMarkerSize [50, 50];
+		_objective2 setMarkerAlpha 0.2;
 		_objective3 = createMarker ["Point 3", _anchor3];
 		_objective3 setMarkerShape "ELLIPSE";
 		_objective3 setMarkerColor "ColorRed";
 		_objective3 setMarkerSize [50, 50];
+		_objective3 setMarkerAlpha 0.2;
 		// unit creation 
 		for "_i" from 1 to 2 do {
 			_indiGroup = createGroup east;
