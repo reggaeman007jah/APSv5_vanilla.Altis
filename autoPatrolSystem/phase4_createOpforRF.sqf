@@ -16,7 +16,10 @@ _smoke = createVehicle ["G_40mm_smokeYELLOW", RGG_patrol_obj, [], 0, "none"]; //
 
 // systemChat "debug --- blufor moving into defensive positions at the patrol point"; 	
 // "MP debug --- blufor moving into defensive positions at the patrol point" remoteExec ["systemChat", 0, true];
-
+deleteMarker "attackPoint";
+_tempMarker = createMarker ["attackPoint", RGG_patrol_obj];
+_tempMarker setMarkerType "hd_objective";
+_tempMarker setMarkerColor "ColorGreen";
 sleep 3;
 
 _indi = [];
@@ -95,6 +98,7 @@ switch (true) do {
 		_objective1 setMarkerShape "ELLIPSE";
 		_objective1 setMarkerColor "ColorRed";
 		_objective1 setMarkerSize [50, 50];
+		_objective1 setMarkerAlpha 0.2;
 		// unit creation 
 		for "_i" from 1 to 6 do {
 			_indiGroup = createGroup east;
@@ -113,7 +117,7 @@ switch (true) do {
 			_ranDist = random 30;
 			_ranDir = random 359;
 			_unitDest = RGG_patrol_obj getPos [_ranDist, _ranDir];
-			// _opforTeam doMove _unitDest;
+			_opforTeam doMove _unitDest;
 			spawnedIndiUnit = spawnedIndiUnit + _groupSize;
 			
 		};

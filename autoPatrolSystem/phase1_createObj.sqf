@@ -116,6 +116,12 @@ _base setMarkerSize [30, 30];
 _base setMarkerAlpha 0.9;
 sleep 1;
 
+// add icon 
+deleteMarker "attackPoint";
+_tempMarker = createMarker ["attackPoint", RGG_patrol_obj];
+_tempMarker setMarkerType "hd_objective";
+_tempMarker setMarkerColor "ColorRed";
+
 // add patrol position to blacklist 
 _topleft = RGG_patrol_obj getPos [1000,315];
 _bottomRight = RGG_patrol_obj getPos [1000,135];
