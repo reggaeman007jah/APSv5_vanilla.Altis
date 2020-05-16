@@ -5,6 +5,8 @@ execVM "autoPatrolSystem\autoPatrolSystemParams.sqf";
 // this launches the sapper system
 execVM "autoPatrolSystem\chainSecuritySystems\chainSec.sqf";
 
+// this launches the random roamers system
+execVM "autoPatrolSystem\randomThreatSystems\randomThreats.sqf";
 
 // this file should run only once 
 sleep 2;
