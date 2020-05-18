@@ -3,6 +3,7 @@ sleep 1;
 
 // test of new voiceMarkerSystem 
 execVM "voiceMarkerSystem\1_vmsInit.sqf";
+// execVM "voiceMarkerSystem\1_vmsInit.sqf";
 
 // execVM "voiceActivatedCoordFinder\VACF_init.sqf";
 // execVM "voiceActivatedDataStore\VADS_init.sqf";

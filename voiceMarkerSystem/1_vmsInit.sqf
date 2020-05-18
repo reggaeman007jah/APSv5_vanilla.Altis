@@ -1,3 +1,9 @@
+
+
+// ----------------------
+// 1_vmsInit.sqf 
+
+
 // init for VMS 
 systemChat " ... Voice Activated Marker System Activated ... ";
 
@@ -45,6 +51,7 @@ Removed the general selection - will be done separately to keep things focussed 
 
 */
 
+/// tvSetCurSel
 // declarations
 RGG_VMS_Category		= [];		// holds category info (east, west, general etc) 
 RGG_VMS_Type			= [];		// holds type info (1-infantry, 2-light armour, 3 - heavy armour)
