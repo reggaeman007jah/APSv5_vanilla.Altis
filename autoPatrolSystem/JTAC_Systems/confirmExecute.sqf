@@ -1,11 +1,10 @@
 /*
-from:		voiceMarkerSystem\keyDownMonitor.sqf
-to:			voiceMarkerSystem\
-to:			voiceMarkerSystem\ 
-to: 		voiceMarkerSystem\
+from:		
+to:			
+to:			
+to: 		
 
 purpose:
-executes marker creation 
 
 notes:
 
@@ -47,27 +46,27 @@ RGG_JTAC_grid	 		= [];
 RGG_JTAC_approach	 	= [];
 RGG_JTAC_egress		 	= [];
 RGG_JTAC_target	 		= [];
-RGG_JTAC_helis	 		= [];
+// RGG_JTAC_helis	 		= [];
 RGG_JTAC_ord	 		= [];
 RGG_JTAC_danger	 		= [];
 RGG_JTAC_colour	 		= [];
 RGG_JTAC_id	 			= [];
-RGG_JTAC_duration 		= [];
+// RGG_JTAC_duration 		= [];
 
 */
 
 // static mission  information 
-_missionType	= _this select 0; // 1 - intiState - CAS or Recon 
-_missionID		= _this select 1; // 2 - alpha - echo 
-_missionColour	= _this select 2; // 3 - rgb 
+// _missionType	= _this select 0; // 1 - intiState - CAS or Recon 
+// _missionID		= _this select 1; // 2 - alpha - echo 
+// _missionColour	= _this select 2; // 3 - rgb 
 
-_missionGrid	= _this select 3; // 4 - 10-grid 
-_approachVec	= _this select 4; // 5 - 3-num 
-_egressVec		= _this select 5; // 6 - 3-num 
+// _missionGrid	= _this select 3; // 4 - 10-grid 
+// _approachVec	= _this select 4; // 5 - 3-num 
+// _egressVec		= _this select 5; // 6 - 3-num 
 
-_ordReq			= _this select 6; // 7 - guns, rocks, runs and rocks, rock dump 
-_targetType		= _this select 7; // 8 - infi, vics, tanks 
-_dangerclose	= _this select 8; // 9 - y or n 
+// _ordReq			= _this select 6; // 7 - guns, rocks, runs and rocks, rock dump 
+// _targetType		= _this select 7; // 8 - infi, vics, tanks 
+// _dangerclose	= _this select 8; // 9 - y or n 
 
 // _missionTTL		= _this select 3; // 4 - 2 4 6 8 10 
 // _heliNum		= _this select 7; // 8 - 1-5 
@@ -121,6 +120,52 @@ switch (RGG_JTAC_id) do {
 RGG_JTAC_grid; 		// 4 - 10-grid 	 
 RGG_JTAC_approach; 	// 5 - 3-num 
 RGG_JTAC_egress; 	// 6 - 3-num 
+
+// show mission information 
+"---------- ALERT ----------" remoteExec ["systemChat", 0, true];
+format ["%1 %2 %3", _missionTypeLabel, _ID_Label, _colourLabel] remoteExec ["systemChat", 0];
+format ["Target: %1", _targetTypeLabel] remoteExec ["systemChat", 0];
+format ["Grid: %1", RGG_JTAC_grid] remoteExec ["systemChat", 0];
+format ["Fire Request: %1", _ordLabel] remoteExec ["systemChat", 0];
+format ["Protocol: %1", _dangerCloseLabel] remoteExec ["systemChat", 0];
+format ["Attack Vector: %1", RGG_JTAC_approach] remoteExec ["systemChat", 0];
+format ["Egress Vector: %1", RGG_JTAC_egress] remoteExec ["systemChat", 0];
+"---------- ALERT ----------" remoteExec ["systemChat", 0, true];
+
+// get grid 
+_disLat = RGG_JTAC_grid Select 0; 
+_disLon = RGG_JTAC_grid Select 1; 
+_displayLat = floor _disLat;
+_displayLon = floor _disLon;
+_gridCoords = [_displayLat, _displayLon];
+
+// create unique marker name for target
+_float = diag_tickTime;
+_float2 = random 10000;
+_uniqueStamp = [_float, _float2];
+_stampToString = str _uniqueStamp;
+
+// create marker 
+_tempMarker = createMarker [_stampToString, RGG_JTAC_grid];
+
+// _tempMarker setMarkerShape "ELLIPSE";
+_tempMarker setMarkerType "mil_triangle";
+// _tempMarker setMarkerSize [20, 20];
+_tempMarker setMarkerAlpha 0.8;
+_tempMarker setMarkerColor
+
+
+_angle = 1;
+while (CASMISSION) do {
+
+	_angle = _angle + 1;
+	_tempMarker setMarkerDir _angle;
+
+	sleep 1;
+};
+
+
+
 
 
 

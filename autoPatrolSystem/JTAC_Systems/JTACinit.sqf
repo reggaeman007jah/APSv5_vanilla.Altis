@@ -1,5 +1,3 @@
-systemChat " ... Voice Activated JTAC System Activated ... ";
-
 /*
 Voice Activated JTAC System (VA-VMS) by Reggaeman 
 May 2020
@@ -74,6 +72,8 @@ confirm / cancel
 
 */
 
+systemChat " ... Voice Activated JTAC System Activated ... ";
+
 // declarations
 RGG_JTAC_NumInputBool 	= false;
 
@@ -87,8 +87,6 @@ RGG_JTAC_egress		 	= [];
 RGG_JTAC_egressBool		= false;
 RGG_JTAC_target	 		= [];
 RGG_JTAC_targetBool		= false;
-RGG_JTAC_helis	 		= [];
-RGG_JTAC_helisBool 		= false;
 RGG_JTAC_ord	 		= [];
 RGG_JTAC_ordBool 		= false;
 RGG_JTAC_danger	 		= [];
@@ -97,10 +95,14 @@ RGG_JTAC_colour	 		= [];
 RGG_JTAC_colourBool		= false;
 RGG_JTAC_id	 			= [];
 RGG_JTAC_idBool 		= false;
-RGG_JTAC_duration 		= [];
-RGG_JTAC_durationBool	= false;
+
 RGG_JTAC_confirm 		= [];
 RGG_JTAC_confirmBool	= false;
+
+// RGG_JTAC_duration 		= [];
+// RGG_JTAC_durationBool	= false;
+// RGG_JTAC_helis	 		= [];
+// RGG_JTAC_helisBool 		= false;
 
 // trigger key = " numpad 5"
 rgg_Activate = (findDisplay 46) displayAddEventHandler ["KeyDown", "if ((!VAMP) && (_this select 1 == 76)) then {

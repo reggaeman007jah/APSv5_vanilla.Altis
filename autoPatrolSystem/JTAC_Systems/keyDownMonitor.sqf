@@ -23,9 +23,6 @@ RGG_JTAC_egressBool		= false;
 RGG_JTAC_target	 		= [];
 RGG_JTAC_targetBool		= false;
 
-RGG_JTAC_helis	 		= [];
-RGG_JTAC_helisBool 		= false;
-
 RGG_JTAC_ord	 		= [];
 RGG_JTAC_ordBool 		= false;
 
@@ -45,27 +42,26 @@ RGG_JTAC_confirm 		= [];
 RGG_JTAC_confirmBool	= false;
 
 
- 
-
 issues:
 
 */
 
 while {RGG_JTAC_NumInputBool} do {
 	
-	// counts entry of inputted values
-	_countRGG_JTAC_mission		= count RGG_JTAC_mission;	 	
-	_countRGG_JTAC_grid	 		= count RGG_JTAC_grid;	
-	_countRGG_JTAC_approach	 	= count RGG_JTAC_approach;
-	_countRGG_JTAC_egress		= count RGG_JTAC_egress;	
-	_countRGG_JTAC_target	 	= count RGG_JTAC_target;	
-	_countRGG_JTAC_helis	 	= count RGG_JTAC_helis;	
-	_countRGG_JTAC_ord	 		= count RGG_JTAC_ord;
-	_countRGG_JTAC_danger	 	= count RGG_JTAC_danger;	
-	_countRGG_JTAC_colour	 	= count RGG_JTAC_colour;	
-	_countRGG_JTAC_id	 		= count RGG_JTAC_id;	
-	_countRGG_JTAC_duration 	= count RGG_JTAC_duration;	
-	_countRGG_JTAC_confirm 		= count RGG_JTAC_confirm;
+	// local variable here counts the entry of inputted values
+	_countRGG_JTAC_mission		= count RGG_JTAC_mission;	// q1 	 	
+	_countRGG_JTAC_grid	 		= count RGG_JTAC_grid;		// q2	
+	_countRGG_JTAC_approach	 	= count RGG_JTAC_approach;	// q3
+	_countRGG_JTAC_egress		= count RGG_JTAC_egress;	// q4	
+	_countRGG_JTAC_target	 	= count RGG_JTAC_target;	// q5
+	_countRGG_JTAC_ord	 		= count RGG_JTAC_ord;		// q6
+	_countRGG_JTAC_danger	 	= count RGG_JTAC_danger;	// q7
+	_countRGG_JTAC_colour	 	= count RGG_JTAC_colour;	// q8
+	_countRGG_JTAC_id	 		= count RGG_JTAC_id;		// q9
+	_countRGG_JTAC_confirm 		= count RGG_JTAC_confirm;	// confirm / cancel
+	// _countRGG_JTAC_duration 	= count RGG_JTAC_duration;	
+	// _countRGG_JTAC_helis	 	= count RGG_JTAC_helis;	
+
 
 	// q1 - mission state / CAS or Recon
 	if (RGG_JTAC_missionBool) then {
@@ -83,7 +79,7 @@ while {RGG_JTAC_NumInputBool} do {
 		};
 	};
 
-	// q1 grid state 
+	// q2 grid state 
 	if (RGG_JTAC_gridBool) then {
 		if (_countRGG_JTAC_grid == 10) then {
 			systemChat "Mission Grid Accepted";
@@ -94,7 +90,7 @@ while {RGG_JTAC_NumInputBool} do {
 		};
 	};
 
-	// q2 approach state 
+	// q3 approach state 
 	if (RGG_JTAC_approachBool) then {
 		if (_countRGG_JTAC_approach == 3) then {
 			systemChat "Attack Vector Accepted";
@@ -105,7 +101,7 @@ while {RGG_JTAC_NumInputBool} do {
 		};
 	};
 
-	// q3 egress state 
+	// q4 egress state 
 	if (RGG_JTAC_egressBool) then {
 		if (_countRGG_JTAC_egress == 3) then {
 			systemChat "Ergess Vector Accepted";
@@ -118,7 +114,7 @@ while {RGG_JTAC_NumInputBool} do {
 		};
 	};
 
-	// q4 type state 
+	// q5 target state 
 	if (RGG_JTAC_targetBool) then {
 		if (_countRGG_JTAC_target == 1) then {
 			systemChat "Target Type Confirmed";
@@ -133,18 +129,18 @@ while {RGG_JTAC_NumInputBool} do {
 	};
 
 	// q5 heli state 
-	if (RGG_JTAC_helisBool) then {
-		if (_countRGG_JTAC_helis == 1) then {
-			systemChat "Heli Numbers Confirmed";
-			systemChat "Confirm ord required";
-			systemChat "1 - Guns";
-			systemChat "2 - Rockets";
-			systemChat "3 - Guns or Rockets";
-			systemChat "4 - Rocket Dump";
-			RGG_JTAC_helisBool 		= false;
-			RGG_JTAC_ordBool 		= true;
-		};
-	};
+	// if (RGG_JTAC_helisBool) then {
+	// 	if (_countRGG_JTAC_helis == 1) then {
+	// 		systemChat "Heli Numbers Confirmed";
+	// 		systemChat "Confirm ord required";
+	// 		systemChat "1 - Guns";
+	// 		systemChat "2 - Rockets";
+	// 		systemChat "3 - Guns or Rockets";
+	// 		systemChat "4 - Rocket Dump";
+	// 		RGG_JTAC_helisBool 		= false;
+	// 		RGG_JTAC_ordBool 		= true;
+	// 	};
+	// };
 
 	// q6 ord state 
 	if (RGG_JTAC_ordBool) then {
@@ -203,30 +199,32 @@ while {RGG_JTAC_NumInputBool} do {
 	};
 
 	// q10 duration state 
-	if (RGG_JTAC_durationBool) then {
-		if (_countRGG_JTAC_duration == 1) then {
-			systemChat "Mission Duration Confirmed";
-			systemChat "Please confirm or Cancel Mission";
-			systemChat "1 - CONFIRM";
-			systemChat "2 - CANCEL";
-			RGG_JTAC_durationBool 	= false;
-			RGG_JTAC_confirmBool 	= true;
-		};
-	};
+	// if (RGG_JTAC_durationBool) then {
+	// 	if (_countRGG_JTAC_duration == 1) then {
+	// 		systemChat "Mission Duration Confirmed";
+	// 		systemChat "Please confirm or Cancel Mission";
+	// 		systemChat "1 - CONFIRM";
+	// 		systemChat "2 - CANCEL";
+	// 		RGG_JTAC_durationBool 	= false;
+	// 		RGG_JTAC_confirmBool 	= true;
+	// 	};
+	// };
 
-	// q11 confirm state 
+	// confirm state 
 	if (RGG_JTAC_confirmBool) then {
 		if (_countRGG_JTAC_confirm == 1) then {
 			switch (RGG_JTAC_confirm) do {
 				case (1): { 
 					systemChat "CAS Misison Confirmed";  
 					RGG_JTAC_confirmBool 	= false;
-					// RGG_JTAC_?Bool 			= true;
+					RGG_JTAC_NumInputBool	= false;
+					execVM "autoPatrolSystem/JTAC_Systems/confirmExecute.sqf";
 				};
 				case (2): { 
 					systemChat "CAS Mission Cancelled"; 
 					RGG_JTAC_confirmBool 	= false;
 					// RGG_JTAC_?Bool 			= true;
+					// to be completed!
 				};
 			};
 		};
