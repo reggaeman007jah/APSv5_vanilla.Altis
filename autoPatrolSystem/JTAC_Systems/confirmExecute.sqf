@@ -42,7 +42,101 @@ East
 4 Armor (Red) / "o_armor"
 5 Artillery (Red) / "o_art"
 
+RGG_JTAC_mission	 	= [];
+RGG_JTAC_grid	 		= [];
+RGG_JTAC_approach	 	= [];
+RGG_JTAC_egress		 	= [];
+RGG_JTAC_target	 		= [];
+RGG_JTAC_helis	 		= [];
+RGG_JTAC_ord	 		= [];
+RGG_JTAC_danger	 		= [];
+RGG_JTAC_colour	 		= [];
+RGG_JTAC_id	 			= [];
+RGG_JTAC_duration 		= [];
+
 */
+
+// static mission  information 
+_missionType	= _this select 0; // 1 - intiState - CAS or Recon 
+_missionID		= _this select 1; // 2 - alpha - echo 
+_missionColour	= _this select 2; // 3 - rgb 
+
+_missionGrid	= _this select 3; // 4 - 10-grid 
+_approachVec	= _this select 4; // 5 - 3-num 
+_egressVec		= _this select 5; // 6 - 3-num 
+
+_ordReq			= _this select 6; // 7 - guns, rocks, runs and rocks, rock dump 
+_targetType		= _this select 7; // 8 - infi, vics, tanks 
+_dangerclose	= _this select 8; // 9 - y or n 
+
+// _missionTTL		= _this select 3; // 4 - 2 4 6 8 10 
+// _heliNum		= _this select 7; // 8 - 1-5 
+
+// or 
+
+RGG_JTAC_mission; 	// 1 - intiState - CAS or Recon 	 	
+RGG_JTAC_target; 	// 8 - infi, vics, tanks 	
+RGG_JTAC_ord; 		// 7 - guns, rocks, runs and rocks, rock dump 
+RGG_JTAC_danger; 	// 9 - y or n 	
+RGG_JTAC_colour; 	// 3 - rgb 	
+RGG_JTAC_id; 		// 2 - alpha - echo 		
+
+switch (RGG_JTAC_mission) do {
+	case (1): { _missionTypeLabel 	= "Close Air Support Mission"; };
+	case (2): { _missionTypeLabel 	= "Recon Mission"; };
+}; 
+
+switch (RGG_JTAC_target) do {
+	case (1): { _targetTypeLabel 	= "Infantry"; };
+	case (2): { _targetTypeLabel 	= "Motorised"; };
+	case (3): { _targetTypeLabel 	= "Armoured"; };
+};
+
+switch (RGG_JTAC_ord) do {
+	case (1): { _ordLabel 			= "Guns"; };
+	case (2): { _ordLabel 			= "Guns and Rockets"; };
+	case (3): { _ordLabel 			= "Rockets"; };
+	case (4): { _ordLabel 			= "Rocket Dump"; };
+};
+
+switch (RGG_JTAC_danger) do {
+	case (1): { _dangerCloseLabel 	= "DANGER CLOSE"; };
+	case (2): { _dangerCloseLabel 	= "DANGER NOT CLOSE"; };
+};
+
+switch (RGG_JTAC_colour) do {
+	case (1): { _colourLabel 		= "Red"; };
+	case (2): { _colourLabel 		= "Green"; };
+	case (3): { _colourLabel 		= "Blue"; };
+};
+
+switch (RGG_JTAC_id) do {
+	case (1): { _ID_Label 			= "Alpha"; };
+	case (2): { _ID_Label 			= "Bravo"; };
+	case (3): { _ID_Label 			= "Charlie"; };
+	case (4): { _ID_Label 			= "Delta"; };
+	case (5): { _ID_Label 			= "Echo"; };
+};
+
+RGG_JTAC_grid; 		// 4 - 10-grid 	 
+RGG_JTAC_approach; 	// 5 - 3-num 
+RGG_JTAC_egress; 	// 6 - 3-num 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// old below 
 
 _Vcat 	= _this select 0; // category (East West Indi General etc) 
 _Vtype 	= _this select 1; // marker type (infi, repair etc)

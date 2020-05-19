@@ -67,7 +67,7 @@ while {RGG_JTAC_NumInputBool} do {
 	_countRGG_JTAC_duration 	= count RGG_JTAC_duration;	
 	_countRGG_JTAC_confirm 		= count RGG_JTAC_confirm;
 
-	// mission state
+	// q1 - mission state / CAS or Recon
 	if (RGG_JTAC_missionBool) then {
 		// CAS Mission
 		if (_countRGG_JTAC_mission == 1) then {
@@ -81,22 +81,6 @@ while {RGG_JTAC_NumInputBool} do {
 				case (2): { systemChat "Recon Misison Selected - not built yet - do not select"; };
 			};
 		};
-		// if (_countRGG_JTAC_mission == 2) then {
-		// 	// Recon Misison
-		// 	switch (RGG_VMS_Category) do {
-		// 		case (1): { systemChat "";  };
-		// 		case (2): { systemChat ""; };
-		// 		case (3): { systemChat "";   };
-		// 	};
-		// 	systemChat "Now confirm ";
-		// 	systemChat "1 ";
-		// 	systemChat "2 ";
-		// 	systemChat "3 ";
-		// 	systemChat "4 ";
-		// 	systemChat "5 ";
-		// 	RGG_Bool = false;
-		// 	RGG_Bool = true;
-		// };
 	};
 
 	// q1 grid state 

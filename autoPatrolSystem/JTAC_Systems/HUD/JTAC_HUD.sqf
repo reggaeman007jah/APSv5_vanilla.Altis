@@ -36,6 +36,9 @@ exit vector (non dynamic)
 exitVector (input: to)
 
 
+proof of concept - show simple message on-screen of any pilot letting them know there is a live CAS mission 
+Remove when mission times out!
+
 */
 _n1 = VACF_Heading;
 _n2 = VACF_Distance;
