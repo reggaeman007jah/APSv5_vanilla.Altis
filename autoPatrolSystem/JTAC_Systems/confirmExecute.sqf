@@ -189,6 +189,18 @@ _gridLon pushBack _grid8;
 _gridLon pushBack _grid9;
 _gridLon pushBack _grid10;
 
+
+		_parsed1Lat = splashCoordsLat joinString "";
+		_parsed1Lon = splashCoordsLon joinString "";
+		_parsed1Rnd = splashRounds joinString "";
+		_parsed1Rad = splashRadius joinString "";
+		_parsedLat = parseNumber _parsed1Lat;
+		_parsedLon = parseNumber _parsed1Lon;
+		_parsedRounds = parseNumber _parsed1Rnd;
+		_parsedRadius = parseNumber _parsed1Rad;
+
+
+
 _10Grid = [];
 _10Grid pushback _gridLat;
 _10Grid pushback _gridLon;
