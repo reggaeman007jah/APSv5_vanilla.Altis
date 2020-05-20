@@ -100,6 +100,8 @@ private _ordLabel = "";
 private _dangerCloseLabel = "";
 private _colourLabel = "";
 private _ID_Label = "";
+private _parsedLon = "";
+private _markerCol = "";
 
 
 
@@ -189,21 +191,26 @@ _gridLon pushBack _grid8;
 _gridLon pushBack _grid9;
 _gridLon pushBack _grid10;
 
+_parsedLat1 = _gridLat joinString "";
+_parsedLon1 = _gridLon joinString "";
+_parsedLat = parseNumber _parsedLat1;
+_parsedLon = parseNumber _parsedLon1;
 
-		_parsed1Lat = splashCoordsLat joinString "";
-		_parsed1Lon = splashCoordsLon joinString "";
-		_parsed1Rnd = splashRounds joinString "";
-		_parsed1Rad = splashRadius joinString "";
-		_parsedLat = parseNumber _parsed1Lat;
-		_parsedLon = parseNumber _parsed1Lon;
-		_parsedRounds = parseNumber _parsed1Rnd;
-		_parsedRadius = parseNumber _parsed1Rad;
+
+		// _parsed1Lat = splashCoordsLat joinString "";
+		// _parsed1Lon = splashCoordsLon joinString "";
+		// _parsed1Rnd = splashRounds joinString "";
+		// _parsed1Rad = splashRadius joinString "";
+		// _parsedLat = parseNumber _parsed1Lat;
+		// _parsedLon = parseNumber _parsed1Lon;
+		// _parsedRounds = parseNumber _parsed1Rnd;
+		// _parsedRadius = parseNumber _parsed1Rad;
 
 
 
 _10Grid = [];
-_10Grid pushback _gridLat;
-_10Grid pushback _gridLon;
+_10Grid pushback _parsedLat;
+_10Grid pushback _parsedLon;
 
 hint str _10Grid;
 
@@ -219,26 +226,29 @@ _float2 = random 10000;
 _uniqueStamp = [_float, _float2];
 _stampToString = str _uniqueStamp;
 
-// create marker 
-_tempMarker = createMarker [_stampToString, _10Grid];
 
-// _tempMarker setMarkerShape "ELLIPSE";
-_tempMarker setMarkerType "mil_triangle";
-// _tempMarker setMarkerSize [20, 20];
-_tempMarker setMarkerAlpha 0.8;
-_tempMarker setMarkerColor _markerCol;
 
 
 // loop 0.5 second per cycle, 360 == hardcoded 3 min duration - this could be dynammic maybe?
 _angle = 1;
-for "_i" from 0 to 360 do {
-	_angle = _angle + 1;
+for "_i" from 0 to 60 do {
+	// create marker 
+	_tempMarker = createMarker [_stampToString, _10Grid];
+
+	// _tempMarker setMarkerShape "ELLIPSE";
+	_tempMarker setMarkerType "mil_triangle";
+	// _tempMarker setMarkerSize [20, 20];
+	// _tempMarker setMarkerAlpha 0.8;
+	_tempMarker setMarkerColor "colorRed";
+	_angle = _angle + 15;
 	_tempMarker setMarkerDir _angle;
-	sleep 0.5;
+	sleep 1;
+	deleteMarker _tempMarker;
 };
-deleteMarker _tempMarker;
 
 
+execVM "autoPatrolSystem\JTAC_Systems\clearKeyDowns.sqf";
+execVM "autoPatrolSystem\JTAC_Systems\JTACinit.sqf";
 
 
 // "mil_arrow2"
