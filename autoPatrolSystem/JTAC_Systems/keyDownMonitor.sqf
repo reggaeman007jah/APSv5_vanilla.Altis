@@ -59,22 +59,29 @@ while {RGG_JTAC_NumInputBool} do {
 	_countRGG_JTAC_colour	 	= count RGG_JTAC_colour;	// q8
 	_countRGG_JTAC_id	 		= count RGG_JTAC_id;		// q9
 	_countRGG_JTAC_confirm 		= count RGG_JTAC_confirm;	// confirm / cancel
+
+	// removed questions:
 	// _countRGG_JTAC_duration 	= count RGG_JTAC_duration;	
 	// _countRGG_JTAC_helis	 	= count RGG_JTAC_helis;	
 
-
 	// q1 - mission state / CAS or Recon
 	if (RGG_JTAC_missionBool) then {
+		// if (_countRGG_JTAC_mission == 1) then {
+		// 	switch (RGG_JTAC_mission) do {
+		// 		case (1): { 
+		// 			systemChat "CAS Misison Selected";  
+		// 			// systemChat "Now confirm 10-Digit Target Grid";
+		// 			// RGG_JTAC_missionBool = false;
+		// 			// RGG_JTAC_gridBool = true;
+		// 		};
+		// 		// case (2): { systemChat "Recon Mission Selected - not built yet - press numpad / to cancel"; };
+		// 	};
+		// };
 		if (_countRGG_JTAC_mission == 1) then {
-			switch (RGG_JTAC_mission) do {
-				case (1): { 
-					systemChat "CAS Misison Selected";  
-					systemChat "Now confirm 10-Digit Target Grid ";
-					RGG_JTAC_missionBool 	= false;
-					RGG_JTAC_gridBool 		= true;
-				};
-				case (2): { systemChat "Recon Misison Selected - not built yet - pres 'numpad /' to cancel"; };
-			};
+			systemChat "CAS Misison Selected";  
+			systemChat "Now confirm 10-Digit Target Grid";
+			RGG_JTAC_missionBool = false;
+			RGG_JTAC_gridBool = true;
 		};
 	};
 
@@ -209,14 +216,31 @@ while {RGG_JTAC_NumInputBool} do {
 	// confirm state 
 	if (RGG_JTAC_confirmBool) then {
 		if (_countRGG_JTAC_confirm == 1) then {
-			switch (RGG_JTAC_confirm) do {
-				case (1): { 
+			// switch (RGG_JTAC_confirm) do {
+			// 	case (1): { 
+			// 		systemChat "CAS Misison Confirmed";  
+			// 		RGG_JTAC_confirmBool 	= false;
+			// 		RGG_JTAC_NumInputBool	= false;
+			// 		execVM "autoPatrolSystem/JTAC_Systems/confirmExecute.sqf";
+			// 	};
+			// 	case (2): { 
+			// 		systemChat "CAS Mission Cancelled"; 
+			// 		RGG_JTAC_confirmBool 	= false;
+			// 		RGG_JTAC_NumInputBool	= false;
+			// 		execVM "autoPatrolSystem/JTAC_Systems/clearKeyDowns.sqf";
+			// 		execVM "autoPatrolSystem/JTAC_Systems/JTACinit.sqf";
+			// 		// RGG_JTAC_?Bool 			= true;
+			// 		// to be completed!
+			// 	};
+			// };
+			_confirm = RGG_JTAC_confirm select 0;
+			if (_confirm == 1) then {
 					systemChat "CAS Misison Confirmed";  
 					RGG_JTAC_confirmBool 	= false;
 					RGG_JTAC_NumInputBool	= false;
-					execVM "autoPatrolSystem/JTAC_Systems/confirmExecute.sqf";
-				};
-				case (2): { 
+					execVM "autoPatrolSystem\JTAC_Systems\confirmExecute.sqf";
+			};
+			if (_confirm == 2) then {
 					systemChat "CAS Mission Cancelled"; 
 					RGG_JTAC_confirmBool 	= false;
 					RGG_JTAC_NumInputBool	= false;
@@ -224,7 +248,6 @@ while {RGG_JTAC_NumInputBool} do {
 					execVM "autoPatrolSystem/JTAC_Systems/JTACinit.sqf";
 					// RGG_JTAC_?Bool 			= true;
 					// to be completed!
-				};
 			};
 		};
 	};

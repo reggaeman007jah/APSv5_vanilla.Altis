@@ -7,7 +7,7 @@ loop-listener that validates user input, and changes state at correct times
 notes:
 
 issues:
-
+RGG_JTAC_missionBool
 */
 
 if (RGG_JTAC_NumInputBool) then {
@@ -29,7 +29,8 @@ if (RGG_JTAC_NumInputBool) then {
 	}"];
 
 	rgg_kd1 = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == 79) then {
-		systemChat '1';
+		
+		if (RGG_JTAC_missionBool) then { RGG_JTAC_mission pushback 1; };
 		if (RGG_JTAC_gridBool) then { RGG_JTAC_grid pushback 1;	};
 		if (RGG_JTAC_approachBool) then { RGG_JTAC_approach pushback 1; };
 		if (RGG_JTAC_egressBool) then { RGG_JTAC_egress pushback 1;	};
@@ -40,10 +41,12 @@ if (RGG_JTAC_NumInputBool) then {
 		if (RGG_JTAC_idBool) then { RGG_JTAC_id pushback 1; }; 
 		if (RGG_JTAC_durationBool) then { RGG_JTAC_duration pushback 1; }; 
 		if (RGG_JTAC_confirmBool) then { RGG_JTAC_confirm pushback 1; }; 
+		systemChat '1';
 	}"];
 
 	rgg_kd2 = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == 80) then {
 		systemChat '2';
+		if (RGG_JTAC_missionBool) then { RGG_JTAC_mission pushback 2; };
 		if (RGG_JTAC_gridBool) then { RGG_JTAC_grid pushback 2; };
 		if (RGG_JTAC_approachBool) then { RGG_JTAC_approach pushback 2; };
 		if (RGG_JTAC_egressBool) then { RGG_JTAC_egress pushback 2; };

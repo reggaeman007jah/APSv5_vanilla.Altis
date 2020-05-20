@@ -82,7 +82,7 @@ RGG_JTAC_missionBool 	= false;
 RGG_JTAC_grid	 		= [];
 RGG_JTAC_gridBool 		= false;
 RGG_JTAC_approach	 	= [];
-RGG_JTAC_appraochBool	= false;
+RGG_JTAC_approachBool	= false;
 RGG_JTAC_egress		 	= [];
 RGG_JTAC_egressBool		= false;
 RGG_JTAC_target	 		= [];
@@ -114,8 +114,8 @@ rgg_Activate = (findDisplay 46) displayAddEventHandler ["KeyDown", "if ((!VAMP) 
 	systemChat '2 - Request Area Recon - not built yet!!!';
 	RGG_JTAC_NumInputBool = true;
 	RGG_JTAC_missionBool = true; 
-	execVM 'JTAC_Systems\keyDowns.sqf'; 
-	execVM 'JTAC_Systems\keyDownMonitor.sqf'; 
+	execVM 'autoPatrolSystem\JTAC_Systems\keyDowns.sqf'; 
+	execVM 'autoPatrolSystem\JTAC_Systems\keyDownMonitor.sqf'; 
 }"];
 
 // 	playSound 'dangerClose1';

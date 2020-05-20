@@ -81,6 +81,28 @@ RGG_JTAC_colour; 	// 3 - rgb
 RGG_JTAC_id; 		// 2 - alpha - echo 		
 */
 
+systemChat "confirm execute running";
+
+/*
+lets test this out 
+*/
+// _RGG_JTAC_mission = RGG_JTAC_mission select 0;
+// _RGG_JTAC_target = RGG_JTAC_target select 0;
+// _RGG_JTAC_ord = RGG_JTAC_ord select 0;
+// _RGG_JTAC_danger = RGG_JTAC_danger select 0;
+// _RGG_JTAC_colour = RGG_JTAC_colour select 0;
+// _RGG_JTAC_id = RGG_JTAC_id select 0;
+
+private _colourLabel = "";
+private _missionTypeLabel = "";
+private _targetTypeLabel = "";
+private _ordLabel = "";
+private _dangerCloseLabel = "";
+private _colourLabel = "";
+private _ID_Label = "";
+
+
+
 // extract given answers from JTAC:
 switch (RGG_JTAC_mission) do {
 	case (1): { _missionTypeLabel 	= "Close Air Support Mission"; };
@@ -125,9 +147,9 @@ switch (_colourLabel) do {
 	case ("Blue"): { _markerCol 	= "colorBlue"; };
 };
 
-RGG_JTAC_grid; 		// 4 - 10-grid 	 
-RGG_JTAC_approach; 	// 5 - 3-num 
-RGG_JTAC_egress; 	// 6 - 3-num 
+// RGG_JTAC_grid; 		// 4 - 10-grid 	 
+// RGG_JTAC_approach; 	// 5 - 3-num 
+// RGG_JTAC_egress; 	// 6 - 3-num 
 
 // show mission information 
 "---------- ALERT ----------" remoteExec ["systemChat", 0, true];
@@ -140,12 +162,44 @@ format ["Attack Vector: %1", RGG_JTAC_approach] remoteExec ["systemChat", 0];
 format ["Egress Vector: %1", RGG_JTAC_egress] remoteExec ["systemChat", 0];
 "---------- ALERT ----------" remoteExec ["systemChat", 0, true];
 
-// get grid 
-_disLat = RGG_JTAC_grid Select 0; 
-_disLon = RGG_JTAC_grid Select 1; 
-_displayLat = floor _disLat;
-_displayLon = floor _disLon;
-_gridCoords = [_displayLat, _displayLon];
+// construct grid 
+_gridLat = [];
+_gridLon = [];
+// _gridLat pushBack RGG_JTAC_grid select [0,4]; // should select range 
+// _gridLon pushBack RGG_JTAC_grid select [5,9]; // should select range
+_grid1 = RGG_JTAC_grid select 0;
+_grid2 = RGG_JTAC_grid select 1;
+_grid3 = RGG_JTAC_grid select 2;
+_grid4 = RGG_JTAC_grid select 3;
+_grid5 = RGG_JTAC_grid select 4;
+_grid6 = RGG_JTAC_grid select 5;
+_grid7 = RGG_JTAC_grid select 6;
+_grid8 = RGG_JTAC_grid select 7;
+_grid9 = RGG_JTAC_grid select 8;
+_grid10 = RGG_JTAC_grid select 9;
+
+_gridLat pushBack _grid1; 
+_gridLat pushBack _grid2; 
+_gridLat pushBack _grid3; 
+_gridLat pushBack _grid4; 
+_gridLat pushBack _grid5; 
+_gridLon pushBack _grid6;
+_gridLon pushBack _grid7;
+_gridLon pushBack _grid8;
+_gridLon pushBack _grid9;
+_gridLon pushBack _grid10;
+
+_10Grid = [];
+_10Grid pushback _gridLat;
+_10Grid pushback _gridLon;
+
+hint str _10Grid;
+
+// _disLat = RGG_JTAC_grid Select 0; 
+// _disLon = RGG_JTAC_grid Select 1; 
+// _displayLat = floor _disLat;
+// _displayLon = floor _disLon;
+// _gridCoords = [_displayLat, _displayLon];
 
 // create unique marker name for target
 _float = diag_tickTime;
@@ -154,7 +208,7 @@ _uniqueStamp = [_float, _float2];
 _stampToString = str _uniqueStamp;
 
 // create marker 
-_tempMarker = createMarker [_stampToString, RGG_JTAC_grid];
+_tempMarker = createMarker [_stampToString, _10Grid];
 
 // _tempMarker setMarkerShape "ELLIPSE";
 _tempMarker setMarkerType "mil_triangle";
@@ -175,6 +229,7 @@ deleteMarker _tempMarker;
 
 
 
+// "mil_arrow2"
 
 
 
@@ -184,9 +239,7 @@ deleteMarker _tempMarker;
 
 
 
-
-
-
+/*
 
 // old below 
 
