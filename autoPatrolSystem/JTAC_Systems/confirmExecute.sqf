@@ -98,103 +98,140 @@ private _missionTypeLabel = "";
 private _targetTypeLabel = "";
 private _ordLabel = "";
 private _dangerCloseLabel = "";
-private _colourLabel = "";
+// private _colourLabel = "";
 private _ID_Label = "";
 private _parsedLon = "";
 private _markerCol = "";
 
 
+RGG_JTAC_EXEC = {
+	
+	// extract given answers from JTAC:
+	switch (RGG_JTAC_mission) do {
+		case (1): { _missionTypeLabel = "Close Air Support Mission"; };
+		case (2): { _missionTypeLabel = "Recon Mission"; };
+	}; 
 
-// extract given answers from JTAC:
-switch (RGG_JTAC_mission) do {
-	case (1): { _missionTypeLabel 	= "Close Air Support Mission"; };
-	case (2): { _missionTypeLabel 	= "Recon Mission"; };
-}; 
+	switch (RGG_JTAC_target) do {
+		case (1): { _targetTypeLabel = "Infantry"; };
+		case (2): { _targetTypeLabel = "Motorised"; };
+		case (3): { _targetTypeLabel = "Armoured"; };
+	};
 
-switch (RGG_JTAC_target) do {
-	case (1): { _targetTypeLabel 	= "Infantry"; };
-	case (2): { _targetTypeLabel 	= "Motorised"; };
-	case (3): { _targetTypeLabel 	= "Armoured"; };
+	switch (RGG_JTAC_ord) do {
+		case (1): { _ordLabel = "Guns"; };
+		case (2): { _ordLabel = "Guns and Rockets"; };
+		case (3): { _ordLabel = "Rockets"; };
+		case (4): { _ordLabel = "Rocket Dump"; };
+	};
+
+	switch (RGG_JTAC_danger) do {
+		case (1): { _dangerCloseLabel = "DANGER CLOSE"; };
+		case (2): { _dangerCloseLabel = "DANGER NOT CLOSE"; };
+	};
+
+	switch (RGG_JTAC_colour) do {
+		case (1): { _colourLabel = "Red"; };
+		case (2): { _colourLabel = "Green"; };
+		case (3): { _colourLabel = "Blue"; };
+	};
+
+	switch (RGG_JTAC_id) do {
+		case (1): { _ID_Label = "Alpha"; };
+		case (2): { _ID_Label = "Bravo"; };
+		case (3): { _ID_Label = "Charlie"; };
+		case (4): { _ID_Label = "Delta"; };
+		case (5): { _ID_Label = "Echo"; };
+	};
+
+	switch (_colourLabel) do {
+		case ("Red"): { _markerCol = "colorRed"; };
+		case ("Green"): { _markerCol = "colorGreen"; };
+		case ("Blue"): { _markerCol = "colorBlue"; };
+	};
+	// construct grid 
+	_gridLat = [];
+	_gridLon = [];
+	// _gridLat pushBack RGG_JTAC_grid select [0,4]; // should select range 
+	// _gridLon pushBack RGG_JTAC_grid select [5,9]; // should select range
+	_grid1 = RGG_JTAC_grid select 0;
+	_grid2 = RGG_JTAC_grid select 1;
+	_grid3 = RGG_JTAC_grid select 2;
+	_grid4 = RGG_JTAC_grid select 3;
+	_grid5 = RGG_JTAC_grid select 4;
+	_grid6 = RGG_JTAC_grid select 5;
+	_grid7 = RGG_JTAC_grid select 6;
+	_grid8 = RGG_JTAC_grid select 7;
+	_grid9 = RGG_JTAC_grid select 8;
+	_grid10 = RGG_JTAC_grid select 9;
+
+	_gridLat pushBack _grid1; 
+	_gridLat pushBack _grid2; 
+	_gridLat pushBack _grid3; 
+	_gridLat pushBack _grid4; 
+	_gridLat pushBack _grid5; 
+	_gridLon pushBack _grid6;
+	_gridLon pushBack _grid7;
+	_gridLon pushBack _grid8;
+	_gridLon pushBack _grid9;
+	_gridLon pushBack _grid10;
+
+	_parsedLat1 = _gridLat joinString "";
+	_parsedLon1 = _gridLon joinString "";
+	_parsedLat = parseNumber _parsedLat1;
+	_parsedLon = parseNumber _parsedLon1;
+
+	_10Grid = [];
+	_10Grid pushback _parsedLat;
+	_10Grid pushback _parsedLon;
+
+	hint str _10Grid;
+
+	_float = diag_tickTime;
+	_float2 = random 10000;
+	_uniqueStamp = [_float, _float2];
+	_stampToString = str _uniqueStamp;
+
+	// show mission information 
+	"---------- ALERT ------------------------------------------" remoteExec ["systemChat", 0, true];
+	format ["mission id colour --- %1 %2 %3", _missionTypeLabel, _ID_Label, _colourLabel] remoteExec ["systemChat", 0, true];
+	format ["Target: %1", _targetTypeLabel] remoteExec ["systemChat", 0];
+	format ["Grid: %1", _10Grid] remoteExec ["systemChat", 0];
+	format ["Fire Request: %1", _ordLabel] remoteExec ["systemChat", 0];
+	format ["Protocol: %1", _dangerCloseLabel] remoteExec ["systemChat", 0];
+	format ["Attack Vector: %1", RGG_JTAC_approach] remoteExec ["systemChat", 0];
+	format ["Egress Vector: %1", RGG_JTAC_egress] remoteExec ["systemChat", 0];
+	"---------- ALERT ------------------------------------------" remoteExec ["systemChat", 0, true];
+
+	// loop 0.5 second per cycle, 360 == hardcoded 3 min duration - this could be dynammic maybe?
+	_angle = 1;
+	for "_i" from 0 to 60 do {
+		// create marker 
+		_tempMarker = createMarker [_stampToString, _10Grid];
+
+		// _tempMarker setMarkerShape "ELLIPSE";
+		// _tempMarker setMarkerType "mil_triangle";
+		_tempMarker setMarkerType "mil_destroy";
+		// _tempMarker setMarkerSize [20, 20];
+		// _tempMarker setMarkerAlpha 0.8;
+		_tempMarker setMarkerColor "colorRed";
+		_angle = _angle + 5;
+		_tempMarker setMarkerDir _angle;
+		sleep 0.1;
+		deleteMarker _tempMarker;
+	};
+
+
+	execVM "autoPatrolSystem\JTAC_Systems\clearKeyDowns.sqf";
+	execVM "autoPatrolSystem\JTAC_Systems\JTACinit.sqf";
 };
+[] call RGG_JTAC_EXEC;
 
-switch (RGG_JTAC_ord) do {
-	case (1): { _ordLabel 			= "Guns"; };
-	case (2): { _ordLabel 			= "Guns and Rockets"; };
-	case (3): { _ordLabel 			= "Rockets"; };
-	case (4): { _ordLabel 			= "Rocket Dump"; };
-};
 
-switch (RGG_JTAC_danger) do {
-	case (1): { _dangerCloseLabel 	= "DANGER CLOSE"; };
-	case (2): { _dangerCloseLabel 	= "DANGER NOT CLOSE"; };
-};
 
-switch (RGG_JTAC_colour) do {
-	case (1): { _colourLabel 		= "Red"; };
-	case (2): { _colourLabel 		= "Green"; };
-	case (3): { _colourLabel 		= "Blue"; };
-};
 
-switch (RGG_JTAC_id) do {
-	case (1): { _ID_Label 			= "Alpha"; };
-	case (2): { _ID_Label 			= "Bravo"; };
-	case (3): { _ID_Label 			= "Charlie"; };
-	case (4): { _ID_Label 			= "Delta"; };
-	case (5): { _ID_Label 			= "Echo"; };
-};
 
-switch (_colourLabel) do {
-	case ("Red"): { _markerCol 		= "colorRed"; };
-	case ("Green"): { _markerCol 	= "colorGreen"; };
-	case ("Blue"): { _markerCol 	= "colorBlue"; };
-};
 
-// RGG_JTAC_grid; 		// 4 - 10-grid 	 
-// RGG_JTAC_approach; 	// 5 - 3-num 
-// RGG_JTAC_egress; 	// 6 - 3-num 
-
-// show mission information 
-"---------- ALERT ----------" remoteExec ["systemChat", 0, true];
-format ["%1 %2 %3", _missionTypeLabel, _ID_Label, _colourLabel] remoteExec ["systemChat", 0];
-format ["Target: %1", _targetTypeLabel] remoteExec ["systemChat", 0];
-format ["Grid: %1", RGG_JTAC_grid] remoteExec ["systemChat", 0];
-format ["Fire Request: %1", _ordLabel] remoteExec ["systemChat", 0];
-format ["Protocol: %1", _dangerCloseLabel] remoteExec ["systemChat", 0];
-format ["Attack Vector: %1", RGG_JTAC_approach] remoteExec ["systemChat", 0];
-format ["Egress Vector: %1", RGG_JTAC_egress] remoteExec ["systemChat", 0];
-"---------- ALERT ----------" remoteExec ["systemChat", 0, true];
-
-// construct grid 
-_gridLat = [];
-_gridLon = [];
-// _gridLat pushBack RGG_JTAC_grid select [0,4]; // should select range 
-// _gridLon pushBack RGG_JTAC_grid select [5,9]; // should select range
-_grid1 = RGG_JTAC_grid select 0;
-_grid2 = RGG_JTAC_grid select 1;
-_grid3 = RGG_JTAC_grid select 2;
-_grid4 = RGG_JTAC_grid select 3;
-_grid5 = RGG_JTAC_grid select 4;
-_grid6 = RGG_JTAC_grid select 5;
-_grid7 = RGG_JTAC_grid select 6;
-_grid8 = RGG_JTAC_grid select 7;
-_grid9 = RGG_JTAC_grid select 8;
-_grid10 = RGG_JTAC_grid select 9;
-
-_gridLat pushBack _grid1; 
-_gridLat pushBack _grid2; 
-_gridLat pushBack _grid3; 
-_gridLat pushBack _grid4; 
-_gridLat pushBack _grid5; 
-_gridLon pushBack _grid6;
-_gridLon pushBack _grid7;
-_gridLon pushBack _grid8;
-_gridLon pushBack _grid9;
-_gridLon pushBack _grid10;
-
-_parsedLat1 = _gridLat joinString "";
-_parsedLon1 = _gridLon joinString "";
-_parsedLat = parseNumber _parsedLat1;
-_parsedLon = parseNumber _parsedLon1;
 
 
 		// _parsed1Lat = splashCoordsLat joinString "";
@@ -208,11 +245,6 @@ _parsedLon = parseNumber _parsedLon1;
 
 
 
-_10Grid = [];
-_10Grid pushback _parsedLat;
-_10Grid pushback _parsedLon;
-
-hint str _10Grid;
 
 // _disLat = RGG_JTAC_grid Select 0; 
 // _disLon = RGG_JTAC_grid Select 1; 
@@ -221,34 +253,22 @@ hint str _10Grid;
 // _gridCoords = [_displayLat, _displayLon];
 
 // create unique marker name for target
-_float = diag_tickTime;
-_float2 = random 10000;
-_uniqueStamp = [_float, _float2];
-_stampToString = str _uniqueStamp;
+
+
+// // test 
+// format ["ALL STATIONS BE ADVISED - %1", _colourLabel] remoteExec ["systemChat", 0];
+
+// sleep 1;
+// // test
+// systemChat "test -------------";
+// systemChat str _colourLabel;
+// systemChat "test -------------";
 
 
 
 
-// loop 0.5 second per cycle, 360 == hardcoded 3 min duration - this could be dynammic maybe?
-_angle = 1;
-for "_i" from 0 to 60 do {
-	// create marker 
-	_tempMarker = createMarker [_stampToString, _10Grid];
-
-	// _tempMarker setMarkerShape "ELLIPSE";
-	_tempMarker setMarkerType "mil_triangle";
-	// _tempMarker setMarkerSize [20, 20];
-	// _tempMarker setMarkerAlpha 0.8;
-	_tempMarker setMarkerColor "colorRed";
-	_angle = _angle + 15;
-	_tempMarker setMarkerDir _angle;
-	sleep 1;
-	deleteMarker _tempMarker;
-};
 
 
-execVM "autoPatrolSystem\JTAC_Systems\clearKeyDowns.sqf";
-execVM "autoPatrolSystem\JTAC_Systems\JTACinit.sqf";
 
 
 // "mil_arrow2"
