@@ -72,14 +72,16 @@ RGG_JTAC_id	 			= [];
 // _heliNum		= _this select 7; // 8 - 1-5 
 
 // or 
-
+/*
 RGG_JTAC_mission; 	// 1 - intiState - CAS or Recon 	 	
 RGG_JTAC_target; 	// 8 - infi, vics, tanks 	
 RGG_JTAC_ord; 		// 7 - guns, rocks, runs and rocks, rock dump 
 RGG_JTAC_danger; 	// 9 - y or n 	
 RGG_JTAC_colour; 	// 3 - rgb 	
 RGG_JTAC_id; 		// 2 - alpha - echo 		
+*/
 
+// extract given answers from JTAC:
 switch (RGG_JTAC_mission) do {
 	case (1): { _missionTypeLabel 	= "Close Air Support Mission"; };
 	case (2): { _missionTypeLabel 	= "Recon Mission"; };
@@ -117,6 +119,12 @@ switch (RGG_JTAC_id) do {
 	case (5): { _ID_Label 			= "Echo"; };
 };
 
+switch (_colourLabel) do {
+	case ("Red"): { _markerCol 		= "colorRed"; };
+	case ("Green"): { _markerCol 	= "colorGreen"; };
+	case ("Blue"): { _markerCol 	= "colorBlue"; };
+};
+
 RGG_JTAC_grid; 		// 4 - 10-grid 	 
 RGG_JTAC_approach; 	// 5 - 3-num 
 RGG_JTAC_egress; 	// 6 - 3-num 
@@ -152,18 +160,17 @@ _tempMarker = createMarker [_stampToString, RGG_JTAC_grid];
 _tempMarker setMarkerType "mil_triangle";
 // _tempMarker setMarkerSize [20, 20];
 _tempMarker setMarkerAlpha 0.8;
-_tempMarker setMarkerColor
+_tempMarker setMarkerColor _markerCol;
 
 
+// loop 0.5 second per cycle, 360 == hardcoded 3 min duration - this could be dynammic maybe?
 _angle = 1;
-while (CASMISSION) do {
-
+for "_i" from 0 to 360 do {
 	_angle = _angle + 1;
 	_tempMarker setMarkerDir _angle;
-
-	sleep 1;
+	sleep 0.5;
 };
-
+deleteMarker _tempMarker;
 
 
 

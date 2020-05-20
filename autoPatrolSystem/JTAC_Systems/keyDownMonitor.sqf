@@ -65,7 +65,6 @@ while {RGG_JTAC_NumInputBool} do {
 
 	// q1 - mission state / CAS or Recon
 	if (RGG_JTAC_missionBool) then {
-		// CAS Mission
 		if (_countRGG_JTAC_mission == 1) then {
 			switch (RGG_JTAC_mission) do {
 				case (1): { 
@@ -74,7 +73,7 @@ while {RGG_JTAC_NumInputBool} do {
 					RGG_JTAC_missionBool 	= false;
 					RGG_JTAC_gridBool 		= true;
 				};
-				case (2): { systemChat "Recon Misison Selected - not built yet - do not select"; };
+				case (2): { systemChat "Recon Misison Selected - not built yet - pres 'numpad /' to cancel"; };
 			};
 		};
 	};
@@ -118,13 +117,13 @@ while {RGG_JTAC_NumInputBool} do {
 	if (RGG_JTAC_targetBool) then {
 		if (_countRGG_JTAC_target == 1) then {
 			systemChat "Target Type Confirmed";
-			systemChat "Please confirm Number of Gunships Required";
-			systemChat "1 - 1 Heli";
-			systemChat "2 - 2 Helis";
-			systemChat "3 - 3 Helis";
-			systemChat "4 - Anything in the area";
+			systemChat "Please confirm Ord Required";
+			systemChat "1 - Guns";
+			systemChat "2 - Rockets";
+			systemChat "3 - Guns or Rockets";
+			systemChat "4 - Rocket Dump";
 			RGG_JTAC_targetBool 	= false;
-			RGG_JTAC_helisBool 		= true;
+			RGG_JTAC_ordBool 		= true;
 		};
 	};
 
@@ -147,8 +146,8 @@ while {RGG_JTAC_NumInputBool} do {
 		if (_countRGG_JTAC_ord == 1) then {
 			systemChat "Ammo Type Confirmed";
 			systemChat "Is this considered DANGER CLOSE?";
-			systemChat "1 - Yes Danger Close";
-			systemChat "2 - No Danger Not Close";
+			systemChat "1 - YES - Danger Close";
+			systemChat "2 - NO  - Danger Not Close";
 			systemChat "3 - Unknown";
 			RGG_JTAC_ordBool 		= false;
 			RGG_JTAC_dangerBool 	= true;
@@ -187,14 +186,11 @@ while {RGG_JTAC_NumInputBool} do {
 	if (RGG_JTAC_idBool) then {
 		if (_countRGG_JTAC_id == 1) then {
 			systemChat "Mission ID Confirmed";
-			systemChat "Confirm Mission Duration";
-			systemChat "1 - 2 Minute";
-			systemChat "2 - 4 Minutes";
-			systemChat "3 - 6 Minutes";
-			systemChat "4 - 8 Minutes";
-			systemChat "5 - 10 Minutes";
+			systemChat "Please confirm or Cancel the mission";
+			systemChat "1 - CONFIRM";
+			systemChat "2 - CANCEL";
 			RGG_JTAC_idBool 		= false;
-			RGG_JTAC_durationBool 	= true;
+			RGG_JTAC_confirmBool 	= true;
 		};
 	};
 
@@ -223,6 +219,9 @@ while {RGG_JTAC_NumInputBool} do {
 				case (2): { 
 					systemChat "CAS Mission Cancelled"; 
 					RGG_JTAC_confirmBool 	= false;
+					RGG_JTAC_NumInputBool	= false;
+					execVM "autoPatrolSystem/JTAC_Systems/clearKeyDowns.sqf";
+					execVM "autoPatrolSystem/JTAC_Systems/JTACinit.sqf";
 					// RGG_JTAC_?Bool 			= true;
 					// to be completed!
 				};

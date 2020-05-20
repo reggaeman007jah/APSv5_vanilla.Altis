@@ -11,5 +11,5 @@ _ehRemove9 	= (findDisplay 46) displayRemoveEventHandler ["keyDown",rgg_kd8];
 _ehRemove10 = (findDisplay 46) displayRemoveEventHandler ["keyDown",rgg_kd9];
 _ehRemove11 = (findDisplay 46) displayRemoveEventHandler ['keyDown',rgg_cnl];
 
-RGG_VMS_NumInputBool 	= false;
+RGG_JTAC_NumInputBool 	= false;
 vamp 					= false;

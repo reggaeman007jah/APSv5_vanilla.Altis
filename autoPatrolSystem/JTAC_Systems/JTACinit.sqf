@@ -99,6 +99,7 @@ RGG_JTAC_idBool 		= false;
 RGG_JTAC_confirm 		= [];
 RGG_JTAC_confirmBool	= false;
 
+// removed for now
 // RGG_JTAC_duration 		= [];
 // RGG_JTAC_durationBool	= false;
 // RGG_JTAC_helis	 		= [];
@@ -109,8 +110,8 @@ rgg_Activate = (findDisplay 46) displayAddEventHandler ["KeyDown", "if ((!VAMP) 
 	vamp = true;
 	_ehRemove1 = (findDisplay 46) displayRemoveEventHandler ['keyDown',rgg_Activate];
 	systemChat 'JTAC Systems Activated - Please Confirm Misison Category';
-	systemChat '1 - Request Close Air Support';
-	systemChat '2 - Request Area Recon';
+	systemChat '1 - Request Close Air Support Fire Mission';
+	systemChat '2 - Request Area Recon - not built yet!!!';
 	RGG_JTAC_NumInputBool = true;
 	RGG_JTAC_missionBool = true; 
 	execVM 'JTAC_Systems\keyDowns.sqf'; 
