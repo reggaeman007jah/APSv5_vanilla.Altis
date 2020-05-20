@@ -205,7 +205,7 @@ RGG_JTAC_EXEC = {
 
 	// loop 0.5 second per cycle, 360 == hardcoded 3 min duration - this could be dynammic maybe?
 	_angle = 1;
-	for "_i" from 0 to 60 do {
+	for "_i" from 0 to 600 do {
 		// create marker 
 		_tempMarker = createMarker [_stampToString, _10Grid];
 
