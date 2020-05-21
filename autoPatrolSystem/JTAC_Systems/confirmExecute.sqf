@@ -81,7 +81,7 @@ RGG_JTAC_colour; 	// 3 - rgb
 RGG_JTAC_id; 		// 2 - alpha - echo 		
 */
 
-systemChat "confirm execute running";
+
 
 /*
 lets test this out 
@@ -118,17 +118,15 @@ _dataPos4 = [040,300];
 _dataPos5 = [050,300];
 
 RGG_JTAC_EXEC = {
-	
-	// params  
-	// params ["_missionType", "_RGG_JTAC_target", "_RGG_JTAC_ord", "_RGG_JTAC_danger", "_RGG_JTAC_id", "__colourLabel"];
-	// params ["_missionType"];
-private _markerCol = "";
-	_missionType = RGG_JTAC_mission select 0;
-	_missionTarget = RGG_JTAC_target select 0;
-	_missionOrd = RGG_JTAC_ord select 0;
-	_missionDanger = RGG_JTAC_danger select 0;
-	_missionColour = RGG_JTAC_colour select 0;
-	_missionID = RGG_JTAC_id select 0;
+
+	private _markerCol = "";
+	_missionType = 		RGG_JTAC_mission select 0;
+	_missionTarget = 	RGG_JTAC_target select 0;
+	_missionOrd = 		RGG_JTAC_ord select 0;
+	_missionDanger = 	RGG_JTAC_danger select 0;
+	_missionColour = 	RGG_JTAC_colour select 0;
+	_missionID = 		RGG_JTAC_id select 0;
+
 	// extract given answers from JTAC:
 	switch (_missionType) do {
 		case (1): { _missionTypeLabel = "Close Air Support Mission"; };
@@ -173,7 +171,7 @@ private _markerCol = "";
 		case ("Blue"): { _markerCol = "colorBlue"; };
 	};
 
-	// construct entry vec 
+	// construct entry vector 
 	_entryVec = [];
 	_entry1 = RGG_JTAC_approach select 0;
 	_entry2 = RGG_JTAC_approach select 1;
@@ -181,7 +179,8 @@ private _markerCol = "";
 	_entryVec pushBack _entry1;
 	_entryVec pushBack _entry2;
 	_entryVec pushBack _entry3;
-	// construct exit vec 
+
+	// construct exit vector 
 	_exitVec = [];
 	_exit1 = RGG_JTAC_egress select 0;
 	_exit2 = RGG_JTAC_egress select 1;
@@ -189,22 +188,18 @@ private _markerCol = "";
 	_exitVec pushBack _exit1;
 	_exitVec pushBack _exit2;
 	_exitVec pushBack _exit3;
+
 	// process vectors into one number 
 	_parsedEntry1 = _entryVec joinString "";
 	_parsedExit1 = _exitVec joinString "";
 	_parsedEntry = parseNumber _parsedEntry1;
 	_parsedExit = parseNumber _parsedExit1;
 
-	// _parsedLat1 = _gridLat joinString "";
-	// _parsedLon1 = _gridLon joinString "";
-	// _parsedLat = parseNumber _parsedLat1;
-	// _parsedLon = parseNumber _parsedLon1;
-
-	// construct grid 
+	// construct 10-grid 
 	_gridLat = [];
 	_gridLon = [];
-	// _gridLat pushBack RGG_JTAC_grid select [0,4]; // should select range 
-	// _gridLon pushBack RGG_JTAC_grid select [5,9]; // should select range
+	// _gridLat pushBack RGG_JTAC_grid select [0,4]; // should select range - why not work?
+	// _gridLon pushBack RGG_JTAC_grid select [5,9]; // should select range - why not work?
 	_grid1 = RGG_JTAC_grid select 0;
 	_grid2 = RGG_JTAC_grid select 1;
 	_grid3 = RGG_JTAC_grid select 2;
@@ -215,7 +210,6 @@ private _markerCol = "";
 	_grid8 = RGG_JTAC_grid select 7;
 	_grid9 = RGG_JTAC_grid select 8;
 	_grid10 = RGG_JTAC_grid select 9;
-
 	_gridLat pushBack _grid1; 
 	_gridLat pushBack _grid2; 
 	_gridLat pushBack _grid3; 
@@ -226,22 +220,21 @@ private _markerCol = "";
 	_gridLon pushBack _grid8;
 	_gridLon pushBack _grid9;
 	_gridLon pushBack _grid10;
-
 	_parsedLat1 = _gridLat joinString "";
 	_parsedLon1 = _gridLon joinString "";
 	_parsedLat = parseNumber _parsedLat1;
 	_parsedLon = parseNumber _parsedLon1;
-
 	_10Grid = [];
 	_10Grid pushback _parsedLat;
 	_10Grid pushback _parsedLon;
 
+	// procedurally generated marker name
 	_float = diag_tickTime;
 	_float2 = random 10000;
 	_uniqueStamp = [_float, _float2];
 	_stampToString = str _uniqueStamp;
 
-	// show mission information 
+	// show mission information - debug 
 	"---------- ALERT ------------------------------------------" remoteExec ["systemChat", 0, true];
 	format ["mission id colour --- %1 %2 %3", _missionTypeLabel, _ID_Label, _colourLabel] remoteExec ["systemChat", 0, true];
 	format ["Target: %1", _targetTypeLabel] remoteExec ["systemChat", 0];
@@ -252,42 +245,43 @@ private _markerCol = "";
 	format ["Egress Vector: %1", RGG_JTAC_egress] remoteExec ["systemChat", 0];
 	"---------- ALERT ------------------------------------------" remoteExec ["systemChat", 0, true];
 
-	// create line in, point, line out, then loop point
-	// get anchor 
+	// approach and egress markers 
 	_anchor = _10Grid;
-	_attackVec1 = _10Grid getPos [500, _parsedEntry];
-	_attackVec2 = _10Grid getPos [300, _parsedEntry];
-	_attackVec3 = _10Grid getPos [100, _parsedEntry];
-	_egressVec1 = _10Grid getPos [500, _parsedExit];
-	_egressVec2 = _10Grid getPos [300, _parsedExit];
-	_egressVec3 = _10Grid getPos [100, _parsedExit];
-	[_10Grid, _attackVec1, _attackVec2, _attackVec3, _egressVec1, _egressVec2, _egressVec3] execVM "autoPatrolSystem\JTAC_Systems\directionMarkers.sqf";
+	_attackVec9 = _10Grid getPos [900, _parsedEntry];
+	_attackVec7 = _10Grid getPos [700, _parsedEntry];
+	_attackVec5 = _10Grid getPos [500, _parsedEntry];
+	_attackVec3 = _10Grid getPos [300, _parsedEntry];
+	_attackVec1 = _10Grid getPos [100, _parsedEntry];
+	_egressVec1 = _10Grid getPos [100, _parsedExit];
+	_egressVec3 = _10Grid getPos [300, _parsedExit];
+	_egressVec5 = _10Grid getPos [500, _parsedExit];
+	[_10Grid, _attackVec9, _attackVec7, _attackVec5, _attackVec3, _attackVec1, _egressVec1, _egressVec3, _egressVec5, _colourLabel, _parsedEntry, _parsedExit] execVM "autoPatrolSystem\JTAC_Systems\directionMarkers.sqf";
 
 
-/*
-// paths between marker points 
-_float = diag_tickTime;
-_float2 = random 10000;
-_uniqueStamp = [_float, _float2];
-_stampToString = str _uniqueStamp;
+	/*
+	// paths between marker points 
+	_float = diag_tickTime;
+	_float2 = random 10000;
+	_uniqueStamp = [_float, _float2];
+	_stampToString = str _uniqueStamp;
 
-_reldirX = RGG_missionOrigin getDir RGG_patrol_obj;
-_relDir = floor _relDirX;
-_distX = RGG_missionOrigin distance RGG_patrol_obj;
-_dist = floor _distX;
-_dist2 = _dist / 2;
-_testPos = RGG_missionOrigin getPos [_dist2, _relDirX];
+	_reldirX = RGG_missionOrigin getDir RGG_patrol_obj;
+	_relDir = floor _relDirX;
+	_distX = RGG_missionOrigin distance RGG_patrol_obj;
+	_dist = floor _distX;
+	_dist2 = _dist / 2;
+	_testPos = RGG_missionOrigin getPos [_dist2, _relDirX];
 
-sleep 5;
+	sleep 5;
 
-_lineTest = createMarker [_stampToString, _testPos];
-_lineTest setMarkerShape "RECTANGLE";
-_lineTest setMarkerColor "ColorBlack";
-_lineTest setMarkerDir _reldirX;
-_lineTest setMarkerSize [2, _dist2];
-*/
+	_lineTest = createMarker [_stampToString, _testPos];
+	_lineTest setMarkerShape "RECTANGLE";
+	_lineTest setMarkerColor "ColorBlack";
+	_lineTest setMarkerDir _reldirX;
+	_lineTest setMarkerSize [2, _dist2];
+	*/
 
-	// loop 0.5 second per cycle, 360 == hardcoded 3 min duration - this could be dynammic maybe?
+	// animate target marker:
 	_angle = 1;
 	for "_i" from 0 to 600 do {
 		// create marker 
@@ -305,7 +299,6 @@ _lineTest setMarkerSize [2, _dist2];
 		deleteMarker _tempMarker;
 	};
 
-
 	execVM "autoPatrolSystem\JTAC_Systems\clearKeyDowns.sqf";
 	execVM "autoPatrolSystem\JTAC_Systems\JTACinit.sqf";
 };
@@ -318,14 +311,14 @@ _lineTest setMarkerSize [2, _dist2];
 
 
 
-		// _parsed1Lat = splashCoordsLat joinString "";
-		// _parsed1Lon = splashCoordsLon joinString "";
-		// _parsed1Rnd = splashRounds joinString "";
-		// _parsed1Rad = splashRadius joinString "";
-		// _parsedLat = parseNumber _parsed1Lat;
-		// _parsedLon = parseNumber _parsed1Lon;
-		// _parsedRounds = parseNumber _parsed1Rnd;
-		// _parsedRadius = parseNumber _parsed1Rad;
+// _parsed1Lat = splashCoordsLat joinString "";
+// _parsed1Lon = splashCoordsLon joinString "";
+// _parsed1Rnd = splashRounds joinString "";
+// _parsed1Rad = splashRadius joinString "";
+// _parsedLat = parseNumber _parsed1Lat;
+// _parsedLon = parseNumber _parsed1Lon;
+// _parsedRounds = parseNumber _parsed1Rnd;
+// _parsedRadius = parseNumber _parsed1Rad;
 
 
 
