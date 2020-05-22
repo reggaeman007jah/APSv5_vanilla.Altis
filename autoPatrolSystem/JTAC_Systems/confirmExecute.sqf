@@ -147,8 +147,9 @@ RGG_JTAC_EXEC = {
 	};
 
 	switch (_missionDanger) do {
-		case (1): { _dangerCloseLabel = "DANGER CLOSE"; };
+		case (1): { _dangerCloseLabel = "WARNING DANGER CLOSE"; };
 		case (2): { _dangerCloseLabel = "DANGER NOT CLOSE"; };
+		case (3): { _dangerCloseLabel = "DANGER CLOSE - UNKNOWN"; };
 	};
 
 	switch (_missionColour) do {
@@ -244,18 +245,24 @@ RGG_JTAC_EXEC = {
 	format ["Attack Vector: %1", RGG_JTAC_approach] remoteExec ["systemChat", 0];
 	format ["Egress Vector: %1", RGG_JTAC_egress] remoteExec ["systemChat", 0];
 	"---------- ALERT ------------------------------------------" remoteExec ["systemChat", 0, true];
+	
+	
+	_dataPos = _10Grid getPos [100,180];
+	[_dataPos, _missionTypeLabel, _ID_Label, _colourLabel, _targetTypeLabel, _ordLabel, _dangerCloseLabel] execVM "autoPatrolSystem\JTAC_Systems\missionData.sqf";
+
+	
 
 	// approach and egress markers 
 	_anchor = _10Grid;
-	_attackVec9 = _10Grid getPos [900, _parsedEntry];
-	_attackVec7 = _10Grid getPos [700, _parsedEntry];
-	_attackVec5 = _10Grid getPos [500, _parsedEntry];
-	_attackVec3 = _10Grid getPos [300, _parsedEntry];
-	_attackVec1 = _10Grid getPos [100, _parsedEntry];
-	_egressVec1 = _10Grid getPos [100, _parsedExit];
-	_egressVec3 = _10Grid getPos [300, _parsedExit];
-	_egressVec5 = _10Grid getPos [500, _parsedExit];
-	[_10Grid, _attackVec9, _attackVec7, _attackVec5, _attackVec3, _attackVec1, _egressVec1, _egressVec3, _egressVec5, _colourLabel, _parsedEntry, _parsedExit] execVM "autoPatrolSystem\JTAC_Systems\directionMarkers.sqf";
+	_attackVec9 = _10Grid getPos [1000, _parsedEntry];
+	_attackVec7 = _10Grid getPos [800, _parsedEntry];
+	_attackVec5 = _10Grid getPos [600, _parsedEntry];
+	_attackVec3 = _10Grid getPos [400, _parsedEntry];
+	_attackVec1 = _10Grid getPos [200, _parsedEntry];
+	_egressVec1 = _10Grid getPos [200, _parsedExit];
+	_egressVec3 = _10Grid getPos [450, _parsedExit];
+	_egressVec5 = _10Grid getPos [600, _parsedExit];
+	[_10Grid, _attackVec9, _attackVec7, _attackVec5, _attackVec3, _attackVec1, _egressVec1, _egressVec3, _egressVec5, _markerCol, _parsedEntry, _parsedExit] execVM "autoPatrolSystem\JTAC_Systems\directionMarkers.sqf";
 
 
 	/*
@@ -280,6 +287,8 @@ RGG_JTAC_EXEC = {
 	_lineTest setMarkerDir _reldirX;
 	_lineTest setMarkerSize [2, _dist2];
 	*/
+	// populate fire mission data 
+
 
 	// animate target marker:
 	_angle = 1;
@@ -287,11 +296,7 @@ RGG_JTAC_EXEC = {
 		// create marker 
 		_tempMarker = createMarker [_stampToString, _10Grid];
 		_tempMarker setMarkerText " <<< DESTROY";
-		// _tempMarker setMarkerShape "ELLIPSE";
-		// _tempMarker setMarkerType "mil_triangle";
 		_tempMarker setMarkerType "mil_destroy";
-		// _tempMarker setMarkerSize [20, 20];
-		// _tempMarker setMarkerAlpha 0.8;
 		_tempMarker setMarkerColor _markerCol;
 		_angle = _angle + 5;
 		_tempMarker setMarkerDir _angle;
