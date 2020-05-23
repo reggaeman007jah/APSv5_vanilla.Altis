@@ -14,6 +14,9 @@ execVM "autoPatrolSystem\debuggingSystems\debugCounter.sqf";
 // initialise flybys - add bombs later 
 execVM "autoPatrolSystem\ambientSystems\randomFlybys.sqf";
 
+// initialise pickup scripts 
+execVM "autoPatrolSystem\pickupSystems\pickupInit.sqf";
+
 while {true} do {
 	{ deleteVehicle _x } forEach allDead;
 	systemChat "cleanup";
