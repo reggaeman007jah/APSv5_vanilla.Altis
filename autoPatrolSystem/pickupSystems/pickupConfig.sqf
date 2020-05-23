@@ -1,5 +1,7 @@
 hint "pickup config running";
-sleep 1;
+"Transport Heli Init" remoteExec ["hint", 0, true];
+
+sleep 2;
 _heli = _this select 0;
 
 _heli setVehicleVarName "transport1"; 
@@ -12,7 +14,9 @@ dropoff = false;
 complete = false;
 
 // initialise pickup scripts 
-hint "re-running pickup";
+"Transport Heli Ready" remoteExec ["hint", 0, true];
+format ["Debug - Heli Var: %1", _heli] remoteExec ["systemChat", 0];
+
 sleep 5;
 
 waitUntil { isEngineOn transport1; }; 

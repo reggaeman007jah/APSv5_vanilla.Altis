@@ -5,6 +5,11 @@ sleep 1;
 execVM "voiceMarkerSystem\1_vmsInit.sqf";
 // execVM "voiceMarkerSystem\1_vmsInit.sqf";
 
+// JTAC
+systemChat "JTAC Systems spinning up";
+// autoPatrolSystem\JTAC_Systems\JTACinit.sqf
+execVM "autoPatrolSystem\JTAC_Systems\JTACinit.sqf";
+
 // execVM "voiceActivatedCoordFinder\VACF_init.sqf";
 // execVM "voiceActivatedDataStore\VADS_init.sqf";
 // execVM "voiceActivatedDataManager\VADM_init.sqf";

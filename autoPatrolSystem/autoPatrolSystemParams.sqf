@@ -83,7 +83,8 @@ campItems = [];
 // decide whether to have to rearm helis every respawn 
 // REARMONSPAWN = true;
 
-// JTAC
-systemChat "JTAC Systems spinning up";
-// autoPatrolSystem\JTAC_Systems\JTACinit.sqf
-execVM "autoPatrolSystem\JTAC_Systems\JTACinit.sqf";
+// moving the below to initPlayerLocal 
+// // JTAC
+// systemChat "JTAC Systems spinning up";
+// // autoPatrolSystem\JTAC_Systems\JTACinit.sqf
+// execVM "autoPatrolSystem\JTAC_Systems\JTACinit.sqf";
