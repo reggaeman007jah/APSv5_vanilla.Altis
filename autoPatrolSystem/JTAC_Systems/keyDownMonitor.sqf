@@ -78,8 +78,13 @@ while {RGG_JTAC_NumInputBool} do {
 		// 	};
 		// };
 		if (_countRGG_JTAC_mission == 1) then {
-			systemChat "CAS Misison Selected";  
-			systemChat "Now confirm 10-Digit Target Grid";
+			_missionType = RGG_JTAC_mission select 0;
+			if (_missionType == 0) then {
+				systemChat "CAS Misison Selected";  
+			} else {
+				systemChat "Fireteam Deployment Selected";  
+			};
+			systemChat "Please confirm 10-Digit Target Grid";
 			RGG_JTAC_missionBool = false;
 			RGG_JTAC_gridBool = true;
 		};
@@ -111,12 +116,22 @@ while {RGG_JTAC_NumInputBool} do {
 	if (RGG_JTAC_egressBool) then {
 		if (_countRGG_JTAC_egress == 3) then {
 			systemChat "Ergess Vector Accepted";
-			systemChat "Please confirm Target Type";
-			systemChat "1 - Infantry";
-			systemChat "2 - Vehicle";
-			systemChat "3 - Armour";
-			RGG_JTAC_egressBool 	= false;
-			RGG_JTAC_targetBool 	= true;
+			_missionType = RGG_JTAC_mission select 0;
+			if (_missionType == 1) then {
+				systemChat "Please confirm Target Type";
+				systemChat "1 - Infantry";
+				systemChat "2 - Vehicle";
+				systemChat "3 - Armour";
+				RGG_JTAC_egressBool = false;
+				RGG_JTAC_targetBool = true;
+			} else {
+				systemChat "Is this considered DANGER CLOSE?";
+				systemChat "1 - YES - Danger Close";
+				systemChat "2 - NO  - Danger Not Close";
+				systemChat "3 - Unknown";
+				RGG_JTAC_egressBool = false;
+				RGG_JTAC_dangerBool = true;
+			};
 		};
 	};
 
@@ -129,8 +144,8 @@ while {RGG_JTAC_NumInputBool} do {
 			systemChat "2 - Rockets";
 			systemChat "3 - Guns or Rockets";
 			systemChat "4 - Rocket Dump";
-			RGG_JTAC_targetBool 	= false;
-			RGG_JTAC_ordBool 		= true;
+			RGG_JTAC_targetBool = false;
+			RGG_JTAC_ordBool = true;
 		};
 	};
 

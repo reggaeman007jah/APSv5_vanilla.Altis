@@ -130,20 +130,23 @@ RGG_JTAC_EXEC = {
 	// extract given answers from JTAC:
 	switch (_missionType) do {
 		case (1): { _missionTypeLabel = "Close Air Support Mission"; };
-		case (2): { _missionTypeLabel = "Recon Mission"; };
+		case (2): { _missionTypeLabel = "Fire Team Insertion Mission"; };
 	}; 
 
 	switch (_missionTarget) do {
 		case (1): { _targetTypeLabel = "Infantry"; };
 		case (2): { _targetTypeLabel = "Motorised"; };
 		case (3): { _targetTypeLabel = "Armoured"; };
+		default { _targetTypeLabel = ""; };
 	};
+	// is a default needed?
 
 	switch (_missionOrd) do {
 		case (1): { _ordLabel = "Guns"; };
 		case (2): { _ordLabel = "Guns and Rockets"; };
 		case (3): { _ordLabel = "Rockets"; };
 		case (4): { _ordLabel = "Rocket Dump"; };
+		default { _ordLabel = ""; };
 	};
 
 	switch (_missionDanger) do {
@@ -248,7 +251,12 @@ RGG_JTAC_EXEC = {
 	
 	
 	_dataPos = _10Grid getPos [100,180];
-	[_dataPos, _missionTypeLabel, _ID_Label, _colourLabel, _targetTypeLabel, _ordLabel, _dangerCloseLabel] execVM "autoPatrolSystem\JTAC_Systems\missionData.sqf";
+	// if (_missionTypeLabel == "Close Air Support Mission") then {
+		[_dataPos, _missionTypeLabel, _ID_Label, _colourLabel, _targetTypeLabel, _ordLabel, _dangerCloseLabel] execVM "autoPatrolSystem\JTAC_Systems\missionData.sqf";
+	// };
+	// if (_missionTypeLabel == "Fire Team Insertion Mission") then {
+	// 	[_dataPos, _missionTypeLabel, _ID_Label, _colourLabel, _targetTypeLabel, _ordLabel, _dangerCloseLabel] execVM "autoPatrolSystem\JTAC_Systems\missionData.sqf";
+	// };
 
 	
 
@@ -292,10 +300,15 @@ RGG_JTAC_EXEC = {
 
 	// animate target marker:
 	_angle = 1;
-	for "_i" from 0 to 600 do {
+	for "_i" from 0 to 1200 do {
 		// create marker 
 		_tempMarker = createMarker [_stampToString, _10Grid];
-		_tempMarker setMarkerText " <<< DESTROY";
+		if (_missionTypeLabel == "Close Air Support Mission") then {
+			_tempMarker setMarkerText " <<< DESTROY";
+		} else {
+			_tempMarker setMarkerText " <<< DEPLOY TROOPS";
+		};
+		
 		_tempMarker setMarkerType "mil_destroy";
 		_tempMarker setMarkerColor _markerCol;
 		_angle = _angle + 5;

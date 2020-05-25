@@ -7,7 +7,17 @@ _missionCol = _this select 3;
 _missionTarget = _this select 4;
 _missionOrd = _this select 5;
 _missionDanger = _this select 6;
-_missionData = _missionType + " / " + _missionID + " " + _missionCol + " / " + _missionTarget + " / " + _missionOrd + " / " + _missionDanger;
+private _missionData = "_missionData";
+
+if (_missionType == "Close Air Support Mission") then {
+	_missionData = _missionType + " / " + _missionID + " " + _missionCol + " / " + _missionTarget + " / " + _missionOrd + " / " + _missionDanger;
+};
+if (_missionType == "Fire Team Insertion Mission") then {
+	_missionData = _missionType + " / " + _missionID + " " + _missionCol + " / " + " / " + _missionDanger;
+};
+
+
+// _missionData = _missionType + " / " + _missionID + " " + _missionCol + " / " + _missionTarget + " / " + _missionOrd + " / " + _missionDanger;
 
 // _tempDataMarker = createMarker [_stampToString, _dataPos];
 _tempDataMarker = createMarker ["tempData", _anchor];
@@ -21,6 +31,3 @@ _tempDataMarker setMarkerType "mil_dot";
 
 // "Marker1" setMarkerText "You are here.";
 // _tempDataMarker setMarkerColor _missionCol;
-sleep 60;
-	// sleep 0.1;
-deleteMarker _tempDataMarker;

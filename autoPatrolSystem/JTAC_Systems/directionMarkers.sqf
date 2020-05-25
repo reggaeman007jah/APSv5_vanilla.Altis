@@ -23,7 +23,7 @@ for "_i" from 1 to 10 do {
 	// _mk1 setMarkerSize [20,20];
 	_mk1 setMarkerColor _colourLabel;
 	sleep _sleep;
-;
+
 	deleteMarker _mk1;
 
 	_mk2 = createMarker ["attack1", _attack2];

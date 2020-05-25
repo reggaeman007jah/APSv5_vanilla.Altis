@@ -27,7 +27,7 @@ format ["Intel suggests %1 enemy units are advancing in your immediate area. Che
 _RGG_reinforcementTrigger = 10; 
 
 // sets patrol phase timer and creates basic move orders for opfor, to prevent stalemate 
-// execVM "autoPatrolSystem\insuranceSystems\phase5Timer.sqf";
+execVM "autoPatrolSystem\insuranceSystems\phase5Timer.sqf";
 // I am removing this for now ... 
 
 /*
