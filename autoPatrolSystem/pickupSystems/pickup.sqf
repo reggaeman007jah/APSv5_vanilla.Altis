@@ -91,6 +91,7 @@ deleteMarker "extract"; // belt and braces
 private _HELI1ATL1 = "_HELI1ATL1";
 
 while {deploymentMission} do {
+
   // engine check
   if (isEngineOn transport1) then {
     _HELI1ATL1 = (getPosATL _myHeli) select 2;
@@ -106,6 +107,7 @@ while {deploymentMission} do {
     complete = false;
     deleteMarker "extract"; // belt and braces
     execVM "autoPatrolSystem\pickupSystems\pickupInit.sqf";
+    systemChat "shutting down pickup system";
   };
   // alt check
   // _HELI1ATL1 = (getPosATL _myHeli) select 2;
@@ -114,43 +116,10 @@ while {deploymentMission} do {
    
   if (initPhase) then {
     if (_HELI1ATL1 > 10) then {
-
-  //     // COUNT UNITS IN PZ1 - IF UNITS, THEN DO NOT SPAWN
-  //     _units = allUnits inAreaArray "PZ1";
-  //     _unitCount1 = count _units;
-
-  //     if (_unitCount1 == 0) then {
-  //         systemChat "squaddies spawning .............................................!";
-  //         _float = diag_tickTime;
-  //         // _float2 = random 10000;
-  //         // _uniqueStamp = [_float, _float2];
-  //         // _stampToString = str _uniqueStamp;
-  //         _stampToString = str _float;
-  //         _stampToString = createGroup west;
-  //         for "_i" from 1 to 1 do { 
-  //           // "B_W_Soldier_A_F" createUnit [[15074,17244], _indiGroup]; 
-  //           "B_W_Soldier_A_F" createUnit [[15074,17244], _stampToString]; 
-  //           sleep 0.1;
-  //         };
-  //         for "_i" from 1 to 1 do { 
-  //           "B_W_Soldier_A_F" createUnit [[15074,17244], _stampToString]; 
-  //           sleep 0.1;
-  //         };
-  //         for "_i" from 1 to 1 do { 
-  //           "B_W_Soldier_A_F" createUnit [[15074,17244], _stampToString]; 
-  //           sleep 0.1;
-  //         };
-  //         for "_i" from 1 to 1 do { 
-  //           "B_W_Soldier_A_F" createUnit [[15074,17244], _stampToString]; 
-  //           sleep 0.1;
-  //         };
-  //         _stampToString move [15129,17195];
-  //         _stampToString setFormation "COLUMN";
-  //         systemChat "squaddies ready .............................................!";
-  //       };
-
-        initPhase = false;
-        pickup = true;
+      _freeCargoPositions = _myHeli emptyPositions "cargo";
+      systemChat format ["cargo available: %1", _freeCargoPositions];
+      initPhase = false;
+      pickup = true;
     };
   };
  
@@ -213,3 +182,38 @@ while {deploymentMission} do {
   
 	sleep 2;
 };
+
+
+  //     // COUNT UNITS IN PZ1 - IF UNITS, THEN DO NOT SPAWN
+  //     _units = allUnits inAreaArray "PZ1";
+  //     _unitCount1 = count _units;
+
+  //     if (_unitCount1 == 0) then {
+  //         systemChat "squaddies spawning .............................................!";
+  //         _float = diag_tickTime;
+  //         // _float2 = random 10000;
+  //         // _uniqueStamp = [_float, _float2];
+  //         // _stampToString = str _uniqueStamp;
+  //         _stampToString = str _float;
+  //         _stampToString = createGroup west;
+  //         for "_i" from 1 to 1 do { 
+  //           // "B_W_Soldier_A_F" createUnit [[15074,17244], _indiGroup]; 
+  //           "B_W_Soldier_A_F" createUnit [[15074,17244], _stampToString]; 
+  //           sleep 0.1;
+  //         };
+  //         for "_i" from 1 to 1 do { 
+  //           "B_W_Soldier_A_F" createUnit [[15074,17244], _stampToString]; 
+  //           sleep 0.1;
+  //         };
+  //         for "_i" from 1 to 1 do { 
+  //           "B_W_Soldier_A_F" createUnit [[15074,17244], _stampToString]; 
+  //           sleep 0.1;
+  //         };
+  //         for "_i" from 1 to 1 do { 
+  //           "B_W_Soldier_A_F" createUnit [[15074,17244], _stampToString]; 
+  //           sleep 0.1;
+  //         };
+  //         _stampToString move [15129,17195];
+  //         _stampToString setFormation "COLUMN";
+  //         systemChat "squaddies ready .............................................!";
+  //       };

@@ -50,50 +50,57 @@ if sappers are destroyed, nothing happens (well, remove red warning marker)
 // if at any stage specops detected they will head to that base immediately 
 sleep 10;
 
+sapperCheck = true;
+
 while {true} do {
 	systemChat "sapperTest running";
-
-	if (patrolPointsTaken >2) then {
-		switch (patrolPointsTaken) do {
-			case (3): {
-				_chance = random 99;
-				if (_chance >20) then {
-					systemChat "sappers coming in on 20%";
-					SAPPERS = true;
+	if (sapperCheck) then {
+		if (patrolPointsTaken >2) then {
+			switch (patrolPointsTaken) do {
+				case (3): {
+					_chance = random 99;
+					if (_chance >20) then {
+						systemChat "sappers coming in on 20%";
+						SAPPERS = true;
+					} else {
+						systemChat "no sappers on 20%";
+					};
+				};
+				case (4): {
+					_chance = random 99;
+					if (_chance >25) then {
+						systemChat "sappers coming in on 25%";
+						SAPPERS = true;
+					} else {
+						systemChat "no sappers on 30%";
+					};
+				};
+				case (5): {
+					_chance = random 99;
+					if (_chance >30) then {
+						systemChat "sappers coming in on 30%";
+						SAPPERS = true;
+					} else {
+						systemChat "no sappers on 40%";
+					};
+				};
+				default {
+					_chance = random 99;
+					if (_chance >35) then {
+						systemChat "sappers coming in on 35%";
+						SAPPERS = true;
+					} else {
+						systemChat "no sappers on 50%";
+					};
 				};
 			};
-			case (4): {
-				_chance = random 99;
-				if (_chance >30) then {
-					systemChat "sappers coming in on 30%";
-					SAPPERS = true;
-				};
-			};
-			case (5): {
-				_chance = random 99;
-				if (_chance >40) then {
-					systemChat "sappers coming in on 40%";
-					SAPPERS = true;
-				};
-			};
-			default {
-				_chance = random 99;
-				if (_chance >50) then {
-					systemChat "sappers coming in on 50%";
-					SAPPERS = true;
-				};
-			};
+		} else {
+			systemChat "no sappers right now you ok";
 		};
-	} else {
-		systemChat "no sappers right now you ok";
+		if (SAPPERS) then {
+			execVM "autoPatrolSystem\chainSecuritySystems\attackBase.sqf";
+			sapperCheck = false;
+		};
 	};
-
-	if (SAPPERS) then {
-		systemChat "needs code";
-		hint "needs code";
-		//
-		SAPPERS = false;
-	};
-
-	sleep 90;
+	sleep 180;
 };

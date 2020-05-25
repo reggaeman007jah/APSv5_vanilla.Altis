@@ -68,7 +68,7 @@ while {monitorDefence} do {
 	if (RGG_redzoneIndi < _RGG_reinforcementTrigger)  then {
 		// systemChat (format ["The Patrol has been compromised, with %1 units left in the fight. Reinforcements are needed.. ", _indiCount]);
 		// "Patrol has been compromised. Reinforcements are needed.. " remoteExec ["systemChat", 0, true]; // make this better
-		format ["The Patrol has been compromised, with %1 units left in the fight. Reinforcements are needed.. ", RGG_redzoneIndi] remoteExec ["hint", 0];
+		format ["The Patrol has been compromised, with %1 units on the front line. Reinforcements are needed.. ", RGG_redzoneIndi] remoteExec ["hint", 0];
 		// [RGG_patrol_obj, RGG_missionOrigin] execVM "autoPatrolSystem\callRF.sqf"; // send RF units into area 
 		// PARADOP UNITS HERE!!!
 	};
