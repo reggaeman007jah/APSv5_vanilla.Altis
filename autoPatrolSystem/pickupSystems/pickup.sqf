@@ -80,6 +80,11 @@ B_W_soldier_M_F
 
 // think about how you can create and designate a group that is named after the UID of the player .. so that group always and only ever belongs to that player 
 
+/*
+Note - we need to control the spawning - maybe link number of fireteams available to number of patrol points taken
+So, 1 PP = 3 FT, then +1 for every new base taken  
+*/
+
 deploymentMission = true;
 initPhase = true;
 pickup = false;
