@@ -83,6 +83,9 @@ B_W_soldier_M_F
 /*
 Note - we need to control the spawning - maybe link number of fireteams available to number of patrol points taken
 So, 1 PP = 3 FT, then +1 for every new base taken  
+
+Known Issue - sometimes the alt check (and probably other stuff) is duplicated! Maybe when destroyed.
+test comment
 */
 
 deploymentMission = true;
