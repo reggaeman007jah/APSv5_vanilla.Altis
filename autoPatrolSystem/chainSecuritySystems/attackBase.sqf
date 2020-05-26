@@ -35,7 +35,7 @@ if not turned off, set bombs off and alert all players a base has been lost
 */
 
 systemChat "ATTACK BASE SCRIPT ACTIVATED!!!";
-"Warning - Local informants have informed us that OPFOR may be planning a spec-ops strike on one of our bases. Ensure you check our suply lines and destroy any incoming threats" remoteExec ["hint", 0, true];
+"Warning - Local informants have informed us that OPFOR may be planning a spec-ops strike on one of our bases. Ensure you check our supply lines and destroy any incoming threats" remoteExec ["hint", 0, true];
 
 _countBases = count RGG_fieldbases;
 _selectedBase = random _countBases; 
@@ -46,7 +46,7 @@ _sapperTarget setMarkerSize [20,20];
 _sapperTarget setMarkerColor "colorBlue";
 
 // create sapper spawn point 
-_sapperSpawn = [_baseTarget, 300, 700, 3, 0, 0, 0, RGG_patrolPositionBlacklist] call BIS_fnc_findSafePos;
+_sapperSpawn = [_baseTarget, 300, 700, 3, 0] call BIS_fnc_findSafePos;
 
 // create units
 _opforClass = [
