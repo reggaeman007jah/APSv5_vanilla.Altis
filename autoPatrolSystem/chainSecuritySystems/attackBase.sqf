@@ -34,7 +34,8 @@ if not turned off, set bombs off and alert all players a base has been lost
 
 */
 
-systemChat "ATTACK BASE ACTIVATED!!!";
+systemChat "ATTACK BASE SCRIPT ACTIVATED!!!";
+"Warning - Local informants have informed us that OPFOR may be planning a spec-ops strike on one of our bases. Ensure you check our suply lines and destroy any incoming threats" remoteExec ["hint", 0, true];
 
 _countBases = count RGG_fieldbases;
 _selectedBase = random _countBases; 
@@ -43,6 +44,111 @@ _sapperTarget = createMarker ["sapperTarget", _baseTarget];
 _sapperTarget setMarkerShape "rectangle";
 _sapperTarget setMarkerSize [20,20];
 _sapperTarget setMarkerColor "colorBlue";
+
+// create sapper spawn point 
+_sapperSpawn = [_baseTarget, 300, 700, 3, 0, 0, 0, RGG_patrolPositionBlacklist] call BIS_fnc_findSafePos;
+
+// create units
+_opforClass = [
+	"O_G_Soldier_A_F",
+	"O_G_Soldier_AR_F",
+	"O_G_medic_F",
+	"O_G_engineer_F",
+	"O_G_Soldier_exp_F",
+	"O_G_Soldier_GL_F",
+	"O_G_Soldier_M_F",
+	"O_G_officer_F",
+	"O_G_Soldier_F",
+	"O_G_Soldier_LAT_F",
+	"O_G_Soldier_LAT2_F",
+	"O_G_Soldier_lite_F",
+	"O_G_Sharpshooter_F",
+	"O_G_Soldier_SL_F",
+	"O_G_Soldier_TL_F"
+];
+_grp = createGroup civilian; // test this - very simple way to avoid these sappers being caught by insurance move orders 
+for "_i" from 1 to 4 do {
+	_rndtype = selectRandom _opforClass;
+	_pos = [_sapperSpawn, 0, 20] call BIS_fnc_findSafePos;
+	_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+	_randomDir = selectRandom [270, 290, 01, 30, 90];
+	_randomDist = random [5, 25, 50]; 
+	_endPoint = _baseTarget getPos [_randomDist, _randomDir];
+	_unit setBehaviour "STEALTH";
+	_unit doMove _endPoint;
+	spawnedSapperUnit = spawnedSapperUnit +1;
+	sleep 1;									
+};
+
+private _RGG_redzoneEast = 0;
+private _RGG_redzoneWest = 0;
+private _RGG_redzoneIndi = 0;
+private _RGG_redzoneCivi = 0;
+
+while {SAPPERS} do {
+	_units = allUnits inAreaArray "sapperTarget";
+	_totalUnits = count _units;
+	{
+		switch ((side _x)) do
+		{
+			case EAST: 			{_RGG_redzoneEast = _RGG_redzoneEast + 1};
+			case WEST: 			{_RGG_redzoneWest = _RGG_redzoneWest + 1};
+			case INDEPENDENT: 	{_RGG_redzoneIndi = _RGG_redzoneIndi + 1};
+			case CIVILIAN: 		{_RGG_redzoneCivi = _RGG_redzoneCivi + 1};
+		};
+	} forEach _units;
+
+	if (_RGG_redzoneCivi > 1) then {
+		"Warning - One of your bases is under attack!" remoteExec ["hint", 0, true];	
+		_countDown = [180] call BIS_fnc_countDown;
+		waitUntil { _countDown = 1; };
+		// [_baseTarget] execVM "autoPatrolSystem/chainSecuritySystems/bombBlast.sqf";
+
+		if ((_RGG_redzoneCivi >1) && (_RGG_redzoneWest <1)) then {
+			_blasts = selectRandom [3,4,5,6];
+			_ord = "Bo_GBU12_LGB";
+			for "_i" from 0 to _blasts do {
+				_delay = selectRandom [.03, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1];
+				_distance = selectRandom [1,3,6,9,12,15,18,21,24];
+				_direction = random 359;
+				_pos = _baseTarget getPos [_distance,_direction];
+				_boom = _ord createVehicle _pos;	
+				sleep _delay;
+			};
+		} else {
+			hint "BOMB SQUAD DESTROYED - BASE IS SAFE"
+		};
+
+		SAPPERS = false;
+	};
+	sleep 60;
+};
+
+
+
+
+
+
+// _indiGroup = createGroup east;
+// _anchor1a = [_anchor1, 50, 200, 3, 0] call BIS_fnc_findSafePos;
+// _opforTeam = [];
+// _opClasses = ["o_g_soldier_ar_f","o_g_soldier_gl_f","o_g_sharpshooter_f"];
+// for "_i" from 1 to _groupSize do {
+// 	_unit = selectRandom _opClasses;
+// 	_unit1 = _indiGroup createUnit [_unit, _anchor1a, [], 0.1, "none"];
+// 	_opforTeam pushBack _unit1;
+// };
+// systemChat "opfor team:";
+// systemChat str _opforTeam;
+// sleep 0.3;
+// // move orders 
+// _ranDist = random 30;
+// _ranDir = random 359;
+// _unitDest = RGG_patrol_obj getPos [_ranDist, _ranDir];
+// _opforTeam doMove _unitDest;
+// spawnedIndiUnit = spawnedIndiUnit + _groupSize;
+
+
 
 // test update 
 

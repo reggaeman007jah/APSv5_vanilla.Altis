@@ -74,6 +74,9 @@ spawnedOpforUnit = 0;
 publicVariable "spawnedIndiUnit";
 publicVariable "spawnedOpforUnit";
 
+// track sapper units 
+spawnedSapperUnit = 0;
+
 // track whether opfor sapper ops are happening
 SAPPERS = false;
 

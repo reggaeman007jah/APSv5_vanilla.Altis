@@ -119,7 +119,6 @@ switch (true) do {
 			_unitDest = RGG_patrol_obj getPos [_ranDist, _ranDir];
 			_opforTeam doMove _unitDest;
 			spawnedIndiUnit = spawnedIndiUnit + _groupSize;
-			
 		};
 		// createGuardedPoint [east, RGG_patrol_obj, -1, objNull];
 		ONEPOINT = false;
