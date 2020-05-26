@@ -33,3 +33,13 @@ if not turned off, set bombs off and alert all players a base has been lost
 
 
 */
+
+systemChat "ATTACK BASE ACTIVATED!!!";
+
+_countBases = count RGG_fieldbases;
+_selectedBase = random _countBases; 
+_baseTarget = RGG_fieldbases select _selectedBase;
+_sapperTarget = createMarker ["sapperTarget", _baseTarget];
+_sapperTarget setMarkerShape "rectangle";
+_sapperTarget setMarkerSize [20,20];
+_sapperTarget setMarkerColor "colorBlue";

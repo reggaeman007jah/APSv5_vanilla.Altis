@@ -60,43 +60,44 @@ while {true} do {
 				case (3): {
 					_chance = random 99;
 					if (_chance >20) then {
-						systemChat "sappers coming in on 20%";
+						hint "3 bases = sappers coming in on 20%";
 						SAPPERS = true;
 					} else {
-						systemChat "no sappers on 20%";
+						hint "3 bases = no sappers on 20%";
 					};
 				};
 				case (4): {
 					_chance = random 99;
 					if (_chance >25) then {
-						systemChat "sappers coming in on 25%";
+						hint "4 bases = sappers coming in on 25%";
 						SAPPERS = true;
 					} else {
-						systemChat "no sappers on 30%";
+						hint "4 bases = no sappers on 30%";
 					};
 				};
 				case (5): {
 					_chance = random 99;
 					if (_chance >30) then {
-						systemChat "sappers coming in on 30%";
+						hint "5 bases = sappers coming in on 30%";
 						SAPPERS = true;
 					} else {
-						systemChat "no sappers on 40%";
+						hint "5 bases = no sappers on 40%";
 					};
 				};
 				default {
 					_chance = random 99;
 					if (_chance >35) then {
-						systemChat "sappers coming in on 35%";
+						hint "6 bases = sappers coming in on 35%";
 						SAPPERS = true;
 					} else {
-						systemChat "no sappers on 50%";
+						hint "6 bases = no sappers on 50%";
 					};
 				};
 			};
 		} else {
-			systemChat "no sappers right now you ok";
+			hint "not enough bases to warrent sappers right now - you ok";
 		};
+
 		if (SAPPERS) then {
 			execVM "autoPatrolSystem\chainSecuritySystems\attackBase.sqf";
 			sapperCheck = false;
