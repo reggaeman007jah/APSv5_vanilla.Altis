@@ -67,9 +67,15 @@ _opforClass = [
 	"O_G_Soldier_TL_F"
 ];
 _grp = createGroup civilian; // test this - very simple way to avoid these sappers being caught by insurance move orders 
-for "_i" from 1 to 4 do {
+for "_i" from 1 to 6 do {
 	_rndtype = selectRandom _opforClass;
 	_pos = [_sapperSpawn, 0, 20] call BIS_fnc_findSafePos;
+
+	_sapperSpawnPoint = createMarker ["sapperSpawn", _sapperSpawn];
+	_sapperSpawnPoint setMarkerShape "rectangle";
+	_sapperSpawnPoint setMarkerSize [20,20];
+	_sapperSpawnPoint setMarkerColor "colorBlue";
+
 	_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
 	_randomDir = selectRandom [270, 290, 01, 30, 90];
 	_randomDist = random [5, 25, 50]; 
