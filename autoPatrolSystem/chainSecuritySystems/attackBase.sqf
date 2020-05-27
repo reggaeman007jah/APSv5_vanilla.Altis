@@ -6,10 +6,10 @@ _selectedBase = random _countBases;
 _baseTarget = RGG_fieldbases select _selectedBase;
 _sapperTarget = createMarker ["sapperTarget", _baseTarget];
 _sapperTarget setMarkerShape "rectangle";
-_sapperTarget setMarkerSize [20,20];
+_sapperTarget setMarkerSize [50,50];
 _sapperTarget setMarkerColor "colorBlue";
 // create sapper spawn point 
-_sapperSpawn = [_baseTarget, 300, 700, 3, 0] call BIS_fnc_findSafePos;
+_sapperSpawn = [_baseTarget, 50, 70, 3, 0] call BIS_fnc_findSafePos;
 // create units
 _opforClass = [
 	"O_G_Soldier_A_F",
@@ -30,11 +30,12 @@ _opforClass = [
 ];
 _grp = createGroup civilian; // test this - very simple way to avoid these sappers being caught by insurance move orders 
 for "_i" from 1 to 6 do {
+	systemChat "sapper spawned";
 	_rndtype = selectRandom _opforClass;
 	_pos = [_sapperSpawn, 0, 20] call BIS_fnc_findSafePos;
 	_sapperSpawnPoint = createMarker ["sapperSpawn", _sapperSpawn];
 	_sapperSpawnPoint setMarkerShape "rectangle";
-	_sapperSpawnPoint setMarkerSize [20,20];
+	_sapperSpawnPoint setMarkerSize [50,50];
 	_sapperSpawnPoint setMarkerColor "colorBlue";
 	_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
 	_randomDir = selectRandom [270, 290, 01, 30, 90];
@@ -43,25 +44,25 @@ for "_i" from 1 to 6 do {
 	_unit setBehaviour "STEALTH";
 	_unit doMove _endPoint;
 	spawnedSapperUnit = spawnedSapperUnit +1;
-	sleep 1;									
+	sleep 2;									
 };
-private _RGG_redzoneEast = 0;
-private _RGG_redzoneWest = 0;
-private _RGG_redzoneIndi = 0;
-private _RGG_redzoneCivi = 0;
-while {SAPPERS} do {
-	_units = allUnits inAreaArray "sapperTarget";
-	_totalUnits = count _units;
-	{
-		switch ((side _x)) do
-		{
-			case EAST: 			{_RGG_redzoneEast = _RGG_redzoneEast + 1};
-			case WEST: 			{_RGG_redzoneWest = _RGG_redzoneWest + 1};
-			case INDEPENDENT: 	{_RGG_redzoneIndi = _RGG_redzoneIndi + 1};
-			case CIVILIAN: 		{_RGG_redzoneCivi = _RGG_redzoneCivi + 1};
-		};
-	} forEach _units;
-	if (_RGG_redzoneCivi >1) then {
+// private _RGG_redzoneEast = 0;
+// private _RGG_redzoneWest = 0;
+// private _RGG_redzoneIndi = 0;
+// private _RGG_redzoneCivi = 0;
+// while {SAPPERS} do {
+// 	_units = allUnits inAreaArray "sapperTarget";
+// 	_totalUnits = count _units;
+// 	{
+// 		switch ((side _x)) do
+// 		{
+// 			case EAST: 			{_RGG_redzoneEast = _RGG_redzoneEast + 1};
+// 			case WEST: 			{_RGG_redzoneWest = _RGG_redzoneWest + 1};
+// 			case INDEPENDENT: 	{_RGG_redzoneIndi = _RGG_redzoneIndi + 1};
+// 			case CIVILIAN: 		{_RGG_redzoneCivi = _RGG_redzoneCivi + 1};
+// 		};
+// 	} forEach _units;
+	// if (_RGG_redzoneCivi >1) then {
 		"Warning - One of your bases is under attack!" remoteExec ["hint", 0, true];	
 		_countDown = [180] call BIS_fnc_countDown;
 		waitUntil { _countDown = 1; };
@@ -80,15 +81,15 @@ while {SAPPERS} do {
 				deleteMarker "sapperTarget";
 			};
 		} else {
-			hint "BOMB SQUAD DESTROYED - BASE IS SAFE"
+			hint "BOMB SQUAD DESTROYED - BASE IS SAFE";
 			sapperCheck = true;
 			deleteMarker "sapperSpawn";
 			deleteMarker "sapperTarget";
 		};
 		SAPPERS = false;
-	};
-	sleep 60;
-};
+	// };
+	// sleep 60;
+// };
 
 
 

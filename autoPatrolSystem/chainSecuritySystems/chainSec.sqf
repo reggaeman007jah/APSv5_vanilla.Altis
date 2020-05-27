@@ -55,8 +55,26 @@ sapperCheck = true;
 while {true} do {
 	systemChat "sapperTest running";
 	if (sapperCheck) then {
-		if (patrolPointsTaken >2) then {
+		if (patrolPointsTaken >0) then {
 			switch (patrolPointsTaken) do {
+				case (1): {
+					_chance = random 99;
+					if (_chance >20) then {
+						hint "1 bases = sappers coming in on 20%";
+						SAPPERS = true;
+					} else {
+						hint "1 bases = no sappers on 20%";
+					};
+				};
+				case (1): {
+					_chance = random 99;
+					if (_chance >20) then {
+						hint "2 bases = sappers coming in on 20%";
+						SAPPERS = true;
+					} else {
+						hint "2 bases = no sappers on 20%";
+					};
+				};
 				case (3): {
 					_chance = random 99;
 					if (_chance >20) then {
