@@ -5,7 +5,7 @@ systemChat "para spawner activated";
 
 while {true} do {
 
-	_units = allUnits inAreaArray "PZ1";
+	_units = allUnits inAreaArray "pz1";
 	_unitCount1 = count _units;
 	if (_unitCount1 == 0) then {
 		// systemChat "paras spawning .............................................!";
