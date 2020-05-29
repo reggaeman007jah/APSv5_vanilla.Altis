@@ -62,6 +62,7 @@ while {true} do {
 					if (_chance >20) then {
 						hint "1 bases = sappers coming in on 20%";
 						SAPPERS = true;
+						sapperCheck = false;
 					} else {
 						hint "1 bases = no sappers on 20%";
 					};
@@ -71,6 +72,7 @@ while {true} do {
 					if (_chance >20) then {
 						hint "2 bases = sappers coming in on 20%";
 						SAPPERS = true;
+						sapperCheck = false;
 					} else {
 						hint "2 bases = no sappers on 20%";
 					};
@@ -80,6 +82,7 @@ while {true} do {
 					if (_chance >20) then {
 						hint "3 bases = sappers coming in on 20%";
 						SAPPERS = true;
+						sapperCheck = false;
 					} else {
 						hint "3 bases = no sappers on 20%";
 					};
@@ -89,6 +92,7 @@ while {true} do {
 					if (_chance >25) then {
 						hint "4 bases = sappers coming in on 25%";
 						SAPPERS = true;
+						sapperCheck = false;
 					} else {
 						hint "4 bases = no sappers on 30%";
 					};
@@ -98,6 +102,7 @@ while {true} do {
 					if (_chance >30) then {
 						hint "5 bases = sappers coming in on 30%";
 						SAPPERS = true;
+						sapperCheck = false;
 					} else {
 						hint "5 bases = no sappers on 40%";
 					};
@@ -107,6 +112,7 @@ while {true} do {
 					if (_chance >35) then {
 						hint "6 bases = sappers coming in on 35%";
 						SAPPERS = true;
+						sapperCheck = false;
 					} else {
 						hint "6 bases = no sappers on 50%";
 					};
@@ -118,7 +124,7 @@ while {true} do {
 
 		if (SAPPERS) then {
 			execVM "autoPatrolSystem\chainSecuritySystems\attackBase.sqf";
-			sapperCheck = false;
+			
 		};
 	};
 	sleep 600; 

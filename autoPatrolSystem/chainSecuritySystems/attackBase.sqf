@@ -126,6 +126,7 @@ if (_RGG_redzoneEast >1) then {
 
 // reset 
 SAPPERS = false;
+sapperCheck = true;
 
 
 	// };
