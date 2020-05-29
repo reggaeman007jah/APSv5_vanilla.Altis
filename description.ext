@@ -22,17 +22,18 @@ allowFunctionsLog = 0;
 
 // briefingName = $STR_MISSION_TITLE;
 overviewText = "OPERATION KILLCHAIN";
-// overviewPicture = "res\lib.paa";
-author = "reggaeman007jah";
+overviewPicture = "killchain.jpg";
+author = "reggaeman";
 // onLoadName = $STR_MISSION_TITLE;
-// onLoadMission = "www.fireteamsolutions.online";
-// loadScreen = "res\lib.paa";
+onLoadName = "OPERATION KILLCHAIN";
+onLoadMission = "Support Independent forces patrol the Altis Badlands...";
+loadScreen = "killchain.jpg";
 
 joinUnassigned = 1;
 
 class Header {
 	gameType =  COOP;	
-	minPlayers =  1;	
+	minPlayers = 1;	
 	maxPlayers = 10;
 };
 
