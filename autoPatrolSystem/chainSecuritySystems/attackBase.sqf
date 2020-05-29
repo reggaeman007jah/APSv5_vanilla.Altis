@@ -7,9 +7,9 @@ _selectedBaseX = random _countBases;
 _baseTarget = RGG_fieldbases select _selectedBase;
 
 _sapperTarget = createMarker ["sapperTarget", _baseTarget];
-_sapperTarget setMarkerShape "rectangle";
-_sapperTarget setMarkerSize [50,50];
-_sapperTarget setMarkerColor "colorRed";
+// _sapperTarget setMarkerShape "rectangle";
+// _sapperTarget setMarkerSize [50,50];
+// _sapperTarget setMarkerColor "colorRed";
 // create sapper spawn point 
 _sapperSpawn = [_baseTarget, 200, 300, 3, 0] call BIS_fnc_findSafePos;
 // create units
@@ -27,9 +27,9 @@ for "_i" from 1 to 6 do {
 	_rndtype = selectRandom _opforClass;
 	_pos = [_sapperSpawn, 0, 20] call BIS_fnc_findSafePos;
 	_sapperSpawnPoint = createMarker ["sapperSpawn", _sapperSpawn];
-	_sapperSpawnPoint setMarkerShape "rectangle";
-	_sapperSpawnPoint setMarkerSize [50,50];
-	_sapperSpawnPoint setMarkerColor "colorBlue";
+	// _sapperSpawnPoint setMarkerShape "rectangle";
+	// _sapperSpawnPoint setMarkerSize [50,50];
+	// _sapperSpawnPoint setMarkerColor "colorBlue";
 	_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
 
 	_randomDist = selectRandom [5, 25]; 
