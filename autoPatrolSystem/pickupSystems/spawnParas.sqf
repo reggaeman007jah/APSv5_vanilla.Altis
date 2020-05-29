@@ -1,4 +1,5 @@
 // this will spawn a fireteam contantly, and only respawn another team when the previous one has been removed from the "pz1" marker area 
+sleep 2;
 
 systemChat "para spawner activated";
 
@@ -7,7 +8,9 @@ while {true} do {
 	_units = allUnits inAreaArray "PZ1";
 	_unitCount1 = count _units;
 	if (_unitCount1 == 0) then {
-		systemChat "paras spawning .............................................!";
+		// systemChat "paras spawning .............................................!";
+		"paras spawning ............................................." remoteExec ["systemChat", 0, true];	
+
 		_float = diag_tickTime;
 		_stampToString = str _float;
 		_stampToString = createGroup west;

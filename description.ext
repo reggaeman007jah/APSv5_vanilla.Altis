@@ -22,7 +22,7 @@ allowFunctionsLog = 0;
 
 // briefingName = $STR_MISSION_TITLE;
 overviewText = "OPERATION KILLCHAIN";
-overviewPicture = "killchain.jpg";
+// overviewPicture = "killchain.jpg";
 author = "reggaeman";
 // onLoadName = $STR_MISSION_TITLE;
 onLoadName = "OPERATION KILLCHAIN";
