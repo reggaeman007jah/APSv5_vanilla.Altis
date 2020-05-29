@@ -79,7 +79,7 @@ spawnedSapperUnit = 0;
 
 // track whether opfor sapper ops are happening
 SAPPERS = false;
-
+publicVariable "SAPPERS";
 // holds camp items (for deletion after taking base)
 campItems = [];
 
@@ -95,3 +95,6 @@ campItems = [];
 // sapper stats 
 sapperWin = 0;
 baseDefend = 0;
+publicVariable "sapperWin";
+publicVariable "baseDefend";
+
