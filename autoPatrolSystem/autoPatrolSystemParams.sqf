@@ -91,3 +91,7 @@ campItems = [];
 // systemChat "JTAC Systems spinning up";
 // // autoPatrolSystem\JTAC_Systems\JTACinit.sqf
 // execVM "autoPatrolSystem\JTAC_Systems\JTACinit.sqf";
+
+// sapper stats 
+sapperWin = 0;
+baseDefend = 0;

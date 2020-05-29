@@ -66,7 +66,7 @@ while {true} do {
 						hint "1 bases = no sappers on 20%";
 					};
 				};
-				case (1): {
+				case (2): {
 					_chance = random 99;
 					if (_chance >20) then {
 						hint "2 bases = sappers coming in on 20%";
@@ -121,5 +121,5 @@ while {true} do {
 			sapperCheck = false;
 		};
 	};
-	sleep 180;
+	sleep 600; 
 };

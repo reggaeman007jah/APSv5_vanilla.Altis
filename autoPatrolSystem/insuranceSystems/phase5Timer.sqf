@@ -11,25 +11,31 @@ sleep 180;
 
 for "_i" from 1 to 5 do {
 	
+
+
 	sleep 300;
-	// systemChat "insurance move";
-	hint "DEBUG - OPFOR INSURANCE MOVE";
 
-	// this next bit is to ensure opfor dont get stuck somewhere and delay mission progression 
-	// it used to be in a loop, now it only runs x times 
+	if (!SAPPERS) then {
+		// systemChat "insurance move";
+		hint "DEBUG - OPFOR INSURANCE MOVE";
 
-	_opfor = [];
-	{if ((side _x) == east) then {_opfor pushBack _x}} forEach allUnits;
+		// this next bit is to ensure opfor dont get stuck somewhere and delay mission progression 
+		// it used to be in a loop, now it only runs x times 
 
-	{
-		_Dir = random 360;
-		_Dist = selectRandom [1, 5, 10]; 
-		_moveTo = RGG_patrol_obj getPos [_Dist,_Dir]; 
-		_x setBehaviour "COMBAT";
-		_x doMove _moveTo;
-		// systemChat "OPFOR insurance move orders";
-		sleep 1;
-	} forEach _opfor;	
+		_opfor = [];
+		{if ((side _x) == east) then {_opfor pushBack _x}} forEach allUnits;
+
+		{
+			_Dir = random 360;
+			_Dist = selectRandom [1, 5, 10]; 
+			_moveTo = RGG_patrol_obj getPos [_Dist,_Dir]; 
+			_x setBehaviour "COMBAT";
+			_x doMove _moveTo;
+			// systemChat "OPFOR insurance move orders";
+			sleep 1;
+		} forEach _opfor;	
+	};
+
 };
 
 /*

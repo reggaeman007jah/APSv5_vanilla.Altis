@@ -1,34 +1,27 @@
 
-systemChat "ATTACK BASE SCRIPT ACTIVATED!!!";
+systemChat "sappers = true // ATTACK BASE SCRIPT ACTIVATED!!!";
 "Warning - Local informants have informed us that OPFOR may be planning a spec-ops strike on one of our bases. Ensure you check our supply lines and destroy any incoming threats" remoteExec ["hint", 0, true];
 _countBases = count RGG_fieldbases;
-_selectedBase = random _countBases; 
+_selectedBaseX = random _countBases;
+ _selectedBase = floor _selectedBaseX;
 _baseTarget = RGG_fieldbases select _selectedBase;
+
 _sapperTarget = createMarker ["sapperTarget", _baseTarget];
 _sapperTarget setMarkerShape "rectangle";
 _sapperTarget setMarkerSize [50,50];
-_sapperTarget setMarkerColor "colorBlue";
+_sapperTarget setMarkerColor "colorRed";
 // create sapper spawn point 
-_sapperSpawn = [_baseTarget, 50, 70, 3, 0] call BIS_fnc_findSafePos;
+_sapperSpawn = [_baseTarget, 200, 300, 3, 0] call BIS_fnc_findSafePos;
 // create units
 _opforClass = [
-	"O_G_Soldier_A_F",
 	"O_G_Soldier_AR_F",
-	"O_G_medic_F",
-	"O_G_engineer_F",
-	"O_G_Soldier_exp_F",
-	"O_G_Soldier_GL_F",
-	"O_G_Soldier_M_F",
-	"O_G_officer_F",
-	"O_G_Soldier_F",
-	"O_G_Soldier_LAT_F",
-	"O_G_Soldier_LAT2_F",
-	"O_G_Soldier_lite_F",
-	"O_G_Sharpshooter_F",
-	"O_G_Soldier_SL_F",
-	"O_G_Soldier_TL_F"
+	"O_G_engineer_F"
 ];
-_grp = createGroup civilian; // test this - very simple way to avoid these sappers being caught by insurance move orders 
+_grp = createGroup EAST; 
+
+systemChat "prepare for sappers spawning";
+sleep 10;
+
 for "_i" from 1 to 6 do {
 	systemChat "sapper spawned";
 	_rndtype = selectRandom _opforClass;
@@ -38,9 +31,16 @@ for "_i" from 1 to 6 do {
 	_sapperSpawnPoint setMarkerSize [50,50];
 	_sapperSpawnPoint setMarkerColor "colorBlue";
 	_unit = _grp createUnit [_rndtype, _pos, [], 30, "none"]; 
+
+	_randomDist = selectRandom [5, 25]; 
 	_randomDir = selectRandom [270, 290, 01, 30, 90];
-	_randomDist = random [5, 25, 50]; 
 	_endPoint = _baseTarget getPos [_randomDist, _randomDir];
+
+	// _debugTarget = createMarker ["debugTarget", _endPoint];
+	// _debugTarget setMarkerShape "rectangle";
+	// _debugTarget setMarkerSize [80,80];
+	// _debugTarget setMarkerColor "colorRed";
+
 	_unit setBehaviour "STEALTH";
 	_unit doMove _endPoint;
 	spawnedSapperUnit = spawnedSapperUnit +1;
@@ -63,30 +63,71 @@ for "_i" from 1 to 6 do {
 // 		};
 // 	} forEach _units;
 	// if (_RGG_redzoneCivi >1) then {
-		"Warning - One of your bases is under attack!" remoteExec ["hint", 0, true];	
-		_countDown = [180] call BIS_fnc_countDown;
-		waitUntil { _countDown = 1; };
-		if ((_RGG_redzoneCivi >1) && (_RGG_redzoneWest <1)) then {
-			_blasts = selectRandom [3,4,5,6];
-			_ord = "Bo_GBU12_LGB";
-			for "_i" from 0 to _blasts do {
-				_delay = selectRandom [.03, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1];
-				_distance = selectRandom [1,3,6,9,12,15,18,21,24];
-				_direction = random 359;
-				_pos = _baseTarget getPos [_distance,_direction];
-				_boom = _ord createVehicle _pos;	
-				sleep _delay;
-				sapperCheck = true;
-				deleteMarker "sapperSpawn";
-				deleteMarker "sapperTarget";
-			};
-		} else {
-			hint "BOMB SQUAD DESTROYED - BASE IS SAFE";
-			sapperCheck = true;
-			deleteMarker "sapperSpawn";
-			deleteMarker "sapperTarget";
-		};
-		SAPPERS = false;
+
+systemChat "sappers spawn complete";
+
+sleep 10;
+
+"Warning - One of your bases is under attack!" remoteExec ["hint", 0, true];	
+// _countDown = [180] call BIS_fnc_countDown;
+// _countDown = [30] call BIS_fnc_countDown;
+// waitUntil { _countDown = 1; };
+
+// waitUntil 
+
+for "_i" from 1 to 4 do {
+	systemChat "1 minute sleep ...";
+	sleep 60;									
+};
+
+hint "debug - 4 min timer complete, now doing base check for sappers";
+
+private _RGG_redzoneEast = 0;
+private _RGG_redzoneWest = 0;
+private _RGG_redzoneIndi = 0;
+private _RGG_redzoneCivi = 0;
+
+_units = allUnits inAreaArray "sapperTarget";
+_totalUnits = count _units;
+{
+	switch ((side _x)) do
+	{
+		case EAST: 			{_RGG_redzoneEast = _RGG_redzoneEast + 1};
+		case WEST: 			{_RGG_redzoneWest = _RGG_redzoneWest + 1};
+		case INDEPENDENT: 	{_RGG_redzoneIndi = _RGG_redzoneIndi + 1};
+		case CIVILIAN: 		{_RGG_redzoneCivi = _RGG_redzoneCivi + 1};
+	};
+} forEach _units;
+
+// if ((_RGG_redzoneEast >1) && (_RGG_redzoneWest <1)) then {
+if (_RGG_redzoneEast >1) then {
+	_blasts = selectRandom [3,4,5,6];
+	_ord = "Bo_GBU12_LGB";
+	for "_i" from 0 to _blasts do {
+		_delay = selectRandom [.03, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1];
+		_distance = selectRandom [1,3,6,9,12,15,18,21,24];
+		_direction = random 359;
+		_pos = _baseTarget getPos [_distance,_direction];
+		_boom = _ord createVehicle _pos;	
+		sleep _delay;
+		sapperCheck = true;
+		deleteMarker "sapperSpawn";
+		deleteMarker "sapperTarget";
+		sapperWin = sapperWin + 1;
+	};
+
+} else {
+	hint "BOMB SQUAD HAS BEEN TAKEN OUT - BASE IS SAFE";
+	sapperCheck = true;
+	deleteMarker "sapperSpawn";
+	deleteMarker "sapperTarget";
+	baseDefend = baseDefend + 1;
+};
+
+// reset 
+SAPPERS = false;
+
+
 	// };
 	// sleep 60;
 // };
