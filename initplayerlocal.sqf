@@ -1,6 +1,10 @@
 
 sleep 1;
 
+player enableStamina FALSE;
+
+player addEventHandler ['Respawn',{player enableStamina FALSE;}];
+
 // test of new voiceMarkerSystem 
 execVM "voiceMarkerSystem\1_vmsInit.sqf";
 // execVM "voiceMarkerSystem\1_vmsInit.sqf";
