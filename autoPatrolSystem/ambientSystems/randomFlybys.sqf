@@ -1,4 +1,8 @@
 /*
+From: initSServer.sqf 
+*/
+
+/*
 ambient spawner for effect only 
 
 Improvement ideas 

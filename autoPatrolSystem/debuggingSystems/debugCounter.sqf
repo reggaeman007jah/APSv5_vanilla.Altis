@@ -1,3 +1,6 @@
+/*
+From: initServer.sqf 
+*/
 
 while {true} do {
 

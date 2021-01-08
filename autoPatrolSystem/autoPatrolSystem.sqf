@@ -1,3 +1,7 @@
+/*
+From: initServer.sqf 
+*/
+
 
 // this launches the mission-specific params file 
 execVM "autoPatrolSystem\autoPatrolSystemParams.sqf";

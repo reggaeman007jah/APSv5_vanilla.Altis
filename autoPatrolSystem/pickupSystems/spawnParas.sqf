@@ -1,3 +1,7 @@
+/*
+From: initServer.sqf 
+*/
+
 // this will spawn a fireteam contantly, and only respawn another team when the previous one has been removed from the "pz1" marker area 
 sleep 10;
 
