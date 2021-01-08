@@ -1,4 +1,8 @@
 /*
+From: autoPatrolSystem/autoPatrolSystem.sqf 
+*/
+
+/*
 chainSec manages the patrolling of previously taken patrol points. Blufor units will be created and will move from one to the next 
 this team will manage any reaction to sappers or hostile specops attacks on FOBs 
 choose an old patrol point and spawn sappers 2km out 

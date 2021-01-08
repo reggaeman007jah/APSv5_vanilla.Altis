@@ -1,4 +1,8 @@
 /*
+From: autoPatrolSystem/autoPatrolSystem.sqf 
+*/
+
+/*
 This file creates dynamic markers 
 These markers are used to direct the flow-logic of the mission 
 "missionOrigin" - green - designates the start of any patrol mission - 

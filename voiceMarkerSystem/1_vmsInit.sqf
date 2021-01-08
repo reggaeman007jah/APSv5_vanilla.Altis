@@ -1,4 +1,6 @@
-
+/*
+From: initPlayerLocal.sqf 
+*/
 
 // ----------------------
 // 1_vmsInit.sqf 

@@ -1,6 +1,7 @@
 
 // ------------------------------------------ //
 // Script Settings 
+// from: init.sqf 
 // ------------------------------------------ //
 
 // systemChat "... VAA Mission Params Activated ...";

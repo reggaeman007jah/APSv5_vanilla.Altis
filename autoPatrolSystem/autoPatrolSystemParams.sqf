@@ -1,4 +1,8 @@
 /*
+From: autoPatrolSystem/autoPatrolSystem.sqf 
+*/
+
+/*
 This file sets up some basic mission-flow params 
 one/two/threePoint relates to states I use to determine how many directions the retalliation should psawn from 
 
@@ -42,11 +46,9 @@ monitorDefence = false;
 patrolPointsTaken = 0;
 publicVariable "patrolPointsTaken";
 
-
 // base-counter var for tracking how many times RF have been called in 
 reinforcementsCalled = 0;
 publicVariable "reinforcementsCalled";
-
 
 // base-counter var for tracking how many patrols have been totally wiped out while in-field 
 lostPatrols = 0;
@@ -66,7 +68,6 @@ RGG_brokenLinks = [];
 // there are a few different stages of the mission, these states will track the current task 
 MISSIONTASK = "Setting up initial patrol";
 publicVariable "MISSIONTASK";
-
 
 // track created units  
 spawnedIndiUnit = 0;

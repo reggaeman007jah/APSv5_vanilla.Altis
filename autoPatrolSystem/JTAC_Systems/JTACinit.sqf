@@ -1,4 +1,9 @@
 /*
+From: initPlayerLocal.sqf 
+*/
+
+
+/*
 Voice Activated JTAC System (VA-VMS) by Reggaeman 
 May 2020
 
