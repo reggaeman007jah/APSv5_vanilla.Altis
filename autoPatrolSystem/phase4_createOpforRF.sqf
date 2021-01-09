@@ -1,31 +1,72 @@
-// defensive positions (blufor) 
-
 /*
-Maybe use this as a timer system?
-_defendStartTime = time;
-systemChat format ["patrol defence started at %1 seconds into mission", _defendStartTime];
+From: autoPatrolSystem\phase3_createOpforDefenders.sqf
 
-I capture mission minutes - this is an easy way to set a timer on any one point 
+Purpose:
+TBC
+
+Flow:
+	player info - publicVariable "MISSIONTASK";
+	yellow smoke as indicator of phase change 
+	create "attackPoint" marker icon 
+	put all indi units into a local array 
+	move indi units to a rough defensive position around the center point 
+	switch check based on patrolPointsTaken, in order to define number of attack vectors and force size   
+
+Receives:
+TBC
+
+Informs:
+	calls the monitoring phase 
+	[_rndOp1] execVM "autoPatrolSystem\phase5_monitorBluforDefence.sqf"; 
+
+Notes:
+	_defendStartTime = time - Maybe use this as a timer system?
+	systemChat format ["patrol defence started at %1 seconds into mission", _defendStartTime];
+	I capture mission minutes - this is an easy way to set a timer on any one point 
+
+Actions:
+	Investigate setting timers on point phases 
+	Add voice to assist players on phase 
+	remove old comments 
+	improve class selection for opfor QRF elements 
+
+Questions:
+	6 enemy groups ar created before the main switch, but groups are also created within the swith block...
+	Are these first 6 groups needed or can they be deleted?
+
+Data:
 
 */
 
+// defensive positions (blufor) 
+
+// player info 
 MISSIONTASK = "Secure the patrol point and prepare for opfor retaliation";
 publicVariable "MISSIONTASK";
 
+// pop phase-change smoke 
 _smoke = createVehicle ["G_40mm_smokeYELLOW", RGG_patrol_obj, [], 0, "none"]; // drop this from up high 
 
 // systemChat "debug --- blufor moving into defensive positions at the patrol point"; 	
 // "MP debug --- blufor moving into defensive positions at the patrol point" remoteExec ["systemChat", 0, true];
+
+// create "attackPoint" marker icon
 deleteMarker "attackPoint";
 _tempMarker = createMarker ["attackPoint", RGG_patrol_obj];
 _tempMarker setMarkerType "hd_objective";
 _tempMarker setMarkerColor "ColorGreen";
 sleep 3;
 
-_indi = [];
+// put all indi units into a local array 
 // {if ((side _x) == INDEPENDENT) then {_indi pushBack _x}} forEach allUnits inAreaArray "Objective 1";
-{if ((side _x) == INDEPENDENT) then {_indi pushBack _x}} forEach allUnits;
+_indi = [];
+{
+	if ((side _x) == INDEPENDENT) then {
+		_indi pushBack _x
+	}
+} forEach allUnits;
 
+// move indi units to a rough defensive position around the center point 
 {
 	// systemChat "debug - BLUEDEFEND STATE - Blue Unit Counted";
 	// "MP debug - BLUEDEFEND STATE - Blue Unit Counted" remoteExec ["systemChat", 0, true];
@@ -64,8 +105,8 @@ _indi = [];
 // _rndOp1 = selectRandom [24, 30, 36, 42, 48, 54]; // RF force size 
 // stage RF based on patrol points taken and maybe also dist from home base 
 
+// switch check based on patrolPointsTaken, in order to define number of attack vectors and force size  
 private ["_rndOp1"];
-
 switch (patrolPointsTaken) do {
 	case (0): { _rndOp1 = 24; ONEPOINT = true; };
 	case (1): { _rndOp1 = 30; ONEPOINT = true; };
@@ -76,15 +117,16 @@ switch (patrolPointsTaken) do {
 	default { _rndOp1 = selectRandom [24, 30, 36, 42, 48, 54]; THREEPOINT = true; };
 };
 
-// create 6 groups each time and send to one two or three points 
+// create 6 groups each time (in order to send to one two or three points)
 _grp1 = createGroup east;
 _grp2 = createGroup east;
 _grp3 = createGroup east;
 _grp4 = createGroup east;
 _grp5 = createGroup east;
 _grp6 = createGroup east;
-_groupSize = _rndOp1 / 12;
+_groupSize = _rndOp1 / 12; // 12 is a reduction factor - needs to be tested 
 
+// switch to generate attack points (and markers), create enemy forces and send towards the base 
 switch (true) do {	
 
 	case (ONEPOINT): {
@@ -350,4 +392,5 @@ switch (true) do {
 };
 
 sleep 5;
-[_rndOp1] execVM "autoPatrolSystem\phase5_monitorBluforDefence.sqf"; // pass in no. of enemy units / no. of origin points / vars to inform intel message
+// pass in no. of enemy units / no. of origin points / vars to inform intel message
+[_rndOp1] execVM "autoPatrolSystem\phase5_monitorBluforDefence.sqf"; 

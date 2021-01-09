@@ -1,5 +1,5 @@
 /*
-From: autoPatrolSystem\phase3_createOpforDefenders.sqf 
+From: autoPatrolSystem\phase2_createOpforWave1.sqf 
 
 Purpose:
 This creates a group of opfor defenders who will head to the patrol obj and await the blufor patrol as they head in to take the point 

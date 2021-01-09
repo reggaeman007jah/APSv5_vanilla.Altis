@@ -1,35 +1,71 @@
 /*
-From: TBC 
+From: autoPatrolSystem\phase4_createOpforRF.sqf
 
 Purpose:
-This script checks how well the defence of the objective is going. 
-If the enemy is destroyed, the team can progress to the next stage of the mission.
+	This script checks how well the defence of the objective is going. 
+	If the enemy is destroyed, the team can progress to the next stage of the mission - everything reboots 
 
 Flow:
-	TBC
+	Player info / intel on phase start and number of attackers 
+	sets _RGG_reinforcementTrigger value 
+	run monitor defence bool-loop 
+	checks indifor numbers, and informs players if numbers are low 
+	chcks whether entire patrol has been wiped out, and adds to that score if yes 
+	The main check in the bool-loop is: if ((RGG_redzoneEast <5) && (RGG_totalEast <10) && (RGG_redzoneIndi >6)) 
+	declares success, deletes camp items and creates a new field-base, with some goodies 
+	push patrol position to global array 
+	close bool-loop bool 
+	kick off new patrol phase 
+	move any remiaining opfor units to new phase objective 
+	move and remaining indifor units to new phase objective
+	uses new missionOrigin pos to find a location, then create tent, repair items etc also VA  
+	rewards are random and based on patrolPointsTaken progress 
+	creates blue marker 
 
 Receives:
-TBC
+	number of attackers (from autoPatrolSystem\phase4_createOpforRF.sqf)
+	_numberOfAttackers = _this select 0;
 
 Informs:
-	TBC
+	[_cleanupPos] execVM "autoPatrolSystem\cleanupSystems\garbageControl.sqf"
+	[_cleanupPos] execVM "autoPatrolSystem\fobSystems\fobInit.sqf"
+	[RGG_missionOrigin] execVM "autoPatrolSystem\phase6_regroup.sqf"
 
 Notes:
-An issue occurs when - for whatever reason - enemy do not engage. This could be due to being spawned in 
-rocks, prevented from engaging due to a building or wall etc.
-Without an insurance policy, this lack of engagement could draw the mission to a standstill. So, a secondary 
-system is needed to ensure that things always progress at a certain time regardless of engagement.
+	An issue occurs when - for whatever reason - enemy do not engage. This could be due to being spawned in 
+	rocks (Malden!!), prevented from engaging due to a building or wall, AI-path-finding issue etc.
+	Without an insurance policy, this lack of engagement could draw the mission to a standstill. So, a secondary 
+	system is needed to ensure that things always progress at a certain time regardless of engagement.
+	bool-loop is based on: monitorDefence
+	adds score to patrolPointsTaken var 
+	Any existing opfor in the mission will be pushed to the new objective, when everything loops around 
 
 Actions:
-TBC
+	Investigate using a timer system as the main trigger to move things forward 
+	Investigate using a voice alert to inform players of incoming attack vectors and size 
+	Inbestigate whether there could be a role, or activity involving setting up a sat-dish that would enable
+	... voice alerts that inform players of incoing opfor ... so ensuring that there are 'boots on the ground'
+	Investigate paradrop script to manage RF - maybe this is another 'boots on the ground' job?
+	if ((RGG_redzoneEast <5) && (RGG_totalEast <10) && (RGG_redzoneIndi >6)) then - note this can lead to statis ...
+	this ^^ needs to be adjusted either by changing the values, or by adding a timer 
+	Think more about the game dynamic of having perks like paradrops, or sat-intel on incoming opfor 
+	consider using patrolPointsTaken to inform an end-state 
 
 Questions:
-TBC
+	What does _RGG_reinforcementTrigger do here, if anything? If nothing, what was it going to do?
+	What was the plan here? execVM "autoPatrolSystem\insuranceSystems\phase5Timer.sqf?
+	Why did I remove the sending in of RF on the first bool-loop check, i.e. checking indifor numbers?
+	Was this bc this led to lots of extra units being sent in?
+	I seem to have two parallel cleanup scripts .. which one is correct? was there an issue with this one?
+	what does this do? [_cleanupPos] execVM "autoPatrolSystem\fobSystems\fobInit.sqf"? There is nothing there?
+	Should sapper units be pushed to any new objective, on phase-loop? I think currently they are captured in this action.
+	should we exclude opfor sappers and other 'far away units' from bulk-move on phase-loop?
 
 Data:
 
 */
 
+// player info 
 systemChat "debug --- phase 5 - defence"; // debug  	
 "MP debug --- phase 5 - defence" remoteExec ["systemChat", 0, true]; // debug 	
 
@@ -44,22 +80,21 @@ _numberOfAttackers = _this select 0;
 // systemChat format ["Intel suggests %1 enemy units are advancing in your immediate area", _numberOfAttackers];
 // systemChat "Check the map for specific locational intel";
 
+// player intel 
 format ["Intel suggests %1 enemy units are advancing in your immediate area. Check the map for specific locational intel", _numberOfAttackers] remoteExec ["hint", 0];
-
 
 // previously this managed blu RF, but now it can be used to manage future things (has no direct usage now)
 _RGG_reinforcementTrigger = 10; 
 
 // sets patrol phase timer and creates basic move orders for opfor, to prevent stalemate 
 execVM "autoPatrolSystem\insuranceSystems\phase5Timer.sqf";
-// I am removing this for now ... 
-
+// note - I am removing this for now ... 
 
 // Allow time for battle before checking initial state of defence 
 sleep 180;
 
+// monitor defence bool-loop 
 monitorDefence = true; 
-
 while {monitorDefence} do {
 	sleep 10;
 
@@ -120,7 +155,7 @@ while {monitorDefence} do {
 
 	// this needs to also ensure indifor have over 10 in the area 
 	if ((RGG_redzoneEast <5) && (RGG_totalEast <10) && (RGG_redzoneIndi >6)) then {
-	// if (_opforCount <= 5) then {// loop ends when opfor is reduced to this number
+		// if (_opforCount <= 5) then {// loop ends when opfor is reduced to this number
 		// hint "WELL DONE !!! the patrol has held the position successfully and is now moving to the next point";
 		systemChat "this proves && syntax test"; // was this ever proven?
 		"WELL DONE !!! the patrol has held the position successfully and is now moving to the next point" remoteExec ["hint", 0, true];	
@@ -132,44 +167,56 @@ while {monitorDefence} do {
 		// delete existing camp 
 		{ deleteVehicle _x } forEach campItems;
 		campItems = [];
-		systemChat "camp cleanup";
+		systemChat "camp cleanup"; // debug 
 			
-	
 		// trigger delayed cleanup 
-		_cleanupPos = RGG_patrol_obj; // this ensures that a snapshot of the location is sent to the cleanup script - a global var will always be the most current version and so will not suit this purpose 
+		_cleanupPos = RGG_patrol_obj; 
+		// this ensures that a snapshot of the location is sent to the cleanup script - a global var will always be the most ..
+		// .. current version and so will not suit this purpose 
+		// activate garbage control 
 		[_cleanupPos] execVM "autoPatrolSystem\cleanupSystems\garbageControl.sqf";
 		// systemchat "debug --- cleanup script triggered";
 		// "MP debug --- cleanup script triggered" remoteExec ["systemChat", 0, true]; // find out if i need or do not need to parse this var to the garbage script?!
 		// note - this does not work as intended ?!
+
 		sleep 1;
+
 		// leave a treat at the won position (reusing the above local var cos why not?)
 		[_cleanupPos] execVM "autoPatrolSystem\fobSystems\fobInit.sqf";
+		// note: this ^^ does nothing??!
+
 		// systemchat "debug --- cleanup script triggered";
 		// "MP debug --- cleanup script triggered" remoteExec ["systemChat", 0, true];
 		// systemChat "debug --- PATROL HAS CLEARED THE AREA";
 		// "debug --- PATROL HAS CLEARED THE AREA" remoteExec ["systemChat", 0, true];
+
+		// 
 		monitorDefence = false;
 		patrolPointsTaken = patrolPointsTaken + 1;
+
 		// do stats?
 		// consolidate injured?
 		// [RGG_initStartPos, RGG_initStartPos] execVM "autoPatrolSystem\phase1_createObj.sqf";
 		// systemchat "debug --- phase1_createObj ACTIVATED";
 		// "MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
 		// [RGG_patrol_obj, ] execVM "";
+
+		// push patrol position to global array 
 		_takenBasePoint = RGG_patrol_obj;
 		RGG_fieldbases pushback _takenBasePoint;
-		systemChat format ["Field Bases: %1", RGG_fieldbases];
-		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf";
-		systemchat "debug --- phase1_createObj ACTIVATED";
-		"MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
+		systemChat format ["Field Bases: %1", RGG_fieldbases]; // debug to list known captured bases 
 
+		// kick off new patrol phase 
+		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf"; 
+		systemchat "debug --- phase1_createObj ACTIVATED"; // debug 
+		"MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true]; // debug 
 
 		// track progress 
 		// execVM "autoPatrolSystem\counterSystems\counterSystems.sqf";
 		// systemchat "debug --- mission count amended";
 		// "MP debug --- mission count amended" remoteExec ["systemChat", 0, true];
 
-		// move any remaining opfor out first 
+		// move any remaining opfor out first, towards new objective  
 		_moveOpfor = [];
 		{if ((side _x) == EAST) then {_moveOpfor pushBack _x}} forEach allUnits;
 		{
@@ -180,9 +227,12 @@ while {monitorDefence} do {
 			_x setBehaviour "COMBAT";
 			_x doMove _endPoint1;
 		} forEach _moveOpfor;
+		// I think this captures all opfor units, moving sapper away from their chosen base 
+		// do we want this?
 
 		sleep 20;
 
+		// move remaining indifor units to next task objective 
 		_moveIndi = [];
 		{if ((side _x) != WEST) then {_moveIndi pushBack _x}} forEach allUnits;
 		// _units = allUnits inAreaArray "missionOrigin";
@@ -195,14 +245,12 @@ while {monitorDefence} do {
 			_x doMove _endPoint1;
 		} forEach _moveIndi;
 
-
-		// BASE REWARD 
-		// initial position  
+		// BASE REWARD :)
+		// get initial position  
 		_anchorPos = getMarkerPos "missionOrigin";
 		// systemChat format ["anchorPos: %1", _anchorPos];
 		// position isFlatEmpty [minDistance, mode, maxGradient, maxGradientRadius, overLandOrWater, shoreLine, ignoreObject]
 		
-
 		// _buildLocation = _anchorPos isFlatEmpty [3, -1, -1, 1, 0];
 		// center findEmptyPosition [radius, maxDistance, vehicleType]
 		_buildLocation = _anchorPos findEmptyPosition [10,100,"B_Heli_Light_01_dynamicLoadout_F"];
@@ -388,9 +436,6 @@ while {monitorDefence} do {
 
 		// breather - what else to do in this time? Sort out injured??
 		sleep 120;
-
-
-		
 	};
 
 	sleep 90;

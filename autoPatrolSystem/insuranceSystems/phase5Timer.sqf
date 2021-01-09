@@ -1,18 +1,21 @@
 /*
 April 2020 - untested
-This system does two things - first it tries (twice) to push opfor openly towards the objective, thereby preventing stalemate situations (prone v prone) 
-But it also ensures that if the above system does not work, the patrol will only wait 10 minutes at a point before moving onto the next point.
+This system does two things - first it tries (twice) to push opfor openly towards the objective, thereby 
+preventing stalemate situations (prone v prone) 
+But it also ensures that if the above system does not work, the patrol will only wait 10 minutes at a point 
+before moving onto the next point.
 
-I have introduced a bool called LOSTPATROL - if this is true it indicates that a patrol has been lost, and then effectivelyt pauses the auto-progression-timer 
-this was needed as without it, RF would be sent to a position, then the actual obj would move on, resulting in RF waiting at the old obj (green marker).
+I have introduced a bool called LOSTPATROL - if this is true it indicates that a patrol has been lost, and then 
+effectively pauses the auto-progression-timer. 
+This was needed as without it, RF would be sent to a position, then the actual obj would move on, resulting in 
+RF waiting at the old obj (green marker).
 
 */
+
 sleep 180;
 
 for "_i" from 1 to 5 do {
 	
-
-
 	sleep 300;
 
 	if (!SAPPERS) then {
