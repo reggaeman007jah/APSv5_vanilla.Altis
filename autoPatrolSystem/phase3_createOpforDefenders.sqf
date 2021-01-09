@@ -1,14 +1,46 @@
 /*
-This creates a group of opfor defenders who will head to the patrol obj and await the blufor patrol as they head in to take the point 
-Then this triggers bluforRF script - this runs a check to see if RF should be called in 
-Then runs an RFCHECK loop to assess if the patrol has taken the point 
-If opfor is 3 or less in the red zone, it is considered taken and the mission progresses 
-As this is all about the 'attack', and considering that sometimes you can have a deadzone if the blufor attackers do not spot hidden opfor defenders ..
-a solution is needed to ensure that blufor essentially search and destroy in and around the objective 
-I need to write a function or script that does an 'Insurance Move' for all blufor in the area but only while RFCHECK is true 
-I tried this before and failed - find out why it failed!
-When defenders are wiped out, next phase is called 
+From: autoPatrolSystem\phase3_createOpforDefenders.sqf 
 
+Purpose:
+This creates a group of opfor defenders who will head to the patrol obj and await the blufor patrol as they head in to take the point 
+Lots of this code determines size of enemy force depending on points taken
+
+Flow:
+	Create opfor defenders and send to enemy camp - addes scores to spawnedOpforUnit global var count 
+	Runs INDIFOR FR check 
+	Runs check loop - FRCHECK - to assess if INDIFOR have taken the point 
+	When defenders are all killed, next phase is called 
+	RFCHECK = true
+	Checks for opfor 3 or less and indifor as 3 or more 
+	execVM "autoPatrolSystem\phase4_createOpforRF.sqf" 
+
+Receives:
+TBC
+
+Informs:
+	redirects any indifor units incorrectly sent to the old point as part of an RF action: 
+	execVM "autoPatrolSystem\insuranceSystems\phase3Timer.sqf"
+	execVM "autoPatrolSystem\phase4_createOpforRF.sqf" 
+
+Notes:
+If opfor is 3 or less in the red zone, it is considered taken and the mission progresses 
+Number of statics and size of defence is linked to the number of points taken - uses patrolPointsTaken global check 
+after they have reached max diff, the statics are totally randomised ...
+i.e. current iteration of killchain is an increasing diff model, until a point, then it is randomised 
+RFCHECK uses RGG_redzoneEast and RGG_redzoneIndi global vars 
+
+Actions:
+As this is all about the 'attack', and considering that sometimes you can have a deadzone if the blufor attackers do not spot hidden 
+opfor defenders a solution is needed to ensure that blufor essentially search and destroy in and around the objective 
+I need to write a function or script that does an 'Insurance Move' for all blufor in the area but only while RFCHECK is true - 
+.. find out why this failed before 
+This entire script needs to be refined / refactored ... very verbose currently 
+Design a retreat script 
+
+Questions:
+TBC
+
+Data:
 O_G_Soldier_LAT_F
 O_G_Soldier_TL_F
 O_G_Soldier_SL_F
@@ -18,10 +50,6 @@ O_G_medic_F
 O_G_HMG_02_high_F
 O_G_Mortar_01_F
 O_G_HMG_02_F
-
-number of statics and size of defence is linked to the number of points taken 
-after they have reached max diff, the statics are totally randomised 
-i.e. current iteration of killchain is an increasing diff model, until a point, then it is randomised 
 */
 
 _opforClass = [
@@ -46,7 +74,7 @@ _opforClass = [
 _rndOp1 = selectRandom [8, 10, 12, 24];
 
 _grp = createGroup east;
-systemchat format ["op defence: %1", _rndOp1];
+systemchat format ["op defence: %1", _rndOp1]; // debug 
 for "_i" from 1 to _rndOp1 do {
 	_rndtype = selectRandom _opforClass;
 	_pos = [RGG_patrol_obj, 0, 200] call BIS_fnc_findSafePos;
@@ -57,7 +85,6 @@ for "_i" from 1 to _rndOp1 do {
 	_unit setBehaviour "COMBAT";
 	// _unit doMove _endPoint;
 	spawnedOpforUnit = spawnedOpforUnit +1;
-
  	sleep 1;									
 };
 
@@ -527,7 +554,8 @@ while {RFCHECK} do {
 	// 	};
 	// } forEach _units;
 	// hint format ["debug --- OPFOR DEFENDERS = %1", _opforCount1];
-	if ((RGG_redzoneEast <= 3) && (RGG_redzoneIndi >=3)) then { // this is the decider-value as to whether the second round of enemy moves in
+	if ((RGG_redzoneEast <= 3) && (RGG_redzoneIndi >=3)) then { 
+		// this is the decider-value as to whether the second round of enemy moves in
 		// systemChat "Debug - Initial defenders neutralised, prepare for OPFOR RF .. !!!";
 		// "MP debug - Initial defenders neutralised, prepare for OPFOR RF .. !!!" remoteExec ["systemChat", 0, true];	
 		sleep 1;
