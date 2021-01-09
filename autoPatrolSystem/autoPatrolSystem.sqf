@@ -1,5 +1,49 @@
 /*
 From: initServer.sqf 
+
+Purpose:
+This file launches various threads / initiation scripts 
+
+
+Flow:
+	execVM "autoPatrolSystem\autoPatrolSystemParams.sqf";
+	execVM "autoPatrolSystem\chainSecuritySystems\chainSec.sqf";
+	execVM "autoPatrolSystem\randomThreatSystems\randomThreats.sqf";
+	Issues player welcome info 
+	Gets location of a mission-specific asset ("ammo1") and uses as anchor position: RGG_initStartPos
+	Creates marker for main player FOB 
+	Triggers mission phase 1
+	Creates friendly units 
+	Adds FOB base data to global blacklist array 
+
+Receives:
+TBC
+
+Informs:
+	mission-specific params file: 
+	execVM "autoPatrolSystem\autoPatrolSystemParams.sqf";
+
+	sapper system:
+	execVM "autoPatrolSystem\chainSecuritySystems\chainSec.sqf";
+
+	random roamers system:
+	execVM "autoPatrolSystem\randomThreatSystems\randomThreats.sqf";
+
+	Mission start:
+	[RGG_initStartPos, RGG_initStartPos] execVM "autoPatrolSystem\phase1_createObj.sqf";
+
+	Creates friendly units 
+	[RGG_initStartPos] execVM "autoPatrolSystem\spawnerSystems\createFriendlyUnits.sqf";
+
+Notes:
+"ammo1" is a fixed 'named asset' in the mission itself - it is both the VA arsenal and also acts as a anchor point for the main Blufor base.
+RGG_patrolPositionBlacklist is the global array for blacklist areas
+
+Actions:
+Remove old comments 
+
+Questions:
+How many times does this file run? Confirm only runs once...
 */
 
 
@@ -14,7 +58,8 @@ execVM "autoPatrolSystem\randomThreatSystems\randomThreats.sqf";
 
 // this file should run only once 
 sleep 2;
-systemchat "debug --- autoPatrolSystem.sqf running";
+systemchat "debug --- autoPatrolSystem.sqf running"; // debug 
+// player information
 "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
 "Support Independent forces as they patrol the badlands" remoteExec ["systemChat", 0, true];
 // "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
@@ -25,8 +70,7 @@ systemchat "debug --- autoPatrolSystem.sqf running";
 ------- Base Setup ------- 
 */
 
-// "ammo1" is a fixed 'named asset' in the mission itself - it is both the VA arsenal and also acts as a anchor point for the main Blufor base.
-// RGG_initStartPos is a location array (of the location of the ammo box)
+// RGG_initStartPos is a location array (of the location of the mission-specific-asset "ammo1")
 // "permaBase" acts as the one and only fixed blufor base area, can be used for RF/RE-UP/Medivac tasks (TBC)
 RGG_initStartPos = getPos ammo1;
 _base = createMarker ["permaBase", RGG_initStartPos];
@@ -50,7 +94,7 @@ sleep 1;
 // the above sequence provides a very basic marker animation on startup 
 
 // this takes the permaBase location as the first anchor (subsequent progress-anchors will be different)
-// -------------------------------------------- to do / April 2020 / work out why you used the same arg twice here --------------------------------------------
+// to do / April 2020 / work out why you used the same arg twice here --------------------------------------------
 [RGG_initStartPos, RGG_initStartPos] execVM "autoPatrolSystem\phase1_createObj.sqf";
 // systemchat "debug --- phase1_createObj ACTIVATED";
 // "MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
