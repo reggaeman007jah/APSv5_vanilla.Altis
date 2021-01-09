@@ -1,13 +1,37 @@
-
 /*
-This script checks how well the defence of the objective is going. If the enemy is destroyed, the team can progress to the next stage of the mission.
-An issue occurs when - for whatever reason - enemy do not engage. This could be due to being spawned in rocks, prevented from engaging due to a building or wall etc.
-Without an insurance policy, this lack of engagement could draw the mission to a standstill. So, a secondary system is needed to ensure that things always progress at 
-a certain time regardless of engagement.
+From: TBC 
+
+Purpose:
+This script checks how well the defence of the objective is going. 
+If the enemy is destroyed, the team can progress to the next stage of the mission.
+
+Flow:
+	TBC
+
+Receives:
+TBC
+
+Informs:
+	TBC
+
+Notes:
+An issue occurs when - for whatever reason - enemy do not engage. This could be due to being spawned in 
+rocks, prevented from engaging due to a building or wall etc.
+Without an insurance policy, this lack of engagement could draw the mission to a standstill. So, a secondary 
+system is needed to ensure that things always progress at a certain time regardless of engagement.
+
+Actions:
+TBC
+
+Questions:
+TBC
+
+Data:
+
 */
 
-systemChat "debug --- phase 5 - defence"; 	
-"MP debug --- phase 5 - defence" remoteExec ["systemChat", 0, true];	
+systemChat "debug --- phase 5 - defence"; // debug  	
+"MP debug --- phase 5 - defence" remoteExec ["systemChat", 0, true]; // debug 	
 
 // // HERE WE CHECK IF BLUFOR NEED RF 
 // execVM "autoPatrolSystem\reinforcementSystems\bluforRF.sqf";
@@ -30,10 +54,8 @@ _RGG_reinforcementTrigger = 10;
 execVM "autoPatrolSystem\insuranceSystems\phase5Timer.sqf";
 // I am removing this for now ... 
 
-/*
-I need to allow some time for battle before checking initial state of defence 
-*/
 
+// Allow time for battle before checking initial state of defence 
 sleep 180;
 
 monitorDefence = true; 
