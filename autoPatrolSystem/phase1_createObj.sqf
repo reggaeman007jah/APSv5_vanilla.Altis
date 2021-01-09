@@ -29,7 +29,7 @@ This file receives two args:
 Informs:
 This file connects to the following files and functions:
 	global blacklist array 
-	opfor wave 1 attacl script: execVM "autoPatrolSystem\phase2_createOpforWave1.sqf"
+	opfor wave 1 attack script: execVM "autoPatrolSystem\phase2_createOpforWave1.sqf"
 	camp items are stored in array to enable items to be deleted when point is taken
 
 Notes:

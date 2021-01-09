@@ -1,11 +1,34 @@
 /*
-This creates small opfor group at patrol obj and sends them to patrol origin, to engage the patrol as they move in - this is the first wave 
-These opfor units will head to the patrol origin .. there is a chance they will not engage with the blufor units heading in 
-Consider sending them back to patrol dest if this happens (surprise attack)
-Also consider ramping diff here somehow 
-*/
+From: autoPatrolSystem/phase1_createObj.sqf 
 
-/*
+Purpose:
+This creates small opfor group at the patrol obj (enemy base) and sends them to patrol origin, to engage the patrol as they move in
+This is the first attack wave for the patrol phase 
+
+Flow:
+	Player info 
+	Creates enemy groups and sends them to patrol origin 
+	execVM "autoPatrolSystem\phase3_createOpforDefenders.sqf";
+	informs the spawnedOpforUnit global counter 
+
+Receives:
+TBC
+
+Informs:
+execVM "autoPatrolSystem\phase3_createOpforDefenders.sqf";
+
+Notes:
+These opfor units will head to the patrol origin .. so .. there is a chance they will not engage with the blufor units heading in 
+
+Actions:
+Decide how to manage the change of no first wave contact - Consider sending them back to patrol dest if this happens (surprise attack)
+Consider ramping up diff levels 
+Decide whether to change the hardcoded _diffLevel (currently 2)
+
+Questions:
+Find out what role spawnedOpforUnit has (global var)
+
+Data:
 CSAT 
 "O_soldierU_A_F",
 "O_soldierU_AAR_F",
@@ -86,6 +109,7 @@ for "_i" from 1 to _diffLevel do {
 
 sleep 1;
 
+// initiate next phase 
 execVM "autoPatrolSystem\phase3_createOpforDefenders.sqf";
 
 
