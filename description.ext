@@ -40,8 +40,14 @@ class Header {
 class CfgSounds {
 	sounds[] = {};
 	
-	class info {
-		sound[] = {"\a3\Ui_f\data\Sound\CfgIngameUI\hint",0.891251,1};
+	// class info {
+	// 	sound[] = {"\a3\Ui_f\data\Sound\CfgIngameUI\hint",0.891251,1};
+	// 	titles[] = {};
+	// };
+	class music1 {
+		name = "music1";
+		sound[] = {"sounds\welcome\welcome.wav", 3000, 1};
+		// sound[] = {"sounds\welcome\dangerClose1.ogg", 3000, 1};
 		titles[] = {};
 	};
 };

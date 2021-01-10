@@ -14,6 +14,10 @@ systemChat "JTAC Systems spinning up";
 // autoPatrolSystem\JTAC_Systems\JTACinit.sqf
 execVM "autoPatrolSystem\JTAC_Systems\JTACinit.sqf";
 
+// welcome message 
+systemChat "SEE THIS";
+execVM "sounds\welcome\welcome.sqf";
+
 // execVM "voiceActivatedCoordFinder\VACF_init.sqf";
 // execVM "voiceActivatedDataStore\VADS_init.sqf";
 // execVM "voiceActivatedDataManager\VADM_init.sqf";

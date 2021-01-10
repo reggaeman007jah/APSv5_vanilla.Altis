@@ -1,0 +1,26 @@
+systemChat "welcome in 5";
+sleep 5;
+systemchat "playing sound";
+// _source = playSound ["music1", true, 0];
+// ammo2 say3d ["music1", 100, 1];
+// playSound "music1";
+// systemchat "played sound";
+// sleep 5;
+// playSound "music1";
+// systemchat "played sound";
+// sleep 5;
+// playSound "music1";
+// systemchat "played sound";
+// sleep 5;
+// playSound "music1";
+// systemchat "played sound";
+// sleep 5;
+// playSound "music1";
+// systemchat "played sound";
+// sleep 5;
+// playSound "music1";
+// systemchat "played sound";
+// sleep 5;
+
+playSound ["music1", TRUE, 0];
+systemchat "played sound";
