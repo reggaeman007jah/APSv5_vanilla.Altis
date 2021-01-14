@@ -153,8 +153,16 @@ while {monitorDefence} do {
 		// end state FAIL - what happens here???
 	};
 
+	/*
+	Note: I have seen issues where the mission stalls / does not progress. I suspect this is down to the logic I use to 
+	determine whether to progress things - if ((RGG_redzoneEast <5) && (RGG_totalEast <10) && (RGG_redzoneIndi >6)). I am 
+	removing the middle check, as (I think) once there are enough roamers and sappers in-mission, this will prevent 
+	progression, even though the actual patrol point is taken, and not under threat.
+	*/
+
 	// this needs to also ensure indifor have over 10 in the area 
-	if ((RGG_redzoneEast <5) && (RGG_totalEast <10) && (RGG_redzoneIndi >6)) then {
+	// if ((RGG_redzoneEast <5) && (RGG_totalEast <10) && (RGG_redzoneIndi >6)) then {
+	if ((RGG_redzoneEast <5) && (RGG_redzoneIndi >6)) then {
 		// if (_opforCount <= 5) then {// loop ends when opfor is reduced to this number
 		// hint "WELL DONE !!! the patrol has held the position successfully and is now moving to the next point";
 		systemChat "this proves && syntax test"; // was this ever proven?
