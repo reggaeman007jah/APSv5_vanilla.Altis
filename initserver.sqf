@@ -5,7 +5,7 @@ VAA_Activate = true;
 sleep 10;
 
 // initialise APS
-execVM "autoPatrolSystem\autoPatrolSystem.sqf";
+execVM "autoPatrolSystem\autoPatrolSystem.sqf"; 
 sleep 0.5;
 
 // initialise debug counter system 
