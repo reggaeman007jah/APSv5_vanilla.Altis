@@ -172,6 +172,11 @@ while {monitorDefence} do {
 		"The patrol FOB will enable full heals at the medical tent" remoteExec ["systemChat", 0, true];	
 		"As well as vehicle repair and rearm" remoteExec ["systemChat", 0, true];	
 
+		// voice broadcast
+		execVM "sounds\welcome\thisIsCommand.sqf";
+		sleep 2;
+		execVM "sounds\welcome\success.sqf";
+
 		// delete existing camp 
 		{ deleteVehicle _x } forEach campItems;
 		campItems = [];

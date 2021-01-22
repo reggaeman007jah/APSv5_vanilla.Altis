@@ -62,6 +62,12 @@ systemchat "debug --- autoPatrolSystem.sqf running"; // debug
 // player information
 "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
 "Support Independent forces as they patrol the badlands" remoteExec ["systemChat", 0, true];
+// voice broadcasts
+execVM "sounds\welcome\thisIsCommand.sqf";
+sleep 2;
+execVM "sounds\welcome\missionLive.sqf";
+
+
 // "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
 // "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
 // "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
