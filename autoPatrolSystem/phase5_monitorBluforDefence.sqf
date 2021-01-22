@@ -219,10 +219,7 @@ while {monitorDefence} do {
 		RGG_fieldbases pushback _takenBasePoint;
 		systemChat format ["Field Bases: %1", RGG_fieldbases]; // debug to list known captured bases 
 
-		// kick off new patrol phase 
-		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf"; 
-		systemchat "debug --- phase1_createObj ACTIVATED"; // debug 
-		"MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true]; // debug 
+
 
 		// track progress 
 		// execVM "autoPatrolSystem\counterSystems\counterSystems.sqf";
@@ -264,17 +261,30 @@ while {monitorDefence} do {
 		// systemChat format ["anchorPos: %1", _anchorPos];
 		// position isFlatEmpty [minDistance, mode, maxGradient, maxGradientRadius, overLandOrWater, shoreLine, ignoreObject]
 		
+		
+
+
 		// _buildLocation = _anchorPos isFlatEmpty [3, -1, -1, 1, 0];
 		// center findEmptyPosition [radius, maxDistance, vehicleType]
 		_buildLocation = _anchorPos findEmptyPosition [10,100,"B_Heli_Light_01_dynamicLoadout_F"];
 		// systemChat format ["buildLocation: %1", _buildLocation];
+		_fobPos = _baseBuilding getPos [20,180];
+		_repairPos = _fobPos findEmptyPosition [10,100,"B_Heli_Light_01_dynamicLoadout_F"];
+
+
+		_flrObj = "F_20mm_Red" createvehicle _buildLocation;
+		sleep 2;
+		_flrObj = "F_20mm_Red" createvehicle _fobPos;
+		sleep 2;
+		_flrObj = "F_20mm_Red" createvehicle _repairPos;
+		sleep 15;
 
 		// _baseBuilding1 = createVehicle ["Land_IRMaskingCover_02_F", getMarkerPos "missionOrigin", [], 30, "none"]; 
 		_baseBuilding1 = createVehicle ["Land_MedicalTent_01_tropic_closed_F", _buildLocation, [], 30, "none"]; 
 		// _baseBuilding1 enableSimulationGlobal false;
 		// sleep 0.6;
 
-		_fobPos = _baseBuilding1 getPos [20,180];
+		
 		// _ammoPos = _fobPos getPos [10,180];
 		// _repairPos = _fobPos getPos [10,90];
 		// _fuelPos = _fobPos getPos [10,270];
@@ -301,7 +311,7 @@ while {monitorDefence} do {
 		// [ "AmmoboxInit", [_spawnedVA, true, {true}] ] call BIS_fnc_arsenal;
 
 		// repair area 
-		_repairPos = _fobPos findEmptyPosition [10,100,"B_Heli_Light_01_dynamicLoadout_F"];
+		
 		_ammoSup = createVehicle ["B_Slingload_01_Repair_F", _repairPos];//vehicle repair 
 		// _repairMan = createVehicle ["C_Man_UtilityWorker_01_F", _repairPos];//mechanic
 		// why does the unit spawn with an empty gun?
@@ -449,6 +459,11 @@ while {monitorDefence} do {
 
 		// breather - what else to do in this time? Sort out injured??
 		sleep 120;
+
+		// kick off new patrol phase 
+		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf"; 
+		systemchat "debug --- phase1_createObj ACTIVATED"; // debug 
+		"MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true]; // debug 
 	};
 
 	sleep 90;

@@ -10,7 +10,7 @@ Receives: TBC
 Informs: TBC
 
 Notes:
-	There is confusion here - notes suggest this was about consolidating idifor forces, I assume to save on group numbers 
+	There is confusion here - notes suggest this was about consolidating indifor forces, I assume to save on group numbers 
 	However all this seems to do is create respawn points.
 	Old notes:
 	here we consolidate the indifor forces 
