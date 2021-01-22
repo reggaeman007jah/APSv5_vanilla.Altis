@@ -21,8 +21,9 @@ while {RFCHECK} do {
 	hint "DEBUG - INDI INSURANCE MOVE";
 	
 	_indi = [];
+	_units = allUnits inAreaArray "objective 1";
 	// {if ((side _x) == INDEPENDENT) then {_indi pushBack _x}} forEach allUnits inAreaArray "Battlearea";
-	{if ((side _x) == INDEPENDENT) then {_indi pushBack _x}} forEach allUnits;
+	{if ((side _x) == INDEPENDENT) then {_indi pushBack _x}} forEach _units;
 
 	// systemChat "Debug - redirecting all indi units to patrol obj during RFCHECK state !!!";
 	// "MP debug - redirecting all blu units to patrol obj during RFCHECK state !!!" remoteExec ["systemChat", 0, true];	
@@ -33,7 +34,7 @@ while {RFCHECK} do {
 		_randomDist = selectRandom [20, 22, 24, 26, 28, 30];
 		_unitDest = [RGG_patrol_obj, 5, 20] call BIS_fnc_findSafePos;
 		_endPoint1 = _unitDest getPos [_randomDist,_randomDir];
-		SLEEP 2;
+		sleep 2;
 		_x setBehaviour "COMBAT";
 		_x doMove _endPoint1;
 	} forEach _indi;
