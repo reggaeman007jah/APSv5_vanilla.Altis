@@ -17,7 +17,7 @@ while {true} do {
 		_randomEnemySpawnPos = [RGG_patrol_obj, 1100, 1300, 3, 0, 0, 0] call BIS_fnc_findSafePos; 
 		systemChat format ["enemy roamers spawned: %1", _randomEnemySpawnPos]; 
 		_grp1 = createGroup east;
-		_random = random 3;
+		_random = random 10;
 		_size = _random + 2; // consider using patrolPoints as a multiplier to number of roamers 
 
 		for "_i" from 1 to 1 do {

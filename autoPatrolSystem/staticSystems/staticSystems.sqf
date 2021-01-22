@@ -6,12 +6,12 @@ If not manned, will check for nearby units and send one of those at random to ta
 
 */
 
-while {true} do {
+// while {true} do {
 
-	// check for static types and store them in a temp array 
-	_staticWeapons = [];
+// 	// check for static types and store them in a temp array 
+// 	_staticWeapons = [];
 
 
 
-	sleep 120;
-};
+// 	sleep 120;
+// };
