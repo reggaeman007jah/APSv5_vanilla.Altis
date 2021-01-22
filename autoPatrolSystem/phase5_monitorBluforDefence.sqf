@@ -256,9 +256,9 @@ while {monitorDefence} do {
 		{if ((side _x) == independent) then {
 				_damage = getDamage _x;
 				if (_damage < 0.7) then {
-					_moveIndi pushBack _x
+					_moveIndi pushBack _x;
 				} else {
-					_holdIndi pushBack _x
+					_holdIndi pushBack _x;
 				};
 			};
 		} forEach allUnits;
@@ -285,7 +285,7 @@ while {monitorDefence} do {
 		// center findEmptyPosition [radius, maxDistance, vehicleType]
 		_buildLocation = _anchorPos findEmptyPosition [10,100,"B_Heli_Light_01_dynamicLoadout_F"];
 		// systemChat format ["buildLocation: %1", _buildLocation];
-		_fobPos = _baseBuilding getPos [20,180];
+		_fobPos = _buildLocation getPos [20,180];
 		_repairPos = _fobPos findEmptyPosition [10,100,"B_Heli_Light_01_dynamicLoadout_F"];
 
 		_flrObj = "F_20mm_Red" createvehicle _buildLocation;
