@@ -62,10 +62,12 @@ systemchat "debug --- autoPatrolSystem.sqf running"; // debug
 // player information
 "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
 "Support Independent forces as they patrol the badlands" remoteExec ["systemChat", 0, true];
+
 // voice broadcasts
 execVM "sounds\welcome\thisIsCommand.sqf";
-sleep 2;
+sleep 3;
 execVM "sounds\welcome\missionLive.sqf";
+// this ^^ is a one-off sound file called only once at the beginning of the mission 
 
 
 // "Welcome to Operation Killchain" remoteExec ["systemChat", 0, true];
@@ -79,6 +81,8 @@ execVM "sounds\welcome\missionLive.sqf";
 // RGG_initStartPos is a location array (of the location of the mission-specific-asset "ammo1")
 // "permaBase" acts as the one and only fixed blufor base area, can be used for RF/RE-UP/Medivac tasks (TBC)
 RGG_initStartPos = getPos ammo1;
+
+// Main FOB Marker 
 _base = createMarker ["permaBase", RGG_initStartPos];
 _base setMarkerShape "ELLIPSE";
 _base setMarkerColor "ColorBlue";
@@ -97,8 +101,8 @@ sleep 0.1;
 _base setMarkerSize [110, 110];
 _base setMarkerAlpha 0.9;
 sleep 1;
-// the above sequence provides a very basic marker animation on startup 
 
+// KICK OFF PATROL MISSION 
 // this takes the permaBase location as the first anchor (subsequent progress-anchors will be different)
 // to do / April 2020 / work out why you used the same arg twice here --------------------------------------------
 [RGG_initStartPos, RGG_initStartPos] execVM "autoPatrolSystem\phase1_createObj.sqf";
@@ -106,6 +110,7 @@ sleep 1;
 // "MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
 sleep 0.2;
 
+// CREATE PATROL SQUADDIES
 // this also takes the main blufor permaBase anchor location as the first spawn point for blufor troops
 [RGG_initStartPos] execVM "autoPatrolSystem\spawnerSystems\createFriendlyUnits.sqf";
 // systemchat "debug --- createFriendlyUnits.sqf running";

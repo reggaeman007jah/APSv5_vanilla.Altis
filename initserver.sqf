@@ -93,6 +93,7 @@ how to do garbage control better ...
 
 having a basic timer cycle can lead to immersion break 
 so, maybe at a key point you create a new marker, on the position of the old obj marker - "cleanup" 
-then set a timer to enable players to leave the area, then do cleanup just in that zone ... better chance that noone will see the function happen ..
+then set a timer to enable players to leave the area, then do cleanup just in that zone ... better chance that noone will 
+see the function happen ..
 
 */

@@ -93,6 +93,7 @@ for "_i" from 1 to _rndOp1 do {
 
 sleep 2;
 
+// calculate static defences 
 switch (patrolPointsTaken) do {
 	case 0: {
 		systemChat "no statics this time around";
@@ -537,8 +538,8 @@ sleep 20; // changes from 5 to 20, in case this was the reasons for the logic gl
 // redirects any indifor units incorrectly sent to the old point as part of an RF action 
 execVM "autoPatrolSystem\insuranceSystems\phase3Timer.sqf";
 
+// check to see when indifor have taken patrol point, and when to trigger opfor rf 
 RFCHECK = true; 
-
 while {RFCHECK} do {
 	// systemChat "___RFCHECK phase 3 cycle___";
 	// confirms side numbers on the red zone 
@@ -555,18 +556,37 @@ while {RFCHECK} do {
 	// } forEach _units;
 	// hint format ["debug --- OPFOR DEFENDERS = %1", _opforCount1];
 	if ((RGG_redzoneEast <= 3) && (RGG_redzoneIndi >=3)) then { 
+		_units = allUnits inAreaArray "missionCore";
+		_coreBlufor = 0;
+		_coreIndi = 0;
+		_coreOpfor = 0;
+
+		{
+			switch ((side _x)) do
+			{
+				case EAST: {_coreOpfor = _coreOpfor + 1};
+				case WEST: {_coreBlufor = _coreBlufor + 1};
+				case INDEPENDENT: {_coreIndi = _coreIndi + 1};
+			};
+		} forEach _units;
 		// this is the decider-value as to whether the second round of enemy moves in
 		// systemChat "Debug - Initial defenders neutralised, prepare for OPFOR RF .. !!!";
 		// "MP debug - Initial defenders neutralised, prepare for OPFOR RF .. !!!" remoteExec ["systemChat", 0, true];	
 		sleep 1;
-		execVM "autoPatrolSystem\phase4_createOpforRF.sqf";
-		"Independent Forces Have Taken The Patrol Point" remoteExec ["hint", 0, true];
-		"Independent Forces Have Taken The Patrol Point" remoteExec ["systemChat", 0, true];
-		"Opfor may try to retake this point - check the map" remoteExec ["systemChat", 0, true];
-		RFCHECK = false;
+		if ((_coreBlufor >4) or (_coreIndi >4)) then {
+			execVM "autoPatrolSystem\phase4_createOpforRF.sqf";
+			"Independent Forces Have Taken The Patrol Point" remoteExec ["hint", 0, true];
+			"Independent Forces Have Taken The Patrol Point" remoteExec ["systemChat", 0, true];
+			"Opfor may try to retake this point - check the map" remoteExec ["systemChat", 0, true];
+			RFCHECK = false;		
+		};
 	};
-	systemChat "debug - 90 second RFcheck cycle";
+
 	sleep 90;
 };
 
 // at what stage should these initial defenders retreat?
+
+
+
+

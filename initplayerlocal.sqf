@@ -1,21 +1,18 @@
 
 sleep 1;
 
+// remove stamina 
 player enableStamina FALSE;
-
 player addEventHandler ['Respawn',{player enableStamina FALSE;}];
 
 // test of new voiceMarkerSystem 
 execVM "voiceMarkerSystem\1_vmsInit.sqf";
-// execVM "voiceMarkerSystem\1_vmsInit.sqf";
 
 // JTAC
 systemChat "JTAC Systems spinning up";
-// autoPatrolSystem\JTAC_Systems\JTACinit.sqf
 execVM "autoPatrolSystem\JTAC_Systems\JTACinit.sqf";
 
 // welcome message 
-// systemChat "SEE THIS";
 execVM "sounds\welcome\welcome.sqf";
 
 // execVM "voiceActivatedCoordFinder\VACF_init.sqf";

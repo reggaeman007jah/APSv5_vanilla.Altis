@@ -24,7 +24,7 @@ Receives:
 This file receives two args:
 	_this select 0; // objective point for any new mission 
 	_this select 1; // starting point for any new mission
-	both args are: RGG_initStartPos 
+	both args are: RGG_initStartPos ?!
 
 Informs:
 This file connects to the following files and functions:
@@ -345,4 +345,4 @@ systemChat format ["No. of Camp Items: %1", _noOfCampItems];
 
 // trigger test
 execVM "autoPatrolSystem\triggerTest.sqf";
-// this might be a cheaper wway to check for n presence in an area ..?
+// this might be a cheaper wway to check for n presence in an area ..? currently does nothing 

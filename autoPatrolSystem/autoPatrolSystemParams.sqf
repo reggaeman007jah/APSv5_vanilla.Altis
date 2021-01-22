@@ -1,8 +1,6 @@
 /*
 From: autoPatrolSystem/autoPatrolSystem.sqf 
-*/
 
-/*
 This file sets up some basic mission-flow params 
 one/two/threePoint relates to states I use to determine how many directions the retalliation should psawn from 
 
