@@ -252,8 +252,20 @@ while {monitorDefence} do {
 
 		// move remaining indifor units to next task objective 
 		_moveIndi = [];
-		{if ((side _x) != WEST) then {_moveIndi pushBack _x}} forEach allUnits;
+		_holdIndi = [];
+		{if ((side _x) == independent) then {
+				_damage = getDamage _x;
+				if (_damage < 0.7) then {
+					_moveIndi pushBack _x
+				} else {
+					_holdIndi pushBack _x
+				};
+			};
+		} forEach allUnits;
 		// _units = allUnits inAreaArray "missionOrigin";
+		/*
+			make sure this is only indifor and only units that are not injured!
+		*/
 		{
 			_randomDir = selectRandom [270, 310, 00, 50, 90];
 			_randomDist = selectRandom [20, 22, 24, 26, 28, 30];
