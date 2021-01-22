@@ -61,7 +61,7 @@ _sentPos 	= _this select 0; // objective point for any new mission
 _sentOrigin = _this select 1; // starting point for any new mission
 
 RGG_missionOrigin = _sentOrigin;
-RGG_patrol_obj = [_sentPos, 400, 900, 3, 0, 0, 0, RGG_patrolPositionBlacklist] call BIS_fnc_findSafePos; // generate patrol obj between 600m and 900m away, and always over land 
+RGG_patrol_obj = [_sentPos, 400, 900, 3, 0, 0, 0, RGG_patrolPositionBlacklist] call BIS_fnc_findSafePos; // generate patrol obj between 400m and 900m away, and always over land 
 // new test to make each point closer, now 350 - 500 away 
 // RGG_patrol_obj = [_sentPos, 600, 650, 3, 0, 0, 0, RGG_patrolPositionBlacklist] call BIS_fnc_findSafePos; // generate patrol obj between 600m and 800m away, and always over land 
 // RGG_patrol_obj = [_sentPos, 600, 800, 3, 0, 20, 0] call BIS_fnc_findSafePos; // generate patrol obj between 600m and 800m away, and always over land 
@@ -345,3 +345,4 @@ systemChat format ["No. of Camp Items: %1", _noOfCampItems];
 
 // trigger test
 execVM "autoPatrolSystem\triggerTest.sqf";
+// this might be a cheaper wway to check for n presence in an area ..?
