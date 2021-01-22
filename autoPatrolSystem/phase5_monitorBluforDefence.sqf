@@ -66,8 +66,8 @@ Data:
 */
 
 // player info 
-systemChat "debug --- phase 5 - defence"; // debug  	
-"MP debug --- phase 5 - defence" remoteExec ["systemChat", 0, true]; // debug 	
+systemChat "DEFEND THE POINT"; // debug  	
+"DEFEND THE POINT" remoteExec ["systemChat", 0, true]; // debug 	
 
 // // HERE WE CHECK IF BLUFOR NEED RF 
 // execVM "autoPatrolSystem\reinforcementSystems\bluforRF.sqf";
@@ -83,6 +83,10 @@ _numberOfAttackers = _this select 0;
 // player intel 
 format ["Intel suggests %1 enemy units are advancing in your immediate area. Check the map for specific locational intel", _numberOfAttackers] remoteExec ["hint", 0];
 
+/*
+We need to add a better voice system to inform players of this ^^^
+*/
+
 // previously this managed blu RF, but now it can be used to manage future things (has no direct usage now)
 _RGG_reinforcementTrigger = 10; 
 
@@ -93,7 +97,7 @@ execVM "autoPatrolSystem\insuranceSystems\phase5Timer.sqf";
 // Allow time for battle before checking initial state of defence 
 sleep 180;
 
-// monitor defence bool-loop 
+// monitor defence - bool-loop 
 monitorDefence = true; 
 while {monitorDefence} do {
 	sleep 10;
@@ -163,6 +167,10 @@ while {monitorDefence} do {
 	// this needs to also ensure indifor have over 10 in the area 
 	// if ((RGG_redzoneEast <5) && (RGG_totalEast <10) && (RGG_redzoneIndi >6)) then {
 	if ((RGG_redzoneEast <5) && (RGG_redzoneIndi >6)) then {
+
+		// breather - what else to do in this time? Sort out injured??
+		sleep 120;
+
 		// if (_opforCount <= 5) then {// loop ends when opfor is reduced to this number
 		// hint "WELL DONE !!! the patrol has held the position successfully and is now moving to the next point";
 		systemChat "this proves && syntax test"; // was this ever proven?
@@ -261,16 +269,12 @@ while {monitorDefence} do {
 		// systemChat format ["anchorPos: %1", _anchorPos];
 		// position isFlatEmpty [minDistance, mode, maxGradient, maxGradientRadius, overLandOrWater, shoreLine, ignoreObject]
 		
-		
-
-
 		// _buildLocation = _anchorPos isFlatEmpty [3, -1, -1, 1, 0];
 		// center findEmptyPosition [radius, maxDistance, vehicleType]
 		_buildLocation = _anchorPos findEmptyPosition [10,100,"B_Heli_Light_01_dynamicLoadout_F"];
 		// systemChat format ["buildLocation: %1", _buildLocation];
 		_fobPos = _baseBuilding getPos [20,180];
 		_repairPos = _fobPos findEmptyPosition [10,100,"B_Heli_Light_01_dynamicLoadout_F"];
-
 
 		_flrObj = "F_20mm_Red" createvehicle _buildLocation;
 		sleep 2;
@@ -284,7 +288,6 @@ while {monitorDefence} do {
 		// _baseBuilding1 enableSimulationGlobal false;
 		// sleep 0.6;
 
-		
 		// _ammoPos = _fobPos getPos [10,180];
 		// _repairPos = _fobPos getPos [10,90];
 		// _fuelPos = _fobPos getPos [10,270];
@@ -293,6 +296,7 @@ while {monitorDefence} do {
 		// sleep 2;
 		// _ammoSup = createVehicle ["B_supplyCrate_F", _fobPos];//ammo 
 		// _ammoSup enableSimulationGlobal false;
+
 		sleep 0.6;
 		_ammoSup = createVehicle ["Box_NATO_Support_F", _fobPos];//ammmo 
 		[ "AmmoboxInit", [_ammoSup, true, {true}] ] call BIS_fnc_arsenal;
@@ -432,7 +436,7 @@ while {monitorDefence} do {
 
 		// // _readyInjured = allUnits inAreaArray "medivac";
 		// {
-		// 	_inj = getDammage _x;
+		// 	_inj = getDamage _x;
 		// 	if ((_inj) >= _damageTrigger) then {
 		// 		_x doMove _fobPos;
 		// 		_civGroup = createGroup civilian;
@@ -457,8 +461,7 @@ while {monitorDefence} do {
 		[RGG_missionOrigin] execVM "autoPatrolSystem\phase6_regroup.sqf";
 		// we need a big center here too 
 
-		// breather - what else to do in this time? Sort out injured??
-		sleep 120;
+
 
 		// kick off new patrol phase 
 		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf"; 

@@ -47,7 +47,7 @@ publicVariable "MISSIONTASK";
 // pop phase-change smoke 
 _smoke = createVehicle ["G_40mm_smokeYELLOW", RGG_patrol_obj, [], 0, "none"]; // drop this from up high 
 
-// voice broadcast 
+// voice broadcast - prepare for retalliation 
 execVM "sounds\welcome\thisIsCommand.sqf";
 sleep 2;
 execVM "sounds\welcome\prepare.sqf";

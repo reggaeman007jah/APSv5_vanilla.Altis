@@ -573,11 +573,13 @@ while {RFCHECK} do {
 		// systemChat "Debug - Initial defenders neutralised, prepare for OPFOR RF .. !!!";
 		// "MP debug - Initial defenders neutralised, prepare for OPFOR RF .. !!!" remoteExec ["systemChat", 0, true];	
 		sleep 1;
+
+		// this should hopefully require presence in core area before can consider point won 
 		if ((_coreBlufor >4) or (_coreIndi >4)) then {
-			execVM "autoPatrolSystem\phase4_createOpforRF.sqf";
 			"Independent Forces Have Taken The Patrol Point" remoteExec ["hint", 0, true];
 			"Independent Forces Have Taken The Patrol Point" remoteExec ["systemChat", 0, true];
 			"Opfor may try to retake this point - check the map" remoteExec ["systemChat", 0, true];
+			execVM "autoPatrolSystem\phase4_createOpforRF.sqf";
 			RFCHECK = false;		
 		};
 	};
