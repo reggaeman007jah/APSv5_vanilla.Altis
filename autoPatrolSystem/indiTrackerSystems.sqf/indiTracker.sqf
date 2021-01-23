@@ -17,8 +17,10 @@ while {true} do {
 
 
 
-while {true} do {
-	{ deleteVehicle _x } forEach allDead;
-	systemChat "cleanup";
-	sleep 30;
-};
+// while {true} do {
+// 	{ deleteVehicle _x } forEach allDead;
+// 	systemChat "cleanup";
+// 	sleep 30;
+// };
+
+// maybe use this as a way to get group leaders to pop smoke 
