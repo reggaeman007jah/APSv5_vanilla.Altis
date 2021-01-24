@@ -1,8 +1,8 @@
 /*
 From: initServer.sqf 
-*/
 
-/*
+confirmed as in use!
+
 spawn random groups of 3 or 4, on outer reaches of battlezone, and send them in 
 */
 

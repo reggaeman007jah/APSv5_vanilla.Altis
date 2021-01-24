@@ -99,8 +99,9 @@ sleep 180;
 
 // monitor defence - bool-loop 
 monitorDefence = true; 
+
 while {monitorDefence} do {
-	sleep 10;
+	// sleep 10;
 
 	// _units1 = allUnits inAreaArray "Objective 1"; // just trying this change out... april 2020
 	// // _unitCount = count _units1;
@@ -126,6 +127,7 @@ while {monitorDefence} do {
 	// 	// "Patrol is at good strength, hold the line .. !!!" remoteExec ["systemChat", 0, true]; // learn this
 	// };
 
+	// note this first message does not actually do anything, it just informs players of situation 
 	if (RGG_redzoneIndi < _RGG_reinforcementTrigger)  then {
 		// systemChat (format ["The Patrol has been compromised, with %1 units left in the fight. Reinforcements are needed.. ", _indiCount]);
 		// "Patrol has been compromised. Reinforcements are needed.. " remoteExec ["systemChat", 0, true]; // make this better
@@ -134,6 +136,7 @@ while {monitorDefence} do {
 		// PARADOP UNITS HERE!!!
 	};
 
+	// again, this is just for info only - it does not trigger new units 
 	if (RGG_redzoneIndi <= 1)  then {
 		// hint "LOST PATROL!! the entire patrol has been WIPED!! Someone is going to get sacked for this!!";
 		// systemChat "The Patrol has been Lost .. ";
@@ -164,23 +167,29 @@ while {monitorDefence} do {
 	progression, even though the actual patrol point is taken, and not under threat.
 	*/
 
+	// this is the main check - have indifor won the point?
 	// this needs to also ensure indifor have over 10 in the area 
 	// if ((RGG_redzoneEast <5) && (RGG_totalEast <10) && (RGG_redzoneIndi >6)) then {
-	if ((RGG_redzoneEast <5) && (RGG_redzoneIndi >6)) then {
+	if ((RGG_redzoneEast <5) && (RGG_redzoneIndi >10)) then {
 
 		// breather - what else to do in this time? Sort out injured??
-		sleep 120;
-
+		
 		// if (_opforCount <= 5) then {// loop ends when opfor is reduced to this number
 		// hint "WELL DONE !!! the patrol has held the position successfully and is now moving to the next point";
 		systemChat "this proves && syntax test"; // was this ever proven?
 		"WELL DONE !!! the patrol has held the position successfully and is now moving to the next point" remoteExec ["hint", 0, true];	
-		"The enemy camp has been destroyed and a new FOB is now available" remoteExec ["systemChat", 0, true];	
+		"The enemy camp has been destroyed and a new FOB is being built" remoteExec ["systemChat", 0, true];	
 		sleep 1;
 		"The patrol FOB will enable full heals at the medical tent" remoteExec ["systemChat", 0, true];	
+		sleep 1;
 		"As well as vehicle repair and rearm" remoteExec ["systemChat", 0, true];	
+		sleep 1;
+		"You now have time to regroup - patrol will move out in 2 minutes" remoteExec ["systemChat", 0, true];	
+		// do stats?
+		// consolidate injured?
+		sleep 120;
 
-		// voice broadcast
+		// voice broadcast to formalise success 
 		execVM "sounds\welcome\thisIsCommand.sqf";
 		sleep 2;
 		execVM "sounds\welcome\success.sqf";
@@ -211,25 +220,23 @@ while {monitorDefence} do {
 		// systemChat "debug --- PATROL HAS CLEARED THE AREA";
 		// "debug --- PATROL HAS CLEARED THE AREA" remoteExec ["systemChat", 0, true];
 
-		// 
-		monitorDefence = false;
-		patrolPointsTaken = patrolPointsTaken + 1;
+		// this is where things go wrong !!!
 
-		// do stats?
-		// consolidate injured?
 		// [RGG_initStartPos, RGG_initStartPos] execVM "autoPatrolSystem\phase1_createObj.sqf";
 		// systemchat "debug --- phase1_createObj ACTIVATED";
 		// "MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true];
-		// [RGG_patrol_obj, ] execVM "";
 
 		// push patrol position to global array 
 		_takenBasePoint = RGG_patrol_obj;
 		RGG_fieldbases pushback _takenBasePoint;
 		systemChat format ["Field Bases: %1", RGG_fieldbases]; // debug to list known captured bases 
 
+		// kick off new patrol phase 
+		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf"; 
+		systemchat "debug --- phase1_createObj ACTIVATED"; // debug 
+		"MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true]; // debug 
 
-
-		// track progress 
+		// track progress
 		// execVM "autoPatrolSystem\counterSystems\counterSystems.sqf";
 		// systemchat "debug --- mission count amended";
 		// "MP debug --- mission count amended" remoteExec ["systemChat", 0, true];
@@ -250,18 +257,23 @@ while {monitorDefence} do {
 
 		sleep 20;
 
+
 		// move remaining indifor units to next task objective 
 		_moveIndi = [];
 		_holdIndi = [];
-		{if ((side _x) == independent) then {
-				_damage = getDamage _x;
-				if (_damage < 0.7) then {
-					_moveIndi pushBack _x;
-				} else {
-					_holdIndi pushBack _x;
-				};
-			};
-		} forEach allUnits;
+
+		{ if ((side _x) == independent) then { _moveIndi pushBack _x; } } forEach allUnits;
+		
+
+				// _damage = getDamage _x;
+				// if ((getDamage _x) < 0.7) then {
+				// 	_moveIndi pushBack _x;
+				// } else {
+				// 	_holdIndi pushBack _x;
+				// };
+				
+
+		
 		// _units = allUnits inAreaArray "missionOrigin";
 		/*
 			make sure this is only indifor and only units that are not injured!
@@ -275,6 +287,43 @@ while {monitorDefence} do {
 			_x doMove _endPoint1;
 		} forEach _moveIndi;
 
+		// try to extract injured units 
+		{
+			_damageLevel = getDammage _x;
+			if (_damageLevel > .7) then {
+				systemChat "count injured";
+				_holdIndi pushBack _x; 
+			}
+		} forEach _moveIndi;
+
+		_countInjured = count _holdIndi;
+		systemChat format ["Units ready for medivac: %1", _countInjured];
+
+
+		// move remaining indifor units to next task objective 
+		// _moveIndi = [];
+		// {if ((side _x) != WEST) then {_moveIndi pushBack _x}} forEach allUnits;
+		// // _units = allUnits inAreaArray "missionOrigin";
+		// {
+		// 	_randomDir = selectRandom [270, 310, 00, 50, 90];
+		// 	_randomDist = selectRandom [20, 22, 24, 26, 28, 30];
+		// 	_unitDest = [RGG_patrol_obj, 5, 20] call BIS_fnc_findSafePos;
+		// 	_endPoint1 = _unitDest getPos [_randomDist, _randomDir];
+		// 	_x setBehaviour "COMBAT";
+		// 	_x doMove _endPoint1;
+		// } forEach _moveIndi;
+		// above block is old and works
+
+
+
+
+
+
+
+
+
+
+
 		// BASE REWARD :)
 		// get initial position  
 		_anchorPos = getMarkerPos "missionOrigin";
@@ -287,6 +336,8 @@ while {monitorDefence} do {
 		// systemChat format ["buildLocation: %1", _buildLocation];
 		_fobPos = _buildLocation getPos [20,180];
 		_repairPos = _fobPos findEmptyPosition [10,100,"B_Heli_Light_01_dynamicLoadout_F"];
+		
+		hint "FLARES ...........";
 
 		_flrObj = "F_20mm_Red" createvehicle _buildLocation;
 		sleep 2;
@@ -294,6 +345,7 @@ while {monitorDefence} do {
 		sleep 2;
 		_flrObj = "F_20mm_Red" createvehicle _repairPos;
 		sleep 15;
+
 
 		// _baseBuilding1 = createVehicle ["Land_IRMaskingCover_02_F", getMarkerPos "missionOrigin", [], 30, "none"]; 
 		_baseBuilding1 = createVehicle ["Land_MedicalTent_01_tropic_closed_F", _buildLocation, [], 30, "none"]; 
@@ -473,12 +525,17 @@ while {monitorDefence} do {
 		[RGG_missionOrigin] execVM "autoPatrolSystem\phase6_regroup.sqf";
 		// we need a big center here too 
 
-
+		// sleep 90;
+		// HINT "SLEEPY TIME";
 
 		// kick off new patrol phase 
-		[RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf"; 
-		systemchat "debug --- phase1_createObj ACTIVATED"; // debug 
-		"MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true]; // debug 
+		// [RGG_patrol_obj, RGG_patrol_obj] execVM "autoPatrolSystem\phase1_createObj.sqf"; 
+		// systemchat "debug --- phase1_createObj ACTIVATED"; // debug 
+		// "MP debug --- phase1_createObj ACTIVATED" remoteExec ["systemChat", 0, true]; // debug 
+
+		// untested change - bool change should in theory be the last thing to process here...
+		monitorDefence = false;
+		patrolPointsTaken = patrolPointsTaken + 1;
 	};
 
 	sleep 90;
