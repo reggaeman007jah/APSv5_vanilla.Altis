@@ -22,5 +22,10 @@ sleep 5;
 // systemchat "played sound";
 // sleep 5;
 
-playSound ["music1", TRUE, 0];
+// playSound ["music1", TRUE, 0];
 // systemchat "played sound";
+
+_sounds = ["welcome1", "welcome2"];
+_sound = selectRandom _sounds;
+// {playSound _sound} remoteExec ["call",0];
+playSound [_sound, TRUE, 0];

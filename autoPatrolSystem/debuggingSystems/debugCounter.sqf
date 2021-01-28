@@ -112,6 +112,10 @@ while {true} do {
 		"INDI REINFORCEMENTS ARE INBOUND" remoteExec ["hint", 0, true];	
 		_smoke = createVehicle ["G_40mm_smokeYELLOW", RGG_missionOrigin, [], 0, "none"]; // drop this from up high 
 
+		// voice broadcasts
+		execVM "sounds\welcome\thisIsCommand.sqf";
+		sleep 3;
+		execVM "sounds\welcome\rfInbound.sqf";
 
 		// systemchat "debug --- friendly units created";
 		// "MP debug --- friendly units created" remoteExec ["systemChat", 0, true];

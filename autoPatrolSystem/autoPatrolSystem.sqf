@@ -67,6 +67,8 @@ systemchat "debug --- autoPatrolSystem.sqf running"; // debug
 execVM "sounds\welcome\thisIsCommand.sqf";
 sleep 3;
 execVM "sounds\welcome\missionLive.sqf";
+// sleep 3;
+// execVM "sounds\welcome\missionLive.sqf";
 // this ^^ is a one-off sound file called only once at the beginning of the mission 
 
 

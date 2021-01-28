@@ -40,19 +40,104 @@ class Header {
 class CfgSounds {
 	sounds[] = {};
 	
-	// class info {
-	// 	sound[] = {"\a3\Ui_f\data\Sound\CfgIngameUI\hint",0.891251,1};
+	class info {
+		sound[] = {"\a3\Ui_f\data\Sound\CfgIngameUI\hint",0.891251,1};
+		titles[] = {};
+	};
+	// class welcome1 {
+	// 	name = "welcome1";
+	// 	sound[] = {"killChain\media\voice\command\welcome1.wav", 3000, 1};
+	// 	// sound[] = {"sounds\welcome\dangerClose1.ogg", 3000, 1};
 	// 	titles[] = {};
 	// };
-	class music1 {
-		name = "music1";
-		sound[] = {"sounds\welcome\welcome.wav", 3000, 1};
-		// sound[] = {"sounds\welcome\dangerClose1.ogg", 3000, 1};
+	class commandOut {
+		name = "commandOut";
+		sound[] = {"killChain\media\voice\command\commandOut.wav", 3000, 1};
+		titles[] = {};
+	};
+	class leavingFOB1 {
+		name = "leavingFOB1";
+		sound[] = {"killChain\media\voice\command\leavingFOB1.wav", 3000, 1};
+		titles[] = {};
+	};
+	class leavingFOB2 {
+		name = "leavingFOB2";
+		sound[] = {"killChain\media\voice\command\leavingFOB2.wav", 3000, 1};
+		titles[] = {};
+	};
+	class opforNeutralised1 {
+		name = "opforNeutralised1";
+		sound[] = {"killChain\media\voice\command\opforNeutralised1.wav", 3000, 1};
+		titles[] = {};
+	};
+	class opforNeutralised2 {
+		name = "opforNeutralised2";
+		sound[] = {"killChain\media\voice\command\opforNeutralised2.wav", 3000, 1};
+		titles[] = {};
+	};
+	class patrolMoving1 {
+		name = "patrolMoving1";
+		sound[] = {"killChain\media\voice\command\patrolMoving1.wav", 3000, 1};
+		titles[] = {};
+	};
+	class patrolMoving2 {
+		name = "patrolMoving2";
+		sound[] = {"killChain\media\voice\command\patrolMoving2.wav", 3000, 1};
+		titles[] = {};
+	};
+	class patrolNowLive1 {
+		name = "patrolNowLive1";
+		sound[] = {"killChain\media\voice\command\patrolNowLive1.wav", 3000, 1};
+		titles[] = {};
+	};
+	class patrolNowLive2 {
+		name = "patrolNowLive2";
+		sound[] = {"killChain\media\voice\command\patrolNowLive2.wav", 3000, 1};
+		titles[] = {};
+	};
+	class pointTakenPrepare1 {
+		name = "pointTakenPrepare1";
+		sound[] = {"killChain\media\voice\command\pointTakenPrepare1.wav", 3000, 1};
+		titles[] = {};
+	};
+	class pointTakenPrepare2 {
+		name = "pointTakenPrepare2";
+		sound[] = {"killChain\media\voice\command\pointTakenPrepare2.wav", 3000, 1};
+		titles[] = {};
+	};
+	class pointTakenPrepare3 {
+		name = "pointTakenPrepare3";
+		sound[] = {"killChain\media\voice\command\pointTakenPrepare3.wav", 3000, 1};
+		titles[] = {};
+	};
+	class RFInbound {
+		name = "RFInbound";
+		sound[] = {"killChain\media\voice\command\RFInbound.wav", 3000, 1};
 		titles[] = {};
 	};
 	class thisIsCommand1 {
 		name = "thisIsCommand1";
-		sound[] = {"sounds\welcome\command1.wav", 3000, 1};
+		sound[] = {"killChain\media\voice\command\command1.wav", 3000, 1};
+		titles[] = {};
+	};
+	class thisIsCommand2 {
+		name = "thisIsCommand2";
+		sound[] = {"killChain\media\voice\command\command2.wav", 3000, 1};
+		titles[] = {};
+	};
+	class thisIsCommand3 {
+		name = "thisIsCommand3";
+		sound[] = {"killChain\media\voice\command\command3.wav", 3000, 1};
+		titles[] = {};
+	};
+	class welcome1 {
+		name = "welcome1";
+		sound[] = {"killChain\media\voice\command\welcome1.wav", 3000, 1};
+		titles[] = {};
+	};
+	class welcome2 {
+		name = "welcome2";
+		sound[] = {"killChain\media\voice\command\welcome2.wav", 3000, 1};
 		titles[] = {};
 	};
 	// class thisIsCommand2 {
@@ -65,19 +150,19 @@ class CfgSounds {
 	// 	sound[] = {"sounds\thisIsCommand3.wav", 3000, 1};
 	// 	titles[] = {};
 	// };
-	class missionLive1 {
-		name = "missionLive1";
-		sound[] = {"sounds\welcome\missionLive1.wav", 3000, 1};
-		titles[] = {};
-	};
-	class prepare1 {
-		name = "prepare1";
-		sound[] = {"sounds\welcome\prepare.wav", 3000, 1};
-		titles[] = {};
-	};
-	class success1 {
-		name = "success1";
-		sound[] = {"sounds\welcome\success.wav", 3000, 1};
-		titles[] = {};
-	};
+	// class missionLive1 {
+	// 	name = "missionLive1";
+	// 	sound[] = {"sounds\welcome\missionLive1.wav", 3000, 1};
+	// 	titles[] = {};
+	// };
+	// class prepare1 {
+	// 	name = "prepare1";
+	// 	sound[] = {"sounds\welcome\prepare.wav", 3000, 1};
+	// 	titles[] = {};
+	// };
+	// class success1 {
+	// 	name = "success1";
+	// 	sound[] = {"sounds\welcome\success.wav", 3000, 1};
+	// 	titles[] = {};
+	// };
 };
