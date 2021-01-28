@@ -27,7 +27,7 @@ author = "reggaeman";
 // onLoadName = $STR_MISSION_TITLE;
 onLoadName = "OPERATION KILLCHAIN";
 onLoadMission = "Support Independent forces patrol the Altis Badlands...";
-loadScreen = "killchain.jpg";
+loadScreen = "killChain\media\images\killchain.jpg";
 
 joinUnassigned = 1;
 
