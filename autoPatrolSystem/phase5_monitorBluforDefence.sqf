@@ -187,13 +187,15 @@ while {monitorDefence} do {
 		"You now have time to regroup - patrol will move out in 2 minutes" remoteExec ["systemChat", 0, true];	
 		// do stats?
 		// consolidate injured?
-		sleep 120;
+		
 
 		// voice broadcast to formalise success 
 		execVM "sounds\welcome\thisIsCommand.sqf";
 		sleep 2;
 		execVM "sounds\welcome\success.sqf";
 
+		sleep 120;
+	
 		// delete existing camp 
 		{ deleteVehicle _x } forEach campItems;
 		campItems = [];
@@ -212,7 +214,7 @@ while {monitorDefence} do {
 		sleep 1;
 
 		// leave a treat at the won position (reusing the above local var cos why not?)
-		[_cleanupPos] execVM "autoPatrolSystem\fobSystems\fobInit.sqf";
+		// [_cleanupPos] execVM "autoPatrolSystem\fobSystems\fobInit.sqf";
 		// note: this ^^ does nothing??!
 
 		// systemchat "debug --- cleanup script triggered";

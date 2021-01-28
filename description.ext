@@ -117,17 +117,17 @@ class CfgSounds {
 	};
 	class thisIsCommand1 {
 		name = "thisIsCommand1";
-		sound[] = {"killChain\media\voice\command\command1.wav", 3000, 1};
+		sound[] = {"killChain\media\voice\command\thisIsCommand1.wav", 3000, 1};
 		titles[] = {};
 	};
 	class thisIsCommand2 {
 		name = "thisIsCommand2";
-		sound[] = {"killChain\media\voice\command\command2.wav", 3000, 1};
+		sound[] = {"killChain\media\voice\command\thisIsCommand2.wav", 3000, 1};
 		titles[] = {};
 	};
 	class thisIsCommand3 {
 		name = "thisIsCommand3";
-		sound[] = {"killChain\media\voice\command\command3.wav", 3000, 1};
+		sound[] = {"killChain\media\voice\command\thisIscommand3.wav", 3000, 1};
 		titles[] = {};
 	};
 	class welcome1 {
