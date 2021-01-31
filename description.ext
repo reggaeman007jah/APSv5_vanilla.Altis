@@ -140,6 +140,62 @@ class CfgSounds {
 		sound[] = {"killChain\media\voice\command\welcome2.wav", 3000, 1};
 		titles[] = {};
 	};
+
+	class enemyAtGrid {
+		name = "enemyAtGrid";
+		sound[] = {"killChain\media\voice\command\enemyAtGrid.wav", 3000, 1};
+		titles[] = {};
+	};
+	class num0 {
+		name = "num0";
+		sound[] = {"killChain\media\voice\command\0.wav", 3000, 1};
+		titles[] = {};
+	};
+	class num1 {
+		name = "num1";
+		sound[] = {"killChain\media\voice\command\1.wav", 3000, 1};
+		titles[] = {};
+	};
+	class num2 {
+		name = "num2";
+		sound[] = {"killChain\media\voice\command\2.wav", 3000, 1};
+		titles[] = {};
+	};
+	class num3 {
+		name = "num3";
+		sound[] = {"killChain\media\voice\command\3.wav", 3000, 1};
+		titles[] = {};
+	};
+	class num4 {
+		name = "num4";
+		sound[] = {"killChain\media\voice\command\4.wav", 3000, 1};
+		titles[] = {};
+	};
+	class num5 {
+		name = "num5";
+		sound[] = {"killChain\media\voice\command\5.wav", 3000, 1};
+		titles[] = {};
+	};
+	class num6 {
+		name = "num6";
+		sound[] = {"killChain\media\voice\command\6.wav", 3000, 1};
+		titles[] = {};
+	};
+	class num7 {
+		name = "num7";
+		sound[] = {"killChain\media\voice\command\7.wav", 3000, 1};
+		titles[] = {};
+	};
+	class num8 {
+		name = "num8";
+		sound[] = {"killChain\media\voice\command\8.wav", 3000, 1};
+		titles[] = {};
+	};
+	class num9 {
+		name = "num9";
+		sound[] = {"killChain\media\voice\command\9.wav", 3000, 1};
+		titles[] = {};
+	};
 	// class thisIsCommand2 {
 	// 	name = "thisIsCommand2";
 	// 	sound[] = {"sounds\thisIsCommand2.wav", 3000, 1};

@@ -7,6 +7,7 @@ spawn random groups of 3 or 4, on outer reaches of battlezone, and send them in
 */
 
 sleep 90;
+// sleep 20;
 
 systemChat "roamers activated";
 
@@ -15,6 +16,7 @@ while {true} do {
 	if (RGG_totalEast < 50) then {
 		// get pos in battlezone outer edges 
 		_randomEnemySpawnPos = [RGG_patrol_obj, 1100, 1300, 3, 0, 0, 0] call BIS_fnc_findSafePos; 
+		[_randomEnemySpawnPos] execVM "killchain\systems\roamerAlerts\roamerAlerts.sqf";
 		systemChat format ["enemy roamers spawned: %1", _randomEnemySpawnPos]; 
 		_grp1 = createGroup east;
 		_random = random 10;
