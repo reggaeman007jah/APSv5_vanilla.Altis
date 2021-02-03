@@ -10,7 +10,7 @@ spawn random groups of 3 or 4, on outer reaches of battlezone, and send them in
 
 
 systemChat "roamers activated";
-sleep 90;
+sleep 60; // restore to 90 if works 
 
 while {true} do {
 

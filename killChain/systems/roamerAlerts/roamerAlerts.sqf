@@ -14,6 +14,8 @@ hint str _target;
 // only arg - relevant pos that informs the voice alert 
 _randomEnemySpawnPos = _this select 0;
 
+_gap = 1;
+
 _posX = _randomEnemySpawnPos select 0;
 _posY = _randomEnemySpawnPos select 1;
 
@@ -44,26 +46,42 @@ sleep 3;
 sleep 3;
 
 {
-	systemChat "ROAMER TEST --------------------------------------- !!!";
-	systemChat str _x;
-
+	// systemChat "ROAMER TEST --------------------------------------- !!!";
+	// systemChat str _x;
 	switch (_x) do {
-		case ("0"): { {playSound "num0"} remoteExec ["call",0]; sleep 2; };
-		case ("1"): { {playSound "num1"} remoteExec ["call",0]; sleep 2; };
-		case ("2"): { {playSound "num2"} remoteExec ["call",0]; sleep 2; };
-		case ("3"): { {playSound "num3"} remoteExec ["call",0]; sleep 2; };
-		case ("4"): { {playSound "num4"} remoteExec ["call",0]; sleep 2; };
-		case ("5"): { {playSound "num5"} remoteExec ["call",0]; sleep 2; };
-		case ("6"): { {playSound "num6"} remoteExec ["call",0]; sleep 2; };
-		case ("7"): { {playSound "num7"} remoteExec ["call",0]; sleep 2; };
-		case ("8"): { {playSound "num8"} remoteExec ["call",0]; sleep 2; };
-		case ("9"): { {playSound "num9"} remoteExec ["call",0]; sleep 2; };
+		case ("0"): { {playSound "num0"} remoteExec ["call",0]; sleep _gap; };
+		case ("1"): { {playSound "num1"} remoteExec ["call",0]; sleep _gap; };
+		case ("2"): { {playSound "num2"} remoteExec ["call",0]; sleep _gap; };
+		case ("3"): { {playSound "num3"} remoteExec ["call",0]; sleep _gap; };
+		case ("4"): { {playSound "num4"} remoteExec ["call",0]; sleep _gap; };
+		case ("5"): { {playSound "num5"} remoteExec ["call",0]; sleep _gap; };
+		case ("6"): { {playSound "num6"} remoteExec ["call",0]; sleep _gap; };
+		case ("7"): { {playSound "num7"} remoteExec ["call",0]; sleep _gap; };
+		case ("8"): { {playSound "num8"} remoteExec ["call",0]; sleep _gap; };
+		case ("9"): { {playSound "num9"} remoteExec ["call",0]; sleep _gap; };
 		default { systemChat "ERROR - number not found..."; };
 	};
-	
 } forEach _posArray;
 
-sleep 1.5;
+sleep 2;
+
+{
+	switch (_x) do {
+		case ("0"): { {playSound "num0"} remoteExec ["call",0]; sleep _gap; };
+		case ("1"): { {playSound "num1"} remoteExec ["call",0]; sleep _gap; };
+		case ("2"): { {playSound "num2"} remoteExec ["call",0]; sleep _gap; };
+		case ("3"): { {playSound "num3"} remoteExec ["call",0]; sleep _gap; };
+		case ("4"): { {playSound "num4"} remoteExec ["call",0]; sleep _gap; };
+		case ("5"): { {playSound "num5"} remoteExec ["call",0]; sleep _gap; };
+		case ("6"): { {playSound "num6"} remoteExec ["call",0]; sleep _gap; };
+		case ("7"): { {playSound "num7"} remoteExec ["call",0]; sleep _gap; };
+		case ("8"): { {playSound "num8"} remoteExec ["call",0]; sleep _gap; };
+		case ("9"): { {playSound "num9"} remoteExec ["call",0]; sleep _gap; };
+		default { systemChat "ERROR - number not found..."; };
+	};
+} forEach _posArray;
+
+sleep 2;
 
 {playSound "commandOut"} remoteExec ["call",0];
 
