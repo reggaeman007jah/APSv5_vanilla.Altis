@@ -141,7 +141,7 @@ RGG_FNC_VMS_createMarker = {
 	format ["ALL STATIONS BE ADVISED - %1 %2 SPOTTED at %3", _markerCat, _markerType, _displayCoords] remoteExec ["systemChat", 0];
 
 	//fade and delete (sorry!) 
-	sleep 45;
+	sleep 125;
 	_tempMarker setMarkerAlpha 0.6;
 	sleep 5;
 	_tempMarker setMarkerAlpha 0.5;
