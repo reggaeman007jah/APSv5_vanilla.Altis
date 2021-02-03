@@ -44,12 +44,6 @@ class CfgSounds {
 		sound[] = {"\a3\Ui_f\data\Sound\CfgIngameUI\hint",0.891251,1};
 		titles[] = {};
 	};
-	// class welcome1 {
-	// 	name = "welcome1";
-	// 	sound[] = {"killChain\media\voice\command\welcome1.wav", 3000, 1};
-	// 	// sound[] = {"sounds\welcome\dangerClose1.ogg", 3000, 1};
-	// 	titles[] = {};
-	// };
 	class commandOut {
 		name = "commandOut";
 		sound[] = {"killChain\media\voice\command\commandOut.wav", 3000, 1};
@@ -140,7 +134,6 @@ class CfgSounds {
 		sound[] = {"killChain\media\voice\command\welcome2.wav", 3000, 1};
 		titles[] = {};
 	};
-
 	class enemyAtGrid {
 		name = "enemyAtGrid";
 		sound[] = {"killChain\media\voice\command\enemyAtGrid.wav", 3000, 1};
@@ -196,29 +189,4 @@ class CfgSounds {
 		sound[] = {"killChain\media\voice\command\newnew9.wav", 3000, 1};
 		titles[] = {};
 	};
-	// class thisIsCommand2 {
-	// 	name = "thisIsCommand2";
-	// 	sound[] = {"sounds\thisIsCommand2.wav", 3000, 1};
-	// 	titles[] = {};
-	// };
-	// class thisIsCommand3 {
-	// 	name = "thisIsCommand3";
-	// 	sound[] = {"sounds\thisIsCommand3.wav", 3000, 1};
-	// 	titles[] = {};
-	// };
-	// class missionLive1 {
-	// 	name = "missionLive1";
-	// 	sound[] = {"sounds\welcome\missionLive1.wav", 3000, 1};
-	// 	titles[] = {};
-	// };
-	// class prepare1 {
-	// 	name = "prepare1";
-	// 	sound[] = {"sounds\welcome\prepare.wav", 3000, 1};
-	// 	titles[] = {};
-	// };
-	// class success1 {
-	// 	name = "success1";
-	// 	sound[] = {"sounds\welcome\success.wav", 3000, 1};
-	// 	titles[] = {};
-	// };
 };
