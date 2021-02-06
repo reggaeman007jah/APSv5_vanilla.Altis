@@ -12,9 +12,15 @@ hint str _target;
 */
 
 // only arg - relevant pos that informs the voice alert 
+
+if (!COMMANDSPEAKING) then {
+	
+
+
+
 _randomEnemySpawnPos = _this select 0;
 
-_gap = 1;
+_gap = 0.8;
 
 _posX = _randomEnemySpawnPos select 0;
 _posY = _randomEnemySpawnPos select 1;
@@ -39,11 +45,11 @@ _posArray pushBack _y3;
 
 {playSound "thisIsCommand1"} remoteExec ["call",0];
 
-sleep 3;
+sleep 2.6;
 
 {playSound "enemyAtGrid"} remoteExec ["call",0];
 
-sleep 3;
+sleep 2.8;
 
 {
 	// systemChat "ROAMER TEST --------------------------------------- !!!";
@@ -63,7 +69,7 @@ sleep 3;
 	};
 } forEach _posArray;
 
-sleep 2;
+sleep 1;
 
 {
 	switch (_x) do {
@@ -81,11 +87,15 @@ sleep 2;
 	};
 } forEach _posArray;
 
-sleep 2;
+sleep 1.6;
 
 {playSound "commandOut"} remoteExec ["call",0];
 
-
+} else {
+	sleep 10;
+	[_randomEnemySpawnPos] execVM "killchain\systems\roamerAlerts\roamerAlerts.sqf"; 
+	// this is to try to re-run this quickly, while also not overlapping more phase-based alerts 
+};
 
 
 

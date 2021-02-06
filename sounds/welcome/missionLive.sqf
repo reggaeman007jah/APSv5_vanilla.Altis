@@ -16,9 +16,11 @@
 // _sounds = ["patrolNowLive1", "patrolNowLive2"];
 // _sound = selectRandom _sounds;
 
+COMMANDSPEAKING = true;
+
 {playSound "thisIsCommand1"} remoteExec ["call",0];
 
-sleep 3;
+sleep 2.8;
 
 {playSound "patrolNowLive1"} remoteExec ["call",0];
 
@@ -26,4 +28,7 @@ sleep 4;
 
 {playSound "commandOut"} remoteExec ["call",0];
 
+sleep 2.9;
+
+COMMANDSPEAKING = false;
 

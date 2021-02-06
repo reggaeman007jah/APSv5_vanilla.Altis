@@ -97,3 +97,6 @@ baseDefend = 0;
 publicVariable "sapperWin";
 publicVariable "baseDefend";
 
+// voice bools 
+COMMANDSPEAKING = false;
+
