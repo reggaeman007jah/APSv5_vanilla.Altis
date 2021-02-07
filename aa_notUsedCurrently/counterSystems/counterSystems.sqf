@@ -33,3 +33,4 @@ Have a global cycle that counts blu and opfor in the red zone - this will inform
 
 // 	sleep 60;
 // };
+// {(leader _x) sideChat "Go ! Go ! Go !"} forEach allGroups;

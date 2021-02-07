@@ -87,6 +87,7 @@ So, 1 PP = 3 FT, then +1 for every new base taken
 Known Issue - sometimes the alt check (and probably other stuff) is duplicated! Maybe when destroyed.
 test comment
 */
+HKSQUADGP = [];
 
 deploymentMission = true;
 initPhase = true;
@@ -160,6 +161,8 @@ while {deploymentMission} do {
 		};
 	};
 
+  
+
   // DISEMBARK
 	if (dropoff) then {
     systemChat "Get the troops on the ground";
@@ -175,6 +178,11 @@ while {deploymentMission} do {
       _units orderGetIn false;
       dropoff = false;
       complete = true;
+      {
+        _squaddieGrp = group _x;
+        HKSQUADGP pushBackUnique _squaddieGrp;
+      } forEach _units;
+      systemChat format ["hk group: %1", HKSQUADGP];
 		};
 	};
 
@@ -182,6 +190,28 @@ while {deploymentMission} do {
     _pos = getMarkerPos "extract";
     _safeDelete = transport1 distance _pos;
 		if ((_safeDelete) > 10) then {
+
+      // 	_opforCount1 = 0;
+      // 	_blueforCount1 = 0;
+      // 	_units = allUnits inAreaArray "Objective 1";
+      // 	_unitCount1 = count _units;
+      // 	{
+      // 		switch ((side _x)) do
+      // 		{
+      // 			case EAST: {_opforCount1 = _opforCount1 + 1};
+      // 			case WEST: {_blueforCount1 = _blueforCount1 + 1};
+      // 		};
+      // 	} forEach _units;
+
+      // 	sleep 60;
+      // };
+      // {(leader _x) sideChat "Go ! Go ! Go !"} forEach allGroups;
+      // _groups = allGroups inAreaArray "extract";
+      // systemChat format ["allGroups inAreaArray: %1", _groups];
+      _hkGrp = HKSQUADGP select 1;
+      systemChat format ["sending this: %1", _hkGrp];
+      [_hkGrp] execVM "killChain\systems\hunterKillerSystems\runHK.sqf";
+      sleep 1;
       deleteMarker "extract";
       complete = false;
       initPhase = true;
