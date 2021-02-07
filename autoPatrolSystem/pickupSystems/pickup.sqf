@@ -208,9 +208,39 @@ while {deploymentMission} do {
       // {(leader _x) sideChat "Go ! Go ! Go !"} forEach allGroups;
       // _groups = allGroups inAreaArray "extract";
       // systemChat format ["allGroups inAreaArray: %1", _groups];
-      _hkGrp = HKSQUADGP select 1;
-      systemChat format ["sending this: %1", _hkGrp];
-      [_hkGrp] execVM "killChain\systems\hunterKillerSystems\runHK.sqf";
+      
+      // count group members 
+      // _hkSize = count group 
+      // {
+      //   _hkSize = count group _x;
+      //   if (_hkSize == 1) then {
+      //     _hkGrp = HKSQUADGP select 1;
+      //   } else {
+          
+      //   };
+      // } forEach HKSQUADGP;
+      
+      _arraySize = count HKSQUADGP; // probably 2 
+
+      // this tries to delete any single-unit groups e.g. a player group 
+      for "_i" from 1 to _arraySize do {
+        _group = HKSQUADGP select (_i -1);
+        _size = count units _group; 
+        systemChat format ["Iteration / Group: %1, Size: %2", _group, _size];
+        if (_size > 1) then {
+          // HKSQUADGP deleteAt _i;
+          [_group] execVM "killChain\systems\hunterKillerSystems\runHK.sqf";
+          systemChat format ["sending this: %1", _group];
+        };
+      };
+
+      // debug check what do we have left? should be only one result
+      // systemChat format ["HK Group Array: %1", HKSQUADGP];
+
+
+      // _hkGrp = HKSQUADGP select 0;
+      // systemChat format ["sending this: %1", _hkGrp];
+      // [_hkGrp] execVM "killChain\systems\hunterKillerSystems\runHK.sqf";
       sleep 1;
       deleteMarker "extract";
       complete = false;
