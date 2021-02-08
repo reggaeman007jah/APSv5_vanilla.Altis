@@ -56,6 +56,11 @@ execVM "autoPatrolSystem\chainSecuritySystems\chainSec.sqf";
 // this launches the random roamers system
 execVM "autoPatrolSystem\randomThreatSystems\randomThreats.sqf";
 
+/*
+New 
+*/
+execVM "killChain\systems\UAV_Markers\indiforMarkers.sqf";
+
 // this file should run only once 
 sleep 2;
 systemchat "debug --- autoPatrolSystem.sqf running"; // debug 
