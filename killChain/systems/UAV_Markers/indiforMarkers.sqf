@@ -9,12 +9,13 @@ while {true} do {
 
 	_groups = allGroups; // gets all known game groups 
 	RGG_indiforGroups = []; // empty array to store opfor group IDs / names 
+	RGG_bluforGroups = []; // empty array to store opfor group IDs / names 
 
 	// now extract only indifor groups and put into storage array 
 	{
 		switch ((side _x)) do {
 			case independent: {RGG_indiforGroups pushBackUnique _x};
-			case WEST: {};
+			case WEST: { RGG_bluforGroups pushBackUnique _x };
 		};
 	} forEach _groups;
 
@@ -32,15 +33,40 @@ while {true} do {
 			_tempMarker = createMarker [_stampToString, _leaderPos];
 			_tempMarker setMarkerType "n_inf";
 			// sleep 5;
-			systemChat "cycle marker debug check";
+			systemChat "indifor marker updated";
 		} else {
 			// delete group - to do 
 			_stampToString = str _x;
 			deleteMarker _stampToString;
-			systemChat "MARKER DELETED";
+			deleteGroup _x;
+			systemChat "indifor MARKER DELETED";
+			systemChat format ["Indifor Group Deleted: %1", _x];
 		};
 	} forEach RGG_indiforGroups;
 
+	{
+		_size = count units _x; 
+		if (_size >0) then {
+			_leader = leader _x;
+			_leaderPos = getPos _leader;
+			_zPos = _leaderPos select 2;
+			if (_zPos < 10) then {
+				_stampToString = str _x;
+			deleteMarker _stampToString;
+			_tempMarker = createMarker [_stampToString, _leaderPos];
+			_tempMarker setMarkerType "b_inf";
+			// sleep 5;
+			systemChat "blufor marker updated";
+			};			
+		} else {
+			// delete group - to do 
+			_stampToString = str _x;
+			deleteMarker _stampToString;
+			deleteGroup _x;
+			systemChat "blufor MARKER DELETED";
+			systemChat format ["Blufor Group Deleted: %1", _x];
+		};
+	} forEach RGG_bluforGroups;
 
 
 // {
