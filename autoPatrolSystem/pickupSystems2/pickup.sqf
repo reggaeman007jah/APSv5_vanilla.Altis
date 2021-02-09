@@ -98,14 +98,14 @@ pickup = false;
 wait = false;
 dropoff = false;
 complete = false;
-_myHeli = transport1a;
+_myHeli = transport2a;
 deleteMarker "extract"; // belt and braces
 private _HELI1ATL1 = "_HELI1ATL1";
 
 while {deploymentMission} do {
 
   // engine check
-  if (isEngineOn transport1a) then {
+  if (isEngineOn transport2a) then {
     _HELI1ATL1 = (getPosATL _myHeli) select 2;
     _HELI1ATL1 = round _HELI1ATL1;
     systemChat str _HELI1ATL1;
@@ -139,7 +139,7 @@ while {deploymentMission} do {
  	if (pickup) then {
     systemChat "Land so troops can board";
 		if ((_HELI1ATL1) < 1) then {
-			_extractLocation = position transport1a;
+			_extractLocation = position transport1;
 			_extractMarker = createMarker ["extract", _extractLocation];
 			_extractMarker setMarkerShape "ELLIPSE";
 			_extractMarker setMarkerColor "ColorGreen";
@@ -164,17 +164,19 @@ while {deploymentMission} do {
 		};
 	};
 
+  
+
   // DISEMBARK
 	if (dropoff) then {
     systemChat "Get the troops on the ground";
 		if ((_HELI1ATL1) < 1) exitWith {
-			_extractLocation = position transport1a;
+			_extractLocation = position transport1;
 			_extractMarker = createMarker ["extract", _extractLocation];
 			_extractMarker setMarkerShape "ELLIPSE";
 			_extractMarker setMarkerColor "ColorRed";
 			_extractMarker setMarkerSize [50, 50];
       // order getOut 
-      { unassignVehicle _x } forEach crew transport1a;
+      { unassignVehicle _x } forEach crew transport1;;
       _units = allUnits inAreaArray "extract";
       _units orderGetIn false;
       dropoff = false;
@@ -189,7 +191,7 @@ while {deploymentMission} do {
 
   if (complete) then {
     _pos = getMarkerPos "extract";
-    _safeDelete = transport1a distance _pos;
+    _safeDelete = transport1 distance _pos;
 		if ((_safeDelete) > 10) then {
 
       // 	_opforCount1 = 0;

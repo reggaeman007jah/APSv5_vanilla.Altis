@@ -4,7 +4,7 @@ hint "pickup config running";
 sleep 2;
 _heli = _this select 0;
 
-_heli setVehicleVarName "transport1a"; 
+_heli setVehicleVarName "transport1"; 
 transport1 = _heli;
 deploymentMission = false;
 initPhase = false;
@@ -14,10 +14,10 @@ dropoff = false;
 complete = false;
 
 // initialise pickup scripts 
-"Transport 1a Heli Ready" remoteExec ["hint", 0, true];
+"Transport Heli Ready" remoteExec ["hint", 0, true];
 format ["Debug - Heli Var: %1", _heli] remoteExec ["systemChat", 0];
 
 sleep 5;
 
-waitUntil { isEngineOn transport1a; }; 
+waitUntil { isEngineOn transport1; }; 
 execVM "autoPatrolSystem\pickupSystems\pickup.sqf";
