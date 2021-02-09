@@ -1,5 +1,5 @@
 
-customFlag setFlagTexture "flag1.jpg";
+// customFlag setFlagTexture "flag1.jpg";
 
 // Voice Activation Global Declaration 
 VAA_Activate = true;

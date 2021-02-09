@@ -1,6 +1,9 @@
 
 // DECIDE = false; // I think this is the only var i need to declare, as the motion.sqf relys on this.
 
+// test
+if (isServer) then { customFlag setFlagTexture "flag1.jpg"; };
+
 // KILL WILDLIFE 
 enableEnvironment [false, true];
 
