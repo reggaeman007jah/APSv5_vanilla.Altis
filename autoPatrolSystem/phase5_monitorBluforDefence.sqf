@@ -189,10 +189,12 @@ while {monitorDefence} do {
 		// consolidate injured?
 		
 
-		// voice broadcast to formalise success 
-		execVM "sounds\welcome\thisIsCommand.sqf";
-		sleep 2;
-		execVM "sounds\welcome\success.sqf";
+		if (!BESILENT) then {
+			// voice broadcast to formalise success 
+			execVM "sounds\welcome\thisIsCommand.sqf";
+			sleep 2;
+			execVM "sounds\welcome\success.sqf";		
+		};
 
 		sleep 120;
 	

@@ -100,3 +100,10 @@ publicVariable "baseDefend";
 // voice bools 
 COMMANDSPEAKING = false;
 
+// enables HK Team as default 
+HUNTERKILLER = true;
+
+// enables shshing of command woman 
+BESILENT = false;
+// if this is false, then command lady will speak 
+

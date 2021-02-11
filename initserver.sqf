@@ -18,9 +18,11 @@ execVM "autoPatrolSystem\ambientSystems\randomFlybys.sqf";
 
 // initialise pickup scripts 
 execVM "autoPatrolSystem\pickupSystems\pickupInit.sqf";
+execVM "autoPatrolSystem\pickupSystems2\pickupInit.sqf";
+execVM "autoPatrolSystem\pickupSystems3\pickupInit.sqf";
 
 // initialise para spawner script 
-execVM "autoPatrolSystem\pickupSystems\spawnParas.sqf";
+execVM "autoPatrolSystem\spawnerSystems\spawnParas.sqf";
 
 while {true} do {
 	{ deleteVehicle _x } forEach allDead;

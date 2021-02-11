@@ -25,36 +25,41 @@
 // sleep 3.2;
 
 // {playSound "commandOut"} remoteExec ["call",0];
-COMMANDSPEAKING = true;
 
-sleep 1;
+if (!BESILENT) then {
+	
+	COMMANDSPEAKING = true;
 
-{playSound "opforNeutralised1"} remoteExec ["call",0];
+	sleep 1;
 
-sleep 3;
+	{playSound "opforNeutralised1"} remoteExec ["call",0];
 
-{playSound "commandOut"} remoteExec ["call",0];
+	sleep 3;
 
-sleep 3;
+	{playSound "commandOut"} remoteExec ["call",0];
 
-COMMANDSPEAKING = false;
+	sleep 3;
 
-sleep 100;
+	COMMANDSPEAKING = false;
 
-COMMANDSPEAKING = true;
+	sleep 100;
 
-sleep 20;
+	COMMANDSPEAKING = true;
 
-{playSound "thisIsCommand1"} remoteExec ["call",0];
+	sleep 20;
 
-sleep 3;
+	{playSound "thisIsCommand1"} remoteExec ["call",0];
 
-{playSound "patrolMoving1"} remoteExec ["call",0];
+	sleep 3;
 
-sleep 3.2;
+	{playSound "patrolMoving1"} remoteExec ["call",0];
 
-{playSound "commandOut"} remoteExec ["call",0];
+	sleep 3.2;
 
-sleep 3;
+	{playSound "commandOut"} remoteExec ["call",0];
 
-COMMANDSPEAKING = false;
+	sleep 3;
+
+	COMMANDSPEAKING = false;
+
+};

@@ -8,10 +8,13 @@
 // _sound = selectRandom _sounds;
 // {playSound _sound} remoteExec ["call",0];
 
-COMMANDSPEAKING = true;
+if (!BESILENT) then {
+	COMMANDSPEAKING = true;
 
-{playSound "thisIsCommand1"} remoteExec ["call",0];
+	{playSound "thisIsCommand1"} remoteExec ["call",0];
 
-sleep 3;
+	sleep 3;
 
-COMMANDSPEAKING = false;
+	COMMANDSPEAKING = false;
+};
+

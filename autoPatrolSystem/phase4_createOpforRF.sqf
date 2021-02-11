@@ -47,10 +47,13 @@ publicVariable "MISSIONTASK";
 // pop phase-change smoke 
 _smoke = createVehicle ["G_40mm_smokeYELLOW", RGG_patrol_obj, [], 0, "none"]; // drop this from up high 
 
-// voice broadcast - prepare for retalliation 
-execVM "sounds\welcome\thisIsCommand.sqf";
-sleep 2;
-execVM "sounds\welcome\prepare.sqf";
+if (!BESILENT) then {
+	// voice broadcast - prepare for retalliation 
+	execVM "sounds\welcome\thisIsCommand.sqf";
+	sleep 2;
+	execVM "sounds\welcome\prepare.sqf";
+};
+
 
 // systemChat "debug --- blufor moving into defensive positions at the patrol point"; 	
 // "MP debug --- blufor moving into defensive positions at the patrol point" remoteExec ["systemChat", 0, true];

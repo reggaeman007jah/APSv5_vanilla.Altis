@@ -90,35 +90,35 @@ test comment
 
 // _myHeli = _this select 0;
 
-HKSQUADGP = [];
+HKSQUADGP3 = [];
 
-deploymentMission = true;
-initPhase = true;
-pickup = false;
-wait = false;
-dropoff = false;
-complete = false;
-_myHeli = transport1a;
-deleteMarker "extract"; // belt and braces
+deploymentMission3 = true;
+initPhase3 = true;
+pickup3 = false;
+wait3 = false;
+dropoff3 = false;
+complete3 = false;
+_myHeli = transport3a;
+deleteMarker "extract3"; // belt and braces
 private _HELI1ATL1 = "_HELI1ATL1";
 
-while {deploymentMission} do {
+while {deploymentMission3} do {
 
   // engine check
-  if (isEngineOn transport1) then {
+  if (isEngineOn transport3a) then {
     _HELI1ATL1 = (getPosATL _myHeli) select 2;
     _HELI1ATL1 = round _HELI1ATL1;
     systemChat str _HELI1ATL1;
   } else {
     // this should shut everything down if the engine is turned off
-    deploymentMission = false;
-    initPhase = false;
-    pickup = false;
-    wait = false;
-    dropoff = false;
-    complete = false;
-    deleteMarker "extract"; // belt and braces
-    execVM "autoPatrolSystem\pickupSystems\pickupInit.sqf";
+    deploymentMission3 = false;
+    initPhase3 = false;
+    pickup3 = false;
+    wait3 = false;
+    dropoff3 = false;
+    complete3 = false;
+    deleteMarker "extract3"; // belt and braces
+    execVM "autoPatrolSystem\pickupSystems3\pickupInit.sqf";
     systemChat "shutting down pickup system";
   };
   // alt check
@@ -126,73 +126,71 @@ while {deploymentMission} do {
   // _HELI1ATL1 = round _HELI1ATL1;
   // systemChat str _HELI1ATL1;
    
-  if (initPhase) then {
+  if (initPhase3) then {
     if (_HELI1ATL1 > 10) then {
       _freeCargoPositions = _myHeli emptyPositions "cargo";
       systemChat format ["cargo available: %1", _freeCargoPositions];
-      initPhase = false;
-      pickup = true;
+      initPhase3 = false;
+      pickup3 = true;
     };
   };
  
   // PICKUP 
- 	if (pickup) then {
+ 	if (pickup3) then {
     systemChat "Land so troops can board";
 		if ((_HELI1ATL1) < 1) then {
-			_extractLocation = position transport1;
-			_extractMarker = createMarker ["extract", _extractLocation];
+			_extractLocation = position transport3a;
+			_extractMarker = createMarker ["extract3", _extractLocation];
 			_extractMarker setMarkerShape "ELLIPSE";
 			_extractMarker setMarkerColor "ColorGreen";
 			_extractMarker setMarkerSize [50, 50];
-  		_units = allUnits inAreaArray "extract";
+  		_units = allUnits inAreaArray "extract3";
 			{
 				_x assignAsCargo _myHeli;
 			} forEach _units;	
 			_units orderGetIn true;
-			pickup = false;
-			wait = true;
+			pickup3 = false;
+			wait3 = true;
 		};
 	};
 
   // WAIT / BOARD / TRANSIT
-	if (wait) then {
+	if (wait3) then {
     systemChat "Troops boarded";
 		if ((_HELI1ATL1) > 3) then {
-			wait = false;
-			dropoff = true;
+			wait3 = false;
+			dropoff3 = true;
 			deleteMarker "extract";
 		};
 	};
 
-  
-
   // DISEMBARK
-	if (dropoff) then {
+	if (dropoff3) then {
     systemChat "Get the troops on the ground";
 		if ((_HELI1ATL1) < 1) exitWith {
-			_extractLocation = position transport1;
-			_extractMarker = createMarker ["extract", _extractLocation];
+			_extractLocation = position transport3a;
+			_extractMarker = createMarker ["extract3", _extractLocation];
 			_extractMarker setMarkerShape "ELLIPSE";
 			_extractMarker setMarkerColor "ColorRed";
-			_extractMarker setMarkerSize [50, 50];
+			_extractMarker setMarkerSize [20, 20];
       // order getOut 
-      { unassignVehicle _x } forEach crew transport1;;
-      _units = allUnits inAreaArray "extract";
+      { unassignVehicle _x } forEach crew transport3a;
+      _units = allUnits inAreaArray "extract3";
       _units orderGetIn false;
-      dropoff = false;
-      complete = true;
+      dropoff3 = false;
+      complete3 = true;
       {
         _squaddieGrp = group _x;
-        HKSQUADGP pushBackUnique _squaddieGrp;
+        HKSQUADGP3 pushBackUnique _squaddieGrp;
       } forEach _units;
-      systemChat format ["hk group: %1", HKSQUADGP];
+      systemChat format ["hk group: %1", HKSQUADGP3];
 		};
 	};
 
-  if (complete) then {
-    _pos = getMarkerPos "extract";
-    _safeDelete = transport1 distance _pos;
-		if ((_safeDelete) > 10) then {
+  if (complete3) then {
+    _pos = getMarkerPos "extract3";
+    _safeDelete = transport3a distance _pos;
+		if ((_safeDelete) > 5) then {
 
       // 	_opforCount1 = 0;
       // 	_blueforCount1 = 0;
@@ -223,19 +221,23 @@ while {deploymentMission} do {
       //   };
       // } forEach HKSQUADGP;
       
-      _arraySize = count HKSQUADGP; // probably 2 
+      if (HUNTERKILLER) then {
+        _arraySize = count HKSQUADGP3; // probably 2 
 
-      // this tries to delete any single-unit groups e.g. a player group 
-      for "_i" from 1 to _arraySize do {
-        _group = HKSQUADGP select (_i -1);
-        _size = count units _group; 
-        systemChat format ["Iteration / Group: %1, Size: %2", _group, _size];
-        if (_size > 1) then {
-          // HKSQUADGP deleteAt _i;
-          [_group] execVM "killChain\systems\hunterKillerSystems\runHK.sqf";
-          systemChat format ["sending this: %1", _group];
-        };
+        // this tries to delete any single-unit groups e.g. a player group 
+        for "_i" from 1 to _arraySize do {
+          _group = HKSQUADGP3 select (_i -1);
+          _size = count units _group; 
+          systemChat format ["Iteration / Group: %1, Size: %2", _group, _size];
+          if (_size > 1) then {
+            // HKSQUADGP deleteAt _i;
+            [_group] execVM "killChain\systems\hunterKillerSystems\runHK.sqf";
+            systemChat format ["sending this: %1", _group];
+          };
+        };   
       };
+
+
 
       // debug check what do we have left? should be only one result
       // systemChat format ["HK Group Array: %1", HKSQUADGP];
@@ -245,9 +247,9 @@ while {deploymentMission} do {
       // systemChat format ["sending this: %1", _hkGrp];
       // [_hkGrp] execVM "killChain\systems\hunterKillerSystems\runHK.sqf";
       sleep 1;
-      deleteMarker "extract";
-      complete = false;
-      initPhase = true;
+      deleteMarker "extract3";
+      complete3 = false;
+      initPhase3 = true;
     };
   };
   

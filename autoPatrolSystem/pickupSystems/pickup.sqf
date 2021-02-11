@@ -172,7 +172,7 @@ while {deploymentMission} do {
 			_extractMarker = createMarker ["extract", _extractLocation];
 			_extractMarker setMarkerShape "ELLIPSE";
 			_extractMarker setMarkerColor "ColorRed";
-			_extractMarker setMarkerSize [50, 50];
+			_extractMarker setMarkerSize [20, 20];
       // order getOut 
       { unassignVehicle _x } forEach crew transport1a;
       _units = allUnits inAreaArray "extract";
@@ -221,18 +221,20 @@ while {deploymentMission} do {
       //   };
       // } forEach HKSQUADGP;
       
-      _arraySize = count HKSQUADGP; // probably 2 
+      if (HUNTERKILLER) then {
+        _arraySize = count HKSQUADGP; // probably 2 
 
-      // this tries to delete any single-unit groups e.g. a player group 
-      for "_i" from 1 to _arraySize do {
-        _group = HKSQUADGP select (_i -1);
-        _size = count units _group; 
-        systemChat format ["Iteration / Group: %1, Size: %2", _group, _size];
-        if (_size > 1) then {
-          // HKSQUADGP deleteAt _i;
-          [_group] execVM "killChain\systems\hunterKillerSystems\runHK.sqf";
-          systemChat format ["sending this: %1", _group];
-        };
+        // this tries to delete any single-unit groups e.g. a player group 
+        for "_i" from 1 to _arraySize do {
+          _group = HKSQUADGP select (_i -1);
+          _size = count units _group; 
+          systemChat format ["Iteration / Group: %1, Size: %2", _group, _size];
+          if (_size > 1) then {
+            // HKSQUADGP deleteAt _i;
+            [_group] execVM "killChain\systems\hunterKillerSystems\runHK.sqf";
+            systemChat format ["sending this: %1", _group];
+          };
+        };   
       };
 
       // debug check what do we have left? should be only one result

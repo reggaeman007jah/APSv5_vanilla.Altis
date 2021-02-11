@@ -1,14 +1,18 @@
 
 // _sounds = ["RFInbound"];
 // _sound = selectRandom _sounds;
-COMMANDSPEAKING = true;
 
-{playSound "RFInbound"} remoteExec ["call",0];
+if (!BESILENT) then {
+	COMMANDSPEAKING = true;
 
-sleep 4;
+	{playSound "RFInbound"} remoteExec ["call",0];
 
-{playSound "commandOut"} remoteExec ["call",0];
+	sleep 4;
 
-sleep 3;
+	{playSound "commandOut"} remoteExec ["call",0];
 
-COMMANDSPEAKING = false;
+	sleep 3;
+
+	COMMANDSPEAKING = false;
+};
+
