@@ -17,7 +17,7 @@ respawnButton = 1;
 // disabledAI = true;
 // respawnOnStart = 1;
 
-enableDebugConsole = 2;
+enableDebugConsole = 1;
 allowFunctionsLog = 0;
 
 // briefingName = $STR_MISSION_TITLE;

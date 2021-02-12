@@ -2,5 +2,5 @@
 From: initServer.sqf 
 */
 
-waitUntil { isEngineOn transport1; }; 
-execVM "autoPatrolSystem\pickupSystems\pickup.sqf";
+waitUntil { isEngineOn transport3a; }; 
+execVM "autoPatrolSystem\pickupSystems3\pickup.sqf";
