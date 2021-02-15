@@ -147,6 +147,10 @@ while {deploymentMission} do {
   		_units = allUnits inAreaArray "extract";
 			{
 				_x assignAsCargo _myHeli;
+        _squaddieGrp = group _x;
+        if !(group _squaddieGrp isEqualTo group player) then {
+          HKSQUADGP pushBackUnique _squaddieGrp;
+        };
 			} forEach _units;	
 			_units orderGetIn true;
 			pickup = false;
