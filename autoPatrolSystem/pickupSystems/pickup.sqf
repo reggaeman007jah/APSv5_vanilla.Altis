@@ -127,7 +127,7 @@ while {deploymentMission} do {
   // systemChat str _HELI1ATL1;
    
   if (initPhase) then {
-    if (_HELI1ATL1 > 10) then {
+    if (_HELI1ATL1 > 5) then {
       _freeCargoPositions = _myHeli emptyPositions "cargo";
       systemChat format ["cargo available: %1", _freeCargoPositions];
       initPhase = false;
@@ -148,6 +148,7 @@ while {deploymentMission} do {
 			{
 				_x assignAsCargo _myHeli;
         _squaddieGrp = group _x;
+        _x setUnitPos "MIDDLE";
         // if !(group _squaddieGrp isEqualTo group player) then {
         //   HKSQUADGP pushBackUnique _squaddieGrp;
         // };
@@ -182,6 +183,9 @@ while {deploymentMission} do {
       { unassignVehicle _x } forEach crew transport1a;
       _units = allUnits inAreaArray "extract";
       _units orderGetIn false;
+      {
+        _x setUnitPos "MIDDLE";
+      } forEach _units;
       dropoff = false;
       complete = true;
       {
@@ -193,9 +197,13 @@ while {deploymentMission} do {
 	};
 
   if (complete) then {
+      _units = allUnits inAreaArray "extract";
+      {
+        _x setUnitPos "AUTO";
+      } forEach _units;
     _pos = getMarkerPos "extract";
     _safeDelete = transport1a distance _pos;
-		if ((_safeDelete) > 10) then {
+		if ((_safeDelete) > 5) then {
 
       // 	_opforCount1 = 0;
       // 	_blueforCount1 = 0;
