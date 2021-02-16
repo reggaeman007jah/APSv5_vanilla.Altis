@@ -39,6 +39,7 @@ Notes:
 	bool-loop is based on: monitorDefence
 	adds score to patrolPointsTaken var 
 	Any existing opfor in the mission will be pushed to the new objective, when everything loops around 
+	Tuesday 15 Feb - added new system to track cycles, and progress if x cycles == 6 - to avoid stagnation
 
 Actions:
 	Investigate using a timer system as the main trigger to move things forward 
@@ -96,6 +97,9 @@ execVM "autoPatrolSystem\insuranceSystems\phase5Timer.sqf";
 
 // Allow time for battle before checking initial state of defence 
 sleep 180;
+
+// Anti-stagnation value 
+_phaseCycles = 1;
 
 // monitor defence - bool-loop 
 monitorDefence = true; 
@@ -170,7 +174,7 @@ while {monitorDefence} do {
 	// this is the main check - have indifor won the point?
 	// this needs to also ensure indifor have over 10 in the area 
 	// if ((RGG_redzoneEast <5) && (RGG_totalEast <10) && (RGG_redzoneIndi >6)) then {
-	if ((RGG_redzoneEast <5) && (RGG_redzoneIndi >10)) then {
+	if ((RGG_redzoneEast <5) && (RGG_redzoneIndi >10) || (_phaseCycles >=6)) then {
 
 		// breather - what else to do in this time? Sort out injured??
 		
@@ -543,4 +547,5 @@ while {monitorDefence} do {
 	};
 
 	sleep 90;
+	_phaseCycles = _phaseCycles +1;
 };
