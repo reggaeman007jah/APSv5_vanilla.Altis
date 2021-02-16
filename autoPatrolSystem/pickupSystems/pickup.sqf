@@ -184,7 +184,7 @@ while {deploymentMission} do {
       _units = allUnits inAreaArray "extract";
       _units orderGetIn false;
       {
-        _x setUnitPos "MIDDLE";
+        _x setUnitPos "AUTO";
       } forEach _units;
       dropoff = false;
       complete = true;
