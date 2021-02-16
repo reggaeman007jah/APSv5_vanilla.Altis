@@ -87,7 +87,7 @@ if (!BESILENT) then {
 			};
 		} forEach _posArray;
 
-		sleep 1.4;
+		sleep 1.2;
 
 		{playSound "commandOut"} remoteExec ["call",0];
 
