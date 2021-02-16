@@ -9,15 +9,17 @@ _testPos = str _xPos;
 _target = _testPos select [1,1]; 
 hint str _target;
 
+Notes:
+	Moved _randomEnemySpawnPos = _this select 0; up one scope to enable the ELSE clause to use it - it bugged out before 
+
 */
 
 // only arg - relevant pos that informs the voice alert 
+_randomEnemySpawnPos = _this select 0;
 
 if (!BESILENT) then {
 	if (!COMMANDSPEAKING) then {
 		
-		_randomEnemySpawnPos = _this select 0;
-
 		_gap = 0.8;
 
 		_posX = _randomEnemySpawnPos select 0;
