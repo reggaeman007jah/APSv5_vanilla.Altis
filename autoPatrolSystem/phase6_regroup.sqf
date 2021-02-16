@@ -100,5 +100,16 @@ Data: TBC
 _mpSpawn = _this select 0;
 _bluforSpawn = _mpSpawn getPos [40,90];
 _indiSpawn = _mpSpawn getPos [40,270];
-[west, _bluforSpawn] call BIS_fnc_addRespawnPosition;
-[independent, _indiSpawn] call BIS_fnc_addRespawnPosition;
+RGG_respawnStore pushBack [_bluforSpawn, _indiSpawn]; // sending to global array to enable deleting of older respawns 
+[west, _bluforSpawn] call BIS_fnc_addRespawnPosition; // create blu resapwn
+[independent, _indiSpawn] call BIS_fnc_addRespawnPosition; // create ind resapwn
+
+_cnt = count RGG_respawnStore; // check if more than one, i.e. don't process this is we only have one (1st) point 
+if (_cnt >1) then {
+	_removeSpawns = RGG_respawnStore select 0;
+	_removeBluSpawn = _removeSpawns select 0;
+	_removeIndSpawn = _removeSpawns select 1;
+	[west, _removeBluSpawn] callBIS_fnc_removeRespawnPosition
+	[independent, _removeIndSpawn] callBIS_fnc_removeRespawnPosition
+	RGG_respawnStore deleteAt 0;
+};
