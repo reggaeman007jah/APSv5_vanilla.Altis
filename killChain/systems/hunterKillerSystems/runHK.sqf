@@ -137,7 +137,7 @@ _hunterPos = getPos _groupLeader;
 
 _allGroups = allGroups; // get all game groups 
 _stalking = []; // this holds data related to stalking 
-// systemChat format ["all game groups: %1", _allGroups]; // debug lists all opfor groups 
+systemChat format ["all game groups: %1", _allGroups]; // debug lists all opfor groups 
 _opforGroups = []; // to hold all opfor groups 
 // _hunters = []; // to hold single hunter group 
 _targetGroup = []; // will hold closest (target) group 
@@ -149,8 +149,8 @@ _targetGroup = []; // will hold closest (target) group
 			_unitCount = count units _x;
 			if (_unitCount > 0) then {
 				_opforGroups pushBack _x;
-				// systemChat format ["SWITCH OPFOR: %1", _x];
-				// systemChat format ["Groupsize: %1", _unitCount];
+				systemChat format ["SWITCH OPFOR: %1", _x];
+				systemChat format ["Groupsize: %1", _unitCount];
 			} else {
 				deleteGroup _x;
 			};
@@ -159,9 +159,9 @@ _targetGroup = []; // will hold closest (target) group
 } forEach _allGroups;
 
 // simple debug message 
-// systemChat format ["opfor groups: %1", _opforGroups]; // debug lists all opfor groups 
-// systemChat ".....";
-// systemChat format ["hunter group: %1", _hunters]; // debug lists hunter group 
+systemChat format ["opfor groups: %1", _opforGroups]; // debug lists all opfor groups 
+systemChat ".....";
+systemChat format ["hunter group: %1", _hunterGroup]; // debug lists hunter group 
 
 // -----------------------------------------------------------------------------------------
 
@@ -178,21 +178,19 @@ _cnt = count _opforGroups;
 _cycle = 1;
 // systemChat format ["There are %1 opfor groups", _cnt]; // debug info 
 
-// catch situation where no enemy 
-if (_cnt == 0) then {
-	exitwith {};
-};
+// catch situation where no enemy - TBD
+if (_cnt == 0) exitwith {}; // test 
 
 // process all known opfor groups to grab the one nearest to hunter group
 {
 	_leader = leader _x; // get group leader 
 	_leaderPos = getPos _leader; // get pos of leader 
 	_dist = _leaderPos distance _hunterLeaderPos; // get distance between hunter and hunted 
-	// systemChat format ["Iteration %1", _cycle]; // debug info - iteraration
-	// systemChat format ["opfor group %1 distance: %2", _x, _dist]; // debug info 
+	systemChat format ["Iteration %1", _cycle]; // debug info - iteraration
+	systemChat format ["opfor group %1 distance: %2", _x, _dist]; // debug info 
 	_enemyGroupDistances pushBack _dist;
 	_cnt = count _enemyGroupDistances;
-	// systemChat format ["_enemyGroupDistances array count is: %1", _cnt]; // debug info 
+	systemChat format ["_enemyGroupDistances array count is: %1", _cnt]; // debug info 
 	// -----------------------
 	_pos0 = _enemyGroupDistances select 0;
 	_pos1 = _enemyGroupDistances select 1;
@@ -203,36 +201,36 @@ if (_cnt == 0) then {
 		_enemyGroupDistances deleteAt 0;
 		_targetGroup deleteAt 0;
 		_targetGroup pushBack _x;
-		// systemChat format ["_pos1 %1 is less than _pos0 %2", _pos1, _pos0]; // debug info 
+		systemChat format ["_pos1 %1 is less than _pos0 %2", _pos1, _pos0]; // debug info 
 	} else {
-		// systemChat format ["_pos1 %1 is greater than or equal to _pos0 %2", _pos1, _pos0]; // debug info 
-		// systemChat "too far away";
+		systemChat format ["_pos1 %1 is greater than or equal to _pos0 %2", _pos1, _pos0]; // debug info 
+		systemChat "too far away";
 		_enemyGroupDistances deleteAt 1;
 	};
 	// sleep 3;
-	// systemChat format ["_targetGroup is currently %1", _targetGroup]; // debug info
-	// systemChat "cycling";
+	systemChat format ["_targetGroup is currently %1", _targetGroup]; // debug info
+	systemChat "cycling";
 	_cycle = _cycle + 1;
-	// sleep 3;
+	sleep 1;
 } forEach _opforGroups;
 
 // -----------------------------------------------------------------------------------------
 
 // // get markers for targets 
-// {
-// 	_leader = leader _x; // get group leader 
-// 	_leaderPos = getPos _leader; // get pos of leader 
-// 	_name = str _x;
-// 	_marker = createMarker [_name, _leaderPos];
-// 	_name setMarkerShape "rectangle";
-// 	_name setMarkerSize [5,5];
-// 	_name setMarkerColor "colorred";
-// 	_name setMArkerText _name;
-	
-// } forEach _opforGroups;
+{
+	_leader = leader _x; // get group leader 
+	_leaderPos = getPos _leader; // get pos of leader 
+	_name = str _x;
+	deleteMarker _name;
+	_marker = createMarker [_name, _leaderPos];
+	_name setMarkerShape "rectangle";
+	_name setMarkerSize [5,5];
+	_name setMarkerColor "colorred";
+	_name setMarkerText _name;
+} forEach _opforGroups;
 
-// systemChat format ["target group is %1, and is %2 m away", _targetGroup, _enemyGroupDistances]; // debug info 
-// systemChat format ["hunter group is %1", _hunter]; // debug info 
+systemChat format ["target group is %1, and is %2 m away", _targetGroup, _enemyGroupDistances]; // debug info 
+systemChat format ["hunter group is %1", _hunterGroup]; // debug info 
 
 // -----------------------------------------------------------------------------------------
 _target = _targetGroup select 0;
@@ -241,14 +239,18 @@ _unitCount = count units _target;
 _leader = leader _target; // get group leader 
 _leaderPos = getPos _leader; // get pos of leader 
 
+_hkUnitCount = count units _hunterGroup;
+
 if (_unitCount >= 1) then {
 	systemChat format ["calling HK order on group %1, %2 away, size: %3", _target, _targetDist, _unitCount]; // debug info 
-	_hunter move _leaderPos;
+	_hunterGroup move _leaderPos;
 } else {
 	systemChat "error - found empty group - deleting empty group - retrying";
 	deleteGroup _target;
 	sleep 10;
-	[] execVM "hkSystemv2\runHK.sqf"; 
+	if (_hkUnitCount > 0) then {
+		[_hunterGroup] execVM "hkSystemv2\runHK.sqf"; 
+	};
 };
 
 _HKACTIVE = true;
@@ -264,13 +266,18 @@ while {_HKACTIVE} do {
 		deleteGroup _target;
 		hint "SUCCCESS ALL DEAD";
 		_HKACTIVE = false;
-		[] execVM "hkSystemv2\runHK.sqf";
+		// [] execVM "hkSystemv2\runHK.sqf";
+		[_hunterGroup] execVM "killChain\systems\hunterKillerSystems\runHK.sqf";
 	} else {
-		_hunter move _leaderPos;
+		_hunterGroup move _leaderPos;
+	};
+
+	if (_hkUnitCount > 0) then {
+		_HKACTIVE = false;
 	};
 
 	sleep 30;
-	systemChat "HKACTIVE CHECK";
+	systemChat format ["HKACTIVE CHECK - Group: %1", _hunterGroup];
 };
 
 

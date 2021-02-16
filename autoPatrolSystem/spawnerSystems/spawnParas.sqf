@@ -36,10 +36,10 @@ while {true} do {
 			"B_W_Recon_TL_F" createUnit [[15074,17244], _stampToString];  
 			sleep 0.1;
 		};
-		for "_i" from 1 to 1 do { 
-			"B_W_Recon_TL_F" createUnit [[15074,17244], _stampToString];  
-			sleep 0.1;
-		};
+		// for "_i" from 1 to 1 do { 
+		// 	"B_W_Recon_TL_F" createUnit [[15074,17244], _stampToString];  
+		// 	sleep 0.1;
+		// };
 		_stampToString move [15129,17195];
 		_stampToString setFormation "DIAMOND";
 		systemChat "recon squaddies ready .............................................!";

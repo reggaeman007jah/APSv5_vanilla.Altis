@@ -148,9 +148,10 @@ while {deploymentMission} do {
 			{
 				_x assignAsCargo _myHeli;
         _squaddieGrp = group _x;
-        if !(group _squaddieGrp isEqualTo group player) then {
-          HKSQUADGP pushBackUnique _squaddieGrp;
-        };
+        // if !(group _squaddieGrp isEqualTo group player) then {
+        //   HKSQUADGP pushBackUnique _squaddieGrp;
+        // };
+        HKSQUADGP pushBackUnique _squaddieGrp;
 			} forEach _units;	
 			_units orderGetIn true;
 			pickup = false;
