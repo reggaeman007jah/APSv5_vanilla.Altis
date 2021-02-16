@@ -179,7 +179,7 @@ _cycle = 1;
 // systemChat format ["There are %1 opfor groups", _cnt]; // debug info 
 
 // catch situation where no enemy - TBD
-if (_cnt == 0) exitwith {}; // test 
+if (_cnt == 0) exitwith {}; 
 
 // process all known opfor groups to grab the one nearest to hunter group
 {
@@ -216,7 +216,7 @@ if (_cnt == 0) exitwith {}; // test
 
 // -----------------------------------------------------------------------------------------
 
-// // get markers for targets 
+// get markers for targets - DEBUG ONLY
 {
 	_leader = leader _x; // get group leader 
 	_leaderPos = getPos _leader; // get pos of leader 
