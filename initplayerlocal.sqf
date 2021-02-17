@@ -1,6 +1,7 @@
 
 sleep 1;
-
+customFlag setFlagTexture "flag1.jpg";
+customFlag2 setObjectTexture [0,"flag1.jpg"];
 // remove stamina 
 player enableStamina FALSE;
 player addEventHandler ['Respawn',{player enableStamina FALSE;}];
@@ -14,6 +15,9 @@ execVM "autoPatrolSystem\JTAC_Systems\JTACinit.sqf";
 
 // welcome message 
 execVM "sounds\welcome\welcome.sqf";
+
+// [player, ["<t color='#FF0000'>DROP RED SMOKE</t>", {_smoke = "SmokeShellRed" createVehicle position player;},nil,0,false,true,"","true", 5]] remoteExec ["addAction"];
+player addAction ["<t color='#FF0000'>DROP RED SMOKE</t>", {_smoke = "SmokeShellRed" createVehicle position player;}];
 
 // execVM "voiceActivatedCoordFinder\VACF_init.sqf";
 // execVM "voiceActivatedDataStore\VADS_init.sqf";
